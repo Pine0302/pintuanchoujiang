@@ -1629,6 +1629,8 @@ class collageActivities{
         if( $condition_limit != '' ){
             $query .= $condition_limit;
         }
+        /*echo "<pre>";
+        print_r($query);exit;*/
 
         $result = _mysql_query($query);
         $error = mysql_error();
@@ -2148,7 +2150,7 @@ class collageActivities{
         }
 
         $condition = " ccot.customer_id=".$customer_id." AND ccot.batchcode='".$batchcode."' AND ccot.isvalid=true ";
-        $filed = " ccot.id,ccot.is_head,ccot.group_id,ccot.activitie_id,ccot.user_id,ccopmt.pid ";
+        $filed = " ccot.group_id.ccot.id,ccot.is_head,ccot.group_id,ccot.activitie_id,ccot.user_id,ccopmt.pid,cgot.type ";
         $crew_order = $this->get_crew_order($condition,$filed)['batchcode'][0];
 
         if( !empty($crew_order) ){
@@ -2165,7 +2167,22 @@ class collageActivities{
                     'paytime' => 'now()',
                     'paystyle' => "'".$paytype."'"
                 );
+                if($crew_order['type']==7){  //新抽奖团
+                    $condition = array(
+                        'customer_id' => $customer_id,
+                        'group_id' => $crew_order['group_id']
+                    );
+                    $value = array(
+                        'status' => 11,
+                        'paytime' => 'now()',
+                        'paystyle' => "'".$paytype."'"
+                    );
+                    $this->update_crew_order($condition,$value);
+                    //抽奖动作开始
+                    $choose_tuan = $this->lottery($crew_order['group_id'],$customer_id);
+                }
                 $this->update_crew_order($condition,$value);
+
 
                 //订单状态改为已取消
                 if($batchcode != ""){
@@ -2276,9 +2293,6 @@ class collageActivities{
                     'total_partakep' => 'total_partakep+1'
                 );
                 $this->update_activities_user($condition,$value);
-
-
-
             }
 
             $price = 0;
@@ -2447,6 +2461,31 @@ class collageActivities{
             'is_send_order' => $is_send_order
         );
         return $res;
+    }
+
+    //新抽奖逻辑
+    public function lottery($group_id,$customer_id){
+        $query = "SELECT id,user_id,batchcode,group_id FROM collage_crew_order_t WHERE customer_id=".$customer_id." AND group_id=".$group_id." AND isvalid=true and lottery_status = 2";
+        $result = _mysql_query($query) or die('Query failed:'.mysql_error());
+        while ( $row = mysql_fetch_object($result) ) {
+            $users[] = array(
+                'id' => $row -> id,
+                'user_id' => $row -> user_id,
+                'batchcode' => $row -> batchcode,
+                'group_id' => $row -> group_id,
+            );
+        }
+        $user_num = count($users);
+        $num = rand(1,$user_num);
+
+        //修改collage_crew_order_t 状态
+        $query_set_lottery_status_0 = "update collage_crew_order_t set lottery_status = 0 and status = 4 WHERE customer_id = ".$customer_id." AND group_id = ".$group_id." AND isvalid=true and lottery_status = 2 and id != ".$users[$num-1]['id'];
+        $query_set_lottery_status_1 = "update collage_crew_order_t set lottery_status = 1 and status = 5 WHERE id = ".$users[$num-1]['id'];
+        _mysql_query($query_set_lottery_status_0);
+        _mysql_query($query_set_lottery_status_1);
+        //todo 修改 crew_order_t 状态
+
+        return $users[$num-1];
     }
 
     /**

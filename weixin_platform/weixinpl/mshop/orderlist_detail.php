@@ -135,15 +135,15 @@ if(!empty($batchcode)){
         $is_sign             = $row->is_sign;
         $is_open_aftersale   = $row->is_open_aftersale;
         $yundian_id = $row ->yundian_id;
-    	$yundian_self = $row ->yundian_self;
+        $yundian_self = $row ->yundian_self;
         $camilo_ids = $row ->camilo_ids;  //关联的卡密id
         $batchcode = $row ->batchcode;   //确保订单号一定有
         $aftersale_type = $row->aftersale_type;
     }
     if($yundian_id > 0 && $yundian_self == 1) {
-    	$yundian = 1;
+        $yundian = 1;
     } else {
-    	$yundian = 0;
+        $yundian = 0;
     }
 
     if( $paystatus == 0 ){
@@ -209,7 +209,7 @@ if(!empty($batchcode)){
     $activitie_id 	= -1;	//活动id
     $is_head 		= 2;	//是否团长：1是、2否
     if( $is_collageActivities > 0 ){
-        $query_collage = "SELECT group_id,activitie_id,is_head,type,lottery_status FROM collage_crew_order_t WHERE isvalid=true AND customer_id=".$customer_id." AND batchcode='".$batchcode."'";
+        $query_collage = "SELECT group_id,activitie_id,is_head FROM collage_crew_order_t WHERE isvalid=true AND customer_id=".$customer_id." AND batchcode='".$batchcode."'";
         $result_collage = _mysql_query($query_collage) or die('Query_collage failed:'.mysql_error());
         while( $row_collage = mysql_fetch_object($result_collage) ){
             $group_id 		= $row_collage->group_id;
@@ -522,7 +522,7 @@ while($poundage_row = mysql_fetch_object($poundage_result)){
     $poundage = $poundage_row->money;
 }
 
- // print_r($poundage);die();
+// print_r($poundage);die();
 /* 零钱支付手续费用 end */
 
 /** 支付密码设置优化 create_by hzq **/
@@ -642,7 +642,7 @@ if($paystatus == 1 && $slyder_extend_id >0){
     <script type="text/javascript" src="./assets/js/jquery.min.js"></script>
     <script type="text/javascript" src="./assets/js/amazeui.js"></script>
     <script type="text/javascript" src="../common/js/jquery-2.1.0.min.js"></script>
-    
+
     <script src="./js/jquery.ellipsis.js"></script>
     <script src="./js/jquery.ellipsis.unobtrusive.js"></script>
     <script type="text/javascript" src="./js/jquery.zclip.min.js"></script>
@@ -939,792 +939,792 @@ if($paystatus == 1 && $slyder_extend_id >0){
 <!-- 基本地区-开始 -->
 <div class="mainArea">
     <div class="order-details">
-<!--        <div class="details-status">-->
-<!--            --><?php
-//            if($status>=0 and $paystatus == 0 and $paystyle!="货到付款" and $sendstatus==0 and $aftersale_state==0 and $p_stu==false){
-//                //未支付
-//                ?>
-<!--                --><?php //if(strtotime($recovery_time)>$currtime){ ?>
-<!--                    <div>-->
-<!--                        <p>等待买家付款</p>-->
-<!--                        <p class="font-size-12">剩<span class="times"></span>自动关闭</p>-->
-<!--                    </div>-->
-<!--                    <img src="/mshop/web/static/yundian/img/order_details_3.png"/>-->
-<!--                --><?php //}else{ ?>
-<!--                    <div>-->
-<!--                        <p>订单已失效</p>-->
-<!--                    </div>-->
-<!--                    <img src="/mshop/web/static/yundian/img/order_details_3.png"/>-->
-<!--                --><?php //} ?>
-<!---->
-<!--            --><?php //
-//                }else{
-//                    $check = 1;
-//            ?><!-- -->
-<!--                --><?php //if($status == -1){ ?>
-<!--                    <div>-->
-<!--                        <p>订单已取消</p>-->
-<!--                    </div>-->
-<!--                    <img src="/mshop/web/static/yundian/img/order_details_3.png"/>-->
-<!--                --><?php //}elseif(($paystatus==1 or $paystyle=="货到付款") && $status>=0 && $sendstatus==0 && $aftersale_state==0){ ?>
-<!--                    <div>-->
-<!--                        <p>等待卖家发货</p>-->
-<!--                    </div>-->
-<!--                    <img src="/mshop/web/static/yundian/img/order_details_3.png"/>-->
-<!--                --><?php //}elseif($paystatus==1 && $status >= 0 && $sendstatus == 1 && $aftersale_state==0){ ?>
-<!--                    <div>-->
-<!--                        <p>卖家已发货</p>-->
-<!--                    </div>-->
-<!--                    <img src="/mshop/web/static/yundian/img/order_details_3.png"/>-->
-<!--                --><?php //}elseif($check == 1 && (($sendstatus==2 && $status==1) || $sendstatus==4 || $sendstatus==6 || $aftersale_state==4 || $return_status==4)){ ?>
-<!--                    <div>-->
-<!--                        <p>交易完成</p>-->
-<!--                    </div>-->
-<!--                    <img src="/mshop/web/static/yundian/img/order_details_3.png"/>-->
-<!--                --><?php //}elseif($aftersale_type == 1 && $aftersale_state == 1 && $sendstatus == 5){ ?>
-<!--                    <div>-->
-<!--                        <p>退款申请中</p>-->
-<!--                    </div>-->
-<!--                    <img src="/mshop/web/static/yundian/img/order_details_3.png"/>-->
-<!--                --><?php //}elseif($aftersale_type == 1 && $aftersale_state == 2 && $sendstatus == 6){ ?>
-<!--                    <div>-->
-<!--                        <p>退款完成</p>-->
-<!--                    </div>-->
-<!--                    <img src="/mshop/web/static/yundian/img/order_details_3.png"/>-->
-<!--                --><?php //}elseif($aftersale_type == 2 && $aftersale_state == 1 && $sendstatus == 3){ ?>
-<!--                    <div>-->
-<!--                        <p>退货申请中</p>-->
-<!--                    </div>-->
-<!--                    <img src="/mshop/web/static/yundian/img/order_details_3.png"/>-->
-<!--                --><?php //}elseif($aftersale_type == 2 && $aftersale_state == 2 && $sendstatus == 3 && $return_status == 2){ ?>
-<!--                    <div>-->
-<!--                        <p>已确认,等待退货</p>-->
-<!--                    </div>-->
-<!--                    <img src="/mshop/web/static/yundian/img/order_details_3.png"/>-->
-<!--                --><?php //}elseif($aftersale_type == 2 && $aftersale_state == 2 && $sendstatus == 3 && $return_status == 5){ ?>
-<!--                    <div>-->
-<!--                        <p>退货（买家已退货）</p>-->
-<!--                    </div>-->
-<!--                    <img src="/mshop/web/static/yundian/img/order_details_3.png"/>-->
-<!--                --><?php //}elseif($aftersale_type == 2 && $aftersale_state == 2 && $sendstatus == 3 && $return_status == 6){ ?>
-<!--                    <div>-->
-<!--                        <p>退货已收货,等待退款</p>-->
-<!--                    </div>-->
-<!--                    <img src="/mshop/web/static/yundian/img/order_details_3.png"/>-->
-<!--                --><?php //}elseif($aftersale_type == 2 && $aftersale_state == 2 && $sendstatus == 4 && $return_status == 2){ ?>
-<!--                    <div>-->
-<!--                        <p>退货完成</p>-->
-<!--                    </div>-->
-<!--                    <img src="/mshop/web/static/yundian/img/order_details_3.png"/>-->
-<!--                --><?php //}elseif($sendstatus == 3 && $return_type == 0 && $aftersale_type == 1 && $aftersale_state == 1){ ?>
-<!--                    <div>-->
-<!--                        <p>退货(仅退款)申请中</p>-->
-<!--                    </div>-->
-<!--                    <img src="/mshop/web/static/yundian/img/order_details_3.png"/>-->
-<!--                --><?php //}elseif($sendstatus == 3 && $return_type == 0 && $aftersale_type == 1 && $aftersale_state == 2){ ?>
-<!--                    <div>-->
-<!--                        <p>退货(仅退款)已同意,待退款</p>-->
-<!--                    </div>-->
-<!--                    <img src="/mshop/web/static/yundian/img/order_details_3.png"/>-->
-<!--                --><?php //}elseif($sendstatus == 4 && $return_type == 0 && $aftersale_type == 1 && $aftersale_state == 2){ ?>
-<!--                    <div>-->
-<!--                        <p>退货(仅退款)已完成</p>-->
-<!--                    </div>-->
-<!--                    <img src="/mshop/web/static/yundian/img/order_details_3.png"/>-->
-<!--                --><?php //}elseif($sendstatus == 3 && $return_type == 2 && $aftersale_type == 3 && $aftersale_state == 1){ ?>
-<!--                    <div>-->
-<!--                        <p>换货申请中</p>-->
-<!--                    </div>-->
-<!--                    <img src="/mshop/web/static/yundian/img/order_details_3.png"/>-->
-<!--                --><?php //}elseif($sendstatus == 3 && $return_type == 2 && $aftersale_type == 3 && $aftersale_state == 2 && $return_status == 2){ ?>
-<!--                    <div>-->
-<!--                        <p>已同意换货,请买家退货</p>-->
-<!--                    </div>-->
-<!--                    <img src="/mshop/web/static/yundian/img/order_details_3.png"/>-->
-<!--                --><?php //}elseif($sendstatus == 3 && $return_type == 2 && $aftersale_type == 3 && $aftersale_state == 2 && $return_status == 5){ ?>
-<!--                    <div>-->
-<!--                        <p>买家已退货,等待换货</p>-->
-<!--                    </div>-->
-<!--                    <img src="/mshop/web/static/yundian/img/order_details_3.png"/>-->
-<!--                --><?php //}else{} ?>
-<!--            --><?php //} ?>
-<!--        </div>-->
+        <!--        <div class="details-status">-->
+        <!--            --><?php
+        //            if($status>=0 and $paystatus == 0 and $paystyle!="货到付款" and $sendstatus==0 and $aftersale_state==0 and $p_stu==false){
+        //                //未支付
+        //                ?>
+        <!--                --><?php //if(strtotime($recovery_time)>$currtime){ ?>
+        <!--                    <div>-->
+        <!--                        <p>等待买家付款</p>-->
+        <!--                        <p class="font-size-12">剩<span class="times"></span>自动关闭</p>-->
+        <!--                    </div>-->
+        <!--                    <img src="/mshop/web/static/yundian/img/order_details_3.png"/>-->
+        <!--                --><?php //}else{ ?>
+        <!--                    <div>-->
+        <!--                        <p>订单已失效</p>-->
+        <!--                    </div>-->
+        <!--                    <img src="/mshop/web/static/yundian/img/order_details_3.png"/>-->
+        <!--                --><?php //} ?>
+        <!---->
+        <!--            --><?php //
+        //                }else{
+        //                    $check = 1;
+        //            ?><!-- -->
+        <!--                --><?php //if($status == -1){ ?>
+        <!--                    <div>-->
+        <!--                        <p>订单已取消</p>-->
+        <!--                    </div>-->
+        <!--                    <img src="/mshop/web/static/yundian/img/order_details_3.png"/>-->
+        <!--                --><?php //}elseif(($paystatus==1 or $paystyle=="货到付款") && $status>=0 && $sendstatus==0 && $aftersale_state==0){ ?>
+        <!--                    <div>-->
+        <!--                        <p>等待卖家发货</p>-->
+        <!--                    </div>-->
+        <!--                    <img src="/mshop/web/static/yundian/img/order_details_3.png"/>-->
+        <!--                --><?php //}elseif($paystatus==1 && $status >= 0 && $sendstatus == 1 && $aftersale_state==0){ ?>
+        <!--                    <div>-->
+        <!--                        <p>卖家已发货</p>-->
+        <!--                    </div>-->
+        <!--                    <img src="/mshop/web/static/yundian/img/order_details_3.png"/>-->
+        <!--                --><?php //}elseif($check == 1 && (($sendstatus==2 && $status==1) || $sendstatus==4 || $sendstatus==6 || $aftersale_state==4 || $return_status==4)){ ?>
+        <!--                    <div>-->
+        <!--                        <p>交易完成</p>-->
+        <!--                    </div>-->
+        <!--                    <img src="/mshop/web/static/yundian/img/order_details_3.png"/>-->
+        <!--                --><?php //}elseif($aftersale_type == 1 && $aftersale_state == 1 && $sendstatus == 5){ ?>
+        <!--                    <div>-->
+        <!--                        <p>退款申请中</p>-->
+        <!--                    </div>-->
+        <!--                    <img src="/mshop/web/static/yundian/img/order_details_3.png"/>-->
+        <!--                --><?php //}elseif($aftersale_type == 1 && $aftersale_state == 2 && $sendstatus == 6){ ?>
+        <!--                    <div>-->
+        <!--                        <p>退款完成</p>-->
+        <!--                    </div>-->
+        <!--                    <img src="/mshop/web/static/yundian/img/order_details_3.png"/>-->
+        <!--                --><?php //}elseif($aftersale_type == 2 && $aftersale_state == 1 && $sendstatus == 3){ ?>
+        <!--                    <div>-->
+        <!--                        <p>退货申请中</p>-->
+        <!--                    </div>-->
+        <!--                    <img src="/mshop/web/static/yundian/img/order_details_3.png"/>-->
+        <!--                --><?php //}elseif($aftersale_type == 2 && $aftersale_state == 2 && $sendstatus == 3 && $return_status == 2){ ?>
+        <!--                    <div>-->
+        <!--                        <p>已确认,等待退货</p>-->
+        <!--                    </div>-->
+        <!--                    <img src="/mshop/web/static/yundian/img/order_details_3.png"/>-->
+        <!--                --><?php //}elseif($aftersale_type == 2 && $aftersale_state == 2 && $sendstatus == 3 && $return_status == 5){ ?>
+        <!--                    <div>-->
+        <!--                        <p>退货（买家已退货）</p>-->
+        <!--                    </div>-->
+        <!--                    <img src="/mshop/web/static/yundian/img/order_details_3.png"/>-->
+        <!--                --><?php //}elseif($aftersale_type == 2 && $aftersale_state == 2 && $sendstatus == 3 && $return_status == 6){ ?>
+        <!--                    <div>-->
+        <!--                        <p>退货已收货,等待退款</p>-->
+        <!--                    </div>-->
+        <!--                    <img src="/mshop/web/static/yundian/img/order_details_3.png"/>-->
+        <!--                --><?php //}elseif($aftersale_type == 2 && $aftersale_state == 2 && $sendstatus == 4 && $return_status == 2){ ?>
+        <!--                    <div>-->
+        <!--                        <p>退货完成</p>-->
+        <!--                    </div>-->
+        <!--                    <img src="/mshop/web/static/yundian/img/order_details_3.png"/>-->
+        <!--                --><?php //}elseif($sendstatus == 3 && $return_type == 0 && $aftersale_type == 1 && $aftersale_state == 1){ ?>
+        <!--                    <div>-->
+        <!--                        <p>退货(仅退款)申请中</p>-->
+        <!--                    </div>-->
+        <!--                    <img src="/mshop/web/static/yundian/img/order_details_3.png"/>-->
+        <!--                --><?php //}elseif($sendstatus == 3 && $return_type == 0 && $aftersale_type == 1 && $aftersale_state == 2){ ?>
+        <!--                    <div>-->
+        <!--                        <p>退货(仅退款)已同意,待退款</p>-->
+        <!--                    </div>-->
+        <!--                    <img src="/mshop/web/static/yundian/img/order_details_3.png"/>-->
+        <!--                --><?php //}elseif($sendstatus == 4 && $return_type == 0 && $aftersale_type == 1 && $aftersale_state == 2){ ?>
+        <!--                    <div>-->
+        <!--                        <p>退货(仅退款)已完成</p>-->
+        <!--                    </div>-->
+        <!--                    <img src="/mshop/web/static/yundian/img/order_details_3.png"/>-->
+        <!--                --><?php //}elseif($sendstatus == 3 && $return_type == 2 && $aftersale_type == 3 && $aftersale_state == 1){ ?>
+        <!--                    <div>-->
+        <!--                        <p>换货申请中</p>-->
+        <!--                    </div>-->
+        <!--                    <img src="/mshop/web/static/yundian/img/order_details_3.png"/>-->
+        <!--                --><?php //}elseif($sendstatus == 3 && $return_type == 2 && $aftersale_type == 3 && $aftersale_state == 2 && $return_status == 2){ ?>
+        <!--                    <div>-->
+        <!--                        <p>已同意换货,请买家退货</p>-->
+        <!--                    </div>-->
+        <!--                    <img src="/mshop/web/static/yundian/img/order_details_3.png"/>-->
+        <!--                --><?php //}elseif($sendstatus == 3 && $return_type == 2 && $aftersale_type == 3 && $aftersale_state == 2 && $return_status == 5){ ?>
+        <!--                    <div>-->
+        <!--                        <p>买家已退货,等待换货</p>-->
+        <!--                    </div>-->
+        <!--                    <img src="/mshop/web/static/yundian/img/order_details_3.png"/>-->
+        <!--                --><?php //}else{} ?>
+        <!--            --><?php //} ?>
+        <!--        </div>-->
         <!--待付款-->
         <!--状态图标全部切出，后缀从1到7-->
 
         <!--			<!-- 订单状态 未支付订单不显示订单状态-->
-        			<?php if($status>=0 and $paystatus == 0 and $paystyle!="货到付款" and $sendstatus==0 and $aftersale_state==0 and $p_stu==false ){?>
-        			<div class="divOrderState" style="background-color: #fd7d23;padding:0;">
-        				<div class="recovery_time">
-        					<?php if(strtotime($recovery_time)>$currtime){?>
-        					<div class="wait_tip">
-        						<div class="left_time_top">等待买家付款</div>
-        						<div class="left_time_bottom"><span class="times"></span>后支付失效</div>
-        					</div>
-        					<div class="order_close" style="display:none;">订单已失效</div>
-        					<div class="recovery_time_img">
-        						<img class="left_time_img" src=".\images\order_image\recovery_time_pay.png">
-        						<img class="order_close_img" src=".\images\order_image\recovery_time_close.png" style="display:none;">
-        					</div>
-        					<?php }else{?>
-        					<div class="order_close">订单已失效</div>
-        					<div class="recovery_time_img">
-        						<img class="order_close_img" src=".\images\order_image\recovery_time_close.png">
-        					</div>
-        					<?php }?>
-        				</div>
-        				<div style="clear:both;height:0;"></div>
-        			<?php }else{?>
-        			<div class="divOrderState">
-        				<div class="orderState">订单状态</div>
-        				<div class="line_gray"></div>
-        				<div id="middle-tab">
-        					<div class="area-one comment-mark sel ">
-        						<img class="btn_round_status" src="./<?php echo $images_skin?>/order_image/icon_check_orange.png">
-        						<div>已提交</div>
-        					</div>
-        					<?php
-        							$check = 1;
-                                    $status_str = '';
-                                    if($status == -1){
-                                        $status_str = '待付款';
-                                    }
-
-        							if($status>=0 and ($paystatus == 0 and $paystyle!="货到付款") and $sendstatus==0 and $aftersale_state==0){
-        								$check = 1;
-        								$status_str = '待付款';
-        							}else if(($paystatus==1 or $paystyle=="货到付款") && $status>=0 && $sendstatus==0 && $aftersale_state==0){
-        								$check = 1;
-        								$status_str = '待发货';
-        							}else if($paystatus==1 && $status >= 0 && $sendstatus == 1 && $aftersale_state==0){
-        								$check = 1;
-        								$status_str = '待收货';
-        							}else if($status >= 0 && $sendstatus == 2 && $aftersale_state==0){
-        								$check = 1;
-        								$status_str = '已收货';
-        							}else if($aftersale_state > 0 ){
-                                        $check = 1;
-                                        $status_str = '售后中';
-                                    }else if($sendstatus >=3 and $sendstatus<5){
-                                        $check = 1;
-                                        $status_str = '退货中';
-                                    }else if($sendstatus>=5){
-        								$check = 1;
-                                        $status_str = '退款中';
-        							}
-
-
-        						if(!empty($pay_batchcode)){
-        							if($paystatus==1 or $paystyle=="货到付款"){
-        								$check = 1;
-        								$status_str = '待发货';
-        								if($sendstatus==2){
-        									$status_str = '已收货';
-        								} else if($sendstatus==1){
-        									$status_str = '待收货';
-        								}
-        							}else{
-        								$check = 1;
-        								$status_str = '待付款';
-        							}
-        						}
-        						if( $cstatus == 3 ){
-        							$status_str = '待退款';
-        						}
-        					?>
-        					<div class="area-one comment-mark <?php if(1==$check){echo 'sel';}?>">
-        						<div class="lineGray"></div>
-        						<?php if(1==$check){?>
-        						<img class="btn_round_status" src="./<?php echo $images_skin?>/order_image/icon_check_orange.png">
-        						<?php }else{?>
-        						<img class="btn_round_status" src="./images/order_image/icon_time_gray.png">
-        						<?php }?>
-        						<div><?php echo $status_str;?></div>
-        					</div>
-        					<?php
-        						//if(1 == $check && (($as_id>0 && $status==7) || ($as_id<0 && $status==1 && $sendstatus==2))){
-                                if($check == 1 && (($sendstatus==2 && $status==1) || $sendstatus==4 || $sendstatus==6 || $aftersale_state==4 || $return_status==4)){
-        					?>
-        					<div class="area-one comment-mark sel">
-        						<div class="lineGray"></div>
-        						<img class="btn_round_status" src="./<?php echo $images_skin?>/order_image/icon_check_orange.png">
-        						<div>已完成</div>
-        					</div>
-        					<?php
-        						}else if($status == -1){
-        					?>
-        					<div class="area-one comment-mark sel">
-        						<div class="lineGray"></div>
-        						<img class="btn_round_status" src="./<?php echo $images_skin?>/order_image/icon_check_orange.png">
-        						<div>已取消</div>
-        					</div>
-        					<?php
-        						}else{
-        					?>
-        					<div class="area-one comment-mark">
-        						<div class="lineGray"></div>
-        						<img class="btn_round_status" src="./images/order_image/icon_time_gray.png">
-        						<div>待完成</div>
-        					</div>
-        					<?php
-        						}
-        					?>
-        				</div>
-        				<?php }?>
-        			</div>
-        <?php
-        $name = '佚名';
-        $query2 = "select address,name,phone,location_p,location_c,location_a from weixin_commonshop_order_addresses where batchcode='".$batchcode."'";
-        // echo $query2;
-        $result2 = _mysql_query($query2) or die('query failed2'.mysql_error());
-        while($row2 = mysql_fetch_object($result2)){
-            $address 	= $row2->address;		//详细地址
-            $name 		= $row2->name;			//收货人姓名
-            $phone 		= $row2->phone;			//收货人联系电话
-            $location_p = $row2->location_p;	//省份
-            $location_c = $row2->location_c;	//市区
-            $location_a = $row2->location_a;	//街道/镇区
-        }
-
-        if ($or_code <= 0) {
-            ?>
-            <!-- 收货人信息 -->
-            <div class="div_receiver">
-                <div class="div_pos">
-                    <img src="./images/order_image/icon_position.png">
-                </div>
-                <div class="div_right">
-                    <div class="frame_top">
-                        <span class="name" style="width:auto;max-width:25%;margin-right:3%;">收货人&nbsp;:&nbsp;</span>
-
-                        <span class="name" style="width: auto;max-width:29%;margin-right: 3%; text-overflow:ellipsis; white-space:nowrap;"><?php echo $name;?></span>
-                        <span class="phone_right"><?php echo $phone;?></span>
+        <?php if($status>=0 and $paystatus == 0 and $paystyle!="货到付款" and $sendstatus==0 and $aftersale_state==0 and $p_stu==false ){?>
+        <div class="divOrderState" style="background-color: #fd7d23;padding:0;">
+            <div class="recovery_time">
+                <?php if(strtotime($recovery_time)>$currtime){?>
+                    <div class="wait_tip">
+                        <div class="left_time_top">等待买家付款</div>
+                        <div class="left_time_bottom"><span class="times"></span>后支付失效</div>
                     </div>
-                    <div class="frame_bottom">
-                        <span>地址&nbsp;:&nbsp;</span><span><?php echo $location_p.$location_c.$location_a.$address;?></span>
+                    <div class="order_close" style="display:none;">订单已失效</div>
+                    <div class="recovery_time_img">
+                        <img class="left_time_img" src=".\images\order_image\recovery_time_pay.png">
+                        <img class="order_close_img" src=".\images\order_image\recovery_time_close.png" style="display:none;">
                     </div>
-                </div>
-                <div style="clear:both;"></div>
+                <?php }else{?>
+                    <div class="order_close">订单已失效</div>
+                    <div class="recovery_time_img">
+                        <img class="order_close_img" src=".\images\order_image\recovery_time_close.png">
+                    </div>
+                <?php }?>
             </div>
-        <?php } ?>
-        <?php if(!empty($pay_batchcode)){?>
-            <div style="height:10px;background-color:#eee;"></div>
+            <div style="clear:both;height:0;"></div>
+            <?php }else{?>
+            <div class="divOrderState">
+                <div class="orderState">订单状态</div>
+                <div class="line_gray"></div>
+                <div id="middle-tab">
+                    <div class="area-one comment-mark sel ">
+                        <img class="btn_round_status" src="./<?php echo $images_skin?>/order_image/icon_check_orange.png">
+                        <div>已提交</div>
+                    </div>
+                    <?php
+                    $check = 1;
+                    $status_str = '';
+                    if($status == -1){
+                        $status_str = '待付款';
+                    }
+
+                    if($status>=0 and ($paystatus == 0 and $paystyle!="货到付款") and $sendstatus==0 and $aftersale_state==0){
+                        $check = 1;
+                        $status_str = '待付款';
+                    }else if(($paystatus==1 or $paystyle=="货到付款") && $status>=0 && $sendstatus==0 && $aftersale_state==0){
+                        $check = 1;
+                        $status_str = '待发货';
+                    }else if($paystatus==1 && $status >= 0 && $sendstatus == 1 && $aftersale_state==0){
+                        $check = 1;
+                        $status_str = '待收货';
+                    }else if($status >= 0 && $sendstatus == 2 && $aftersale_state==0){
+                        $check = 1;
+                        $status_str = '已收货';
+                    }else if($aftersale_state > 0 ){
+                        $check = 1;
+                        $status_str = '售后中';
+                    }else if($sendstatus >=3 and $sendstatus<5){
+                        $check = 1;
+                        $status_str = '退货中';
+                    }else if($sendstatus>=5){
+                        $check = 1;
+                        $status_str = '退款中';
+                    }
+
+
+                    if(!empty($pay_batchcode)){
+                        if($paystatus==1 or $paystyle=="货到付款"){
+                            $check = 1;
+                            $status_str = '待发货';
+                            if($sendstatus==2){
+                                $status_str = '已收货';
+                            } else if($sendstatus==1){
+                                $status_str = '待收货';
+                            }
+                        }else{
+                            $check = 1;
+                            $status_str = '待付款';
+                        }
+                    }
+                    if( $cstatus == 3 ){
+                        $status_str = '待退款';
+                    }
+                    ?>
+                    <div class="area-one comment-mark <?php if(1==$check){echo 'sel';}?>">
+                        <div class="lineGray"></div>
+                        <?php if(1==$check){?>
+                            <img class="btn_round_status" src="./<?php echo $images_skin?>/order_image/icon_check_orange.png">
+                        <?php }else{?>
+                            <img class="btn_round_status" src="./images/order_image/icon_time_gray.png">
+                        <?php }?>
+                        <div><?php echo $status_str;?></div>
+                    </div>
+                    <?php
+                    //if(1 == $check && (($as_id>0 && $status==7) || ($as_id<0 && $status==1 && $sendstatus==2))){
+                    if($check == 1 && (($sendstatus==2 && $status==1) || $sendstatus==4 || $sendstatus==6 || $aftersale_state==4 || $return_status==4)){
+                        ?>
+                        <div class="area-one comment-mark sel">
+                            <div class="lineGray"></div>
+                            <img class="btn_round_status" src="./<?php echo $images_skin?>/order_image/icon_check_orange.png">
+                            <div>已完成</div>
+                        </div>
+                        <?php
+                    }else if($status == -1){
+                        ?>
+                        <div class="area-one comment-mark sel">
+                            <div class="lineGray"></div>
+                            <img class="btn_round_status" src="./<?php echo $images_skin?>/order_image/icon_check_orange.png">
+                            <div>已取消</div>
+                        </div>
+                        <?php
+                    }else{
+                        ?>
+                        <div class="area-one comment-mark">
+                            <div class="lineGray"></div>
+                            <img class="btn_round_status" src="./images/order_image/icon_time_gray.png">
+                            <div>待完成</div>
+                        </div>
+                        <?php
+                    }
+                    ?>
+                </div>
+                <?php }?>
+            </div>
             <?php
-        }
-        if(!empty($pay_batchcode)){
-            $query_batchcode = "select batchcode,supply_id,createtime,delivery_time_start,sendstyle,delivery_time_end,yundian_id,yundian_self from weixin_commonshop_orders where isvalid=true and customer_id=".$customer_id." and pay_batchcode='".$pay_batchcode."' group by batchcode";
-        }else{
+            $name = '佚名';
+            $query2 = "select address,name,phone,location_p,location_c,location_a from weixin_commonshop_order_addresses where batchcode='".$batchcode."'";
+            // echo $query2;
+            $result2 = _mysql_query($query2) or die('query failed2'.mysql_error());
+            while($row2 = mysql_fetch_object($result2)){
+                $address 	= $row2->address;		//详细地址
+                $name 		= $row2->name;			//收货人姓名
+                $phone 		= $row2->phone;			//收货人联系电话
+                $location_p = $row2->location_p;	//省份
+                $location_c = $row2->location_c;	//市区
+                $location_a = $row2->location_a;	//街道/镇区
+            }
 
+            if ($or_code <= 0) {
+                ?>
+                <!-- 收货人信息 -->
+                <div class="div_receiver">
+                    <div class="div_pos">
+                        <img src="./images/order_image/icon_position.png">
+                    </div>
+                    <div class="div_right">
+                        <div class="frame_top">
+                            <span class="name" style="width:auto;max-width:25%;margin-right:3%;">收货人&nbsp;:&nbsp;</span>
 
-            $query_batchcode = "select batchcode,supply_id,createtime,delivery_time_start,sendstyle,delivery_time_end,yundian_id,yundian_self from weixin_commonshop_orders where isvalid=true and customer_id=".$customer_id." and batchcode='".$batchcode."' group by batchcode";
-        }
-
-        $supply_id	 = -1;	//供应商ID
-        $createtime	 = '';	//创建时间
-        $pid_str 	 = '';	//产品ID字符串
-        $prcount_str = '';	//产品数量字符串
-        $product_count = 0;	//产品总数
-        $delivery_time_start = '';	//配送时间
-        $delivery_time_end = '';	//配送时间
-        $sendstyle = '';	//配送方式
-        $result_batchcode = _mysql_query($query_batchcode) or die('query_batchcode faile：'.mysql_error());
-        while($row_batchcode = mysql_fetch_object($result_batchcode)){
-
-        $supply_id  = $row_batchcode->supply_id;
-        $createtime = $row_batchcode->createtime;
-        $batchcode  = $row_batchcode->batchcode;
-        $delivery_time_start  = $row_batchcode->delivery_time_start;
-        $delivery_time_end  = $row_batchcode->delivery_time_end;
-        $sendstyle  = $row_batchcode->sendstyle;
-
-        $yundian_id = $row_batchcode->yundian_id;
-        $yundian_self = $row_batchcode->yundian_self;
-
-        $shop_show_name  = ""; //显示的商城名
-        $brand_supply_id = -1; //品牌供应商ID
-        if($supply_id>0){
-
-            $sql_supplyname = "select id,brand_supply_name from weixin_commonshop_brand_supplys where isvalid=true and user_id=".$supply_id;
-            $result_supply = _mysql_query($sql_supplyname) or die('query sql_supplyname failed3' . mysql_error());
-            if ($row_supply = mysql_fetch_object($result_supply)) {
-                $brand_supply_id = $row_supply->id;
-                $shop_show_name  = $row_supply->brand_supply_name;                //店铺名
+                            <span class="name" style="width: auto;max-width:29%;margin-right: 3%; text-overflow:ellipsis; white-space:nowrap;"><?php echo $name;?></span>
+                            <span class="phone_right"><?php echo $phone;?></span>
+                        </div>
+                        <div class="frame_bottom">
+                            <span>地址&nbsp;:&nbsp;</span><span><?php echo $location_p.$location_c.$location_a.$address;?></span>
+                        </div>
+                    </div>
+                    <div style="clear:both;"></div>
+                </div>
+            <?php } ?>
+            <?php if(!empty($pay_batchcode)){?>
+                <div style="height:10px;background-color:#eee;"></div>
+                <?php
+            }
+            if(!empty($pay_batchcode)){
+                $query_batchcode = "select batchcode,supply_id,createtime,delivery_time_start,sendstyle,delivery_time_end,yundian_id,yundian_self from weixin_commonshop_orders where isvalid=true and customer_id=".$customer_id." and pay_batchcode='".$pay_batchcode."' group by batchcode";
             }else{
-                $sql_supplyname = "select shopName from weixin_commonshop_applysupplys where isvalid = true and user_id=" . $supply_id;
+
+
+                $query_batchcode = "select batchcode,supply_id,createtime,delivery_time_start,sendstyle,delivery_time_end,yundian_id,yundian_self from weixin_commonshop_orders where isvalid=true and customer_id=".$customer_id." and batchcode='".$batchcode."' group by batchcode";
+            }
+
+            $supply_id	 = -1;	//供应商ID
+            $createtime	 = '';	//创建时间
+            $pid_str 	 = '';	//产品ID字符串
+            $prcount_str = '';	//产品数量字符串
+            $product_count = 0;	//产品总数
+            $delivery_time_start = '';	//配送时间
+            $delivery_time_end = '';	//配送时间
+            $sendstyle = '';	//配送方式
+            $result_batchcode = _mysql_query($query_batchcode) or die('query_batchcode faile：'.mysql_error());
+            while($row_batchcode = mysql_fetch_object($result_batchcode)){
+
+            $supply_id  = $row_batchcode->supply_id;
+            $createtime = $row_batchcode->createtime;
+            $batchcode  = $row_batchcode->batchcode;
+            $delivery_time_start  = $row_batchcode->delivery_time_start;
+            $delivery_time_end  = $row_batchcode->delivery_time_end;
+            $sendstyle  = $row_batchcode->sendstyle;
+
+            $yundian_id = $row_batchcode->yundian_id;
+            $yundian_self = $row_batchcode->yundian_self;
+
+            $shop_show_name  = ""; //显示的商城名
+            $brand_supply_id = -1; //品牌供应商ID
+            if($supply_id>0){
+
+                $sql_supplyname = "select id,brand_supply_name from weixin_commonshop_brand_supplys where isvalid=true and user_id=".$supply_id;
                 $result_supply = _mysql_query($sql_supplyname) or die('query sql_supplyname failed3' . mysql_error());
                 if ($row_supply = mysql_fetch_object($result_supply)) {
-                    $shop_show_name = $row_supply->shopName;                //店铺名
-                }
-            }
-        }else{
-            if($yundian_id > 0 && $yundian_self ==1){   //判断是否是云店的自营订单，输出店铺名
-                // $sql_shopname = 'select realname,contact_name from '.WSY_USER.'.weixin_yundian_keeper where customer_id='.$customer_id.' and id ='.$yundian_id.' ';
-                // $result_shop = _mysql_query($sql_shopname) or die('query sql_shopname failed'.mysql_error());
-                // if($row_shop = mysql_fetch_object($result_shop)) {
-                //     $realname = $row_shop->realname; 
-                //     $contact_name = $row_shop->contact_name;                    
-                // }
-
-                // if(!empty($contact_name)){
-                //     $shop_show_name = $contact_name."的店铺";
-                // }else{
-                //     $shop_show_name = $realname."的店铺";
-                // }
-
-                $sql_shopname = 'SELECT wyk.realname,wyk.contact_name,wyk.kepper_img,wu.weixin_name,wyk.store_name FROM '.WSY_USER.'.weixin_yundian_keeper as wyk left join '.WSY_USER.'.weixin_users as wu on wyk.user_id = wu.id where wyk.customer_id='.$customer_id.' and wyk.id ='.$yundian_id;
-                $result_shop = _mysql_query($sql_shopname) or die('Query failed1: ' . mysql_error());
-                while ($row_shop = mysql_fetch_object($result_shop)) {
-                   $realname = $row_shop->realname;
-                   $contact_name = $row_shop->contact_name;
-                   $weixin_name = $row_shop->weixin_name;
-                   $store_name = $row_shop->store_name;
-                   $brand_logo = $row_shop->kepper_img;
-                }
-                if($store_name==NULL)
-                {
-                    if(!empty($weixin_name)){
-                        $shop_show_name = $weixin_name."的店铺";
-                    }else if(!empty($contact_name)){
-                        $shop_show_name = $contact_name."的店铺";
-                    }else{
-                        $shop_show_name = $realname."的店铺";
+                    $brand_supply_id = $row_supply->id;
+                    $shop_show_name  = $row_supply->brand_supply_name;                //店铺名
+                }else{
+                    $sql_supplyname = "select shopName from weixin_commonshop_applysupplys where isvalid = true and user_id=" . $supply_id;
+                    $result_supply = _mysql_query($sql_supplyname) or die('query sql_supplyname failed3' . mysql_error());
+                    if ($row_supply = mysql_fetch_object($result_supply)) {
+                        $shop_show_name = $row_supply->shopName;                //店铺名
                     }
                 }
-                else
-                {
-                    $shop_show_name = $store_name;
-                }
-                
             }else{
+                if($yundian_id > 0 && $yundian_self ==1){   //判断是否是云店的自营订单，输出店铺名
+                    // $sql_shopname = 'select realname,contact_name from '.WSY_USER.'.weixin_yundian_keeper where customer_id='.$customer_id.' and id ='.$yundian_id.' ';
+                    // $result_shop = _mysql_query($sql_shopname) or die('query sql_shopname failed'.mysql_error());
+                    // if($row_shop = mysql_fetch_object($result_shop)) {
+                    //     $realname = $row_shop->realname;
+                    //     $contact_name = $row_shop->contact_name;
+                    // }
 
-                //查询商城名
-                $sql_shopname = "select name from weixin_commonshops where isvalid=true and customer_id=".$customer_id;
-                $result_shop = _mysql_query($sql_shopname) or die('query sql_shopname failed'.mysql_error());
-                if($row_shop = mysql_fetch_object($result_shop)) {
-                    $shop_show_name = $row_shop->name;					//商家名
+                    // if(!empty($contact_name)){
+                    //     $shop_show_name = $contact_name."的店铺";
+                    // }else{
+                    //     $shop_show_name = $realname."的店铺";
+                    // }
+
+                    $sql_shopname = 'SELECT wyk.realname,wyk.contact_name,wyk.kepper_img,wu.weixin_name,wyk.store_name FROM '.WSY_USER.'.weixin_yundian_keeper as wyk left join '.WSY_USER.'.weixin_users as wu on wyk.user_id = wu.id where wyk.customer_id='.$customer_id.' and wyk.id ='.$yundian_id;
+                    $result_shop = _mysql_query($sql_shopname) or die('Query failed1: ' . mysql_error());
+                    while ($row_shop = mysql_fetch_object($result_shop)) {
+                        $realname = $row_shop->realname;
+                        $contact_name = $row_shop->contact_name;
+                        $weixin_name = $row_shop->weixin_name;
+                        $store_name = $row_shop->store_name;
+                        $brand_logo = $row_shop->kepper_img;
+                    }
+                    if($store_name==NULL)
+                    {
+                        if(!empty($weixin_name)){
+                            $shop_show_name = $weixin_name."的店铺";
+                        }else if(!empty($contact_name)){
+                            $shop_show_name = $contact_name."的店铺";
+                        }else{
+                            $shop_show_name = $realname."的店铺";
+                        }
+                    }
+                    else
+                    {
+                        $shop_show_name = $store_name;
+                    }
+
+                }else{
+
+                    //查询商城名
+                    $sql_shopname = "select name from weixin_commonshops where isvalid=true and customer_id=".$customer_id;
+                    $result_shop = _mysql_query($sql_shopname) or die('query sql_shopname failed'.mysql_error());
+                    if($row_shop = mysql_fetch_object($result_shop)) {
+                        $shop_show_name = $row_shop->name;					//商家名
+                    }
                 }
             }
-        }
-        ?>
-        <!-- 订单的商品目录信息 -->
-        <ul class="ui_order_goods" style="<?php if(!empty($pay_batchcode)){echo 'margin:0;border-top:0;';}?>">
-            <div class="shopHead">
-                <ul class="am-cf am-avg-sm-1" style="z-index:111;">
-                    <li class="tab_right_top" style="margin:0px;">
-                        <img class="itemPhotoCheck shopall shopCheck" src="./images/order_image/icon_shop.png">
-                        <span onclick="<?php if($brand_supply_id>0){echo "gotoShop(".$supply_id.")";}else{echo "gotoIndex()";}?>" class="am-navbar-label">
+            ?>
+            <!-- 订单的商品目录信息 -->
+            <ul class="ui_order_goods" style="<?php if(!empty($pay_batchcode)){echo 'margin:0;border-top:0;';}?>">
+                <div class="shopHead">
+                    <ul class="am-cf am-avg-sm-1" style="z-index:111;">
+                        <li class="tab_right_top" style="margin:0px;">
+                            <img class="itemPhotoCheck shopall shopCheck" src="./images/order_image/icon_shop.png">
+                            <span onclick="<?php if($brand_supply_id>0){echo "gotoShop(".$supply_id.")";}else{echo "gotoIndex()";}?>" class="am-navbar-label">
                             <span class="shopName"><?php echo $shop_show_name;?><?php if($or_shop_type==2){echo '/'.$o_shop_name.'/'.$o_shop_branch_name;}?></span>
                         </span>
-                        <img class="img_shop_right" onclick="<?php if($brand_supply_id>0){echo "gotoShop(".$supply_id.")";}else{echo "gotoIndex()";}?>" src="./images/order_image/btn_right.png">
-                    </li>
-                </ul>
-            </div>
-            <?php
+                            <img class="img_shop_right" onclick="<?php if($brand_supply_id>0){echo "gotoShop(".$supply_id.")";}else{echo "gotoIndex()";}?>" src="./images/order_image/btn_right.png">
+                        </li>
+                    </ul>
+                </div>
+                <?php
 
 
-            $sum_curr = 0;//可抵扣购物币
-            $query3 = "select pid,rcount,prvalues,prvalues_name,is_exchange,totalprice from weixin_commonshop_orders where isvalid=true and customer_id=".$customer_id." and batchcode='".$batchcode."'";
-            $result3 = _mysql_query($query3) or die('query failed3'.mysql_error());
-            while($row3 = mysql_fetch_object($result3)){
-                $pid 			= $row3->pid;				//商品ID
-                $rcounts 		= $row3->rcount;			//商品数量
-                $prvalues 		= $row3->prvalues;			//商品属性
-                $prvalues_name 	= $row3->prvalues_name;		//商品属性字符串
-                $pro_totalprice = $row3->totalprice;
+                $sum_curr = 0;//可抵扣购物币
+                $query3 = "select pid,rcount,prvalues,prvalues_name,is_exchange,totalprice from weixin_commonshop_orders where isvalid=true and customer_id=".$customer_id." and batchcode='".$batchcode."'";
+                $result3 = _mysql_query($query3) or die('query failed3'.mysql_error());
+                while($row3 = mysql_fetch_object($result3)){
+                    $pid 			= $row3->pid;				//商品ID
+                    $rcounts 		= $row3->rcount;			//商品数量
+                    $prvalues 		= $row3->prvalues;			//商品属性
+                    $prvalues_name 	= $row3->prvalues_name;		//商品属性字符串
+                    $pro_totalprice = $row3->totalprice;
 
-                $is_exchange = $row3->is_exchange;       //是否为换购产品
+                    $is_exchange = $row3->is_exchange;       //是否为换购产品
 
-                $product_count++;
+                    $product_count++;
 
-                $pid_str = $pid_str.$pid.',';	//产品ID拼接成字符串
-                $prcount_str = $prcount_str.$rcounts.',';	//产品数量拼接成字符串
+                    $pid_str = $pid_str.$pid.',';	//产品ID拼接成字符串
+                    $prcount_str = $prcount_str.$rcounts.',';	//产品数量拼接成字符串
 
-                $prvstr = "";
-                if( !empty($prvalues) and !empty($prvalues_name) ){
-                    $prvstr = $prvalues_name;
-                } else if( !empty($prvalues) ){
-                    $prvarr= explode("_",$prvalues);
-                    for($i=0;$i<count($prvarr);$i++){
-                        $prvid = $prvarr[$i];
-                        if($prvid>0){
-                            $parent_id = -1;
-                            $prname    = '';
+                    $prvstr = "";
+                    if( !empty($prvalues) and !empty($prvalues_name) ){
+                        $prvstr = $prvalues_name;
+                    } else if( !empty($prvalues) ){
+                        $prvarr= explode("_",$prvalues);
+                        for($i=0;$i<count($prvarr);$i++){
+                            $prvid = $prvarr[$i];
+                            if($prvid>0){
+                                $parent_id = -1;
+                                $prname    = '';
 
-                            $query4 = "select name,parent_id from weixin_commonshop_pros where  id=".$prvid;
-                            $result4 = _mysql_query($query4) or die('query failed4'.mysql_error());
-                            while($row4 = mysql_fetch_object($result4)){
-                                $parent_id = $row4->parent_id;	//是否子属性
-                                $prname    = $row4->name;		//属性名
-                            }
-                            $p_prname = '';
+                                $query4 = "select name,parent_id from weixin_commonshop_pros where  id=".$prvid;
+                                $result4 = _mysql_query($query4) or die('query failed4'.mysql_error());
+                                while($row4 = mysql_fetch_object($result4)){
+                                    $parent_id = $row4->parent_id;	//是否子属性
+                                    $prname    = $row4->name;		//属性名
+                                }
+                                $p_prname = '';
 
-                            $query5 = "select name from weixin_commonshop_pros where  id=".$parent_id;
-                            $result5 = _mysql_query($query5) or die('query failed5'.mysql_error());
-                            while($row5 = mysql_fetch_object($result5)){
-                                $p_prname = $row5->name;		//属性名
-                                $prvstr   = $prvstr.$p_prname.":".$prname."  ";
+                                $query5 = "select name from weixin_commonshop_pros where  id=".$parent_id;
+                                $result5 = _mysql_query($query5) or die('query failed5'.mysql_error());
+                                while($row5 = mysql_fetch_object($result5)){
+                                    $p_prname = $row5->name;		//属性名
+                                    $prvstr   = $prvstr.$p_prname.":".$prname."  ";
+                                }
                             }
                         }
                     }
-                }
 
 
-                $query6 = "select id,name,is_virtual,default_imgurl,is_QR,QR_isforever,QR_starttime,QR_endtime from weixin_commonshop_products where customer_id=".$customer_id." and id=";
+                    $query6 = "select id,name,is_virtual,default_imgurl,is_QR,QR_isforever,QR_starttime,QR_endtime from weixin_commonshop_products where customer_id=".$customer_id." and id=";
 
-                $query6 .= $pid;
-
-                $result6 = _mysql_query($query6) or die('query failed6'.mysql_error());
-                while($row6 = mysql_fetch_object($result6)){
-                    $product_id 			= $row6->id;				//商品ID
-                    $product_name 			= $row6->name;				//商品名
-                    $product_is_virtual 	= $row6->is_virtual;		//是否虚拟产品
-                    $product_default_imgurl = $row6->default_imgurl;	//商品封面图
-                    $product_yundian_id = $row6->yundian_id;        //商品云店id
-                    /*郑培强*/
-                    $is_QR_z                = $row6->is_QR;
-                    $QR_isforever           = $row6->QR_isforever;
-                    $QR_starttime           = $row6->QR_starttime;
-                    $QR_endtime             = $row6->QR_endtime;
-                    /*郑培强*/
-                }
-
-                if(empty($product_default_imgurl)){
-                    $query6 = "select imgurl from weixin_commonshop_product_imgs where isvalid=true and customer_id=".$customer_id." and product_id=".$pid." limit 1";
+                    $query6 .= $pid;
 
                     $result6 = _mysql_query($query6) or die('query failed6'.mysql_error());
                     while($row6 = mysql_fetch_object($result6)){
-                        $product_default_imgurl = $row6->imgurl;	//商品封面图
+                        $product_id 			= $row6->id;				//商品ID
+                        $product_name 			= $row6->name;				//商品名
+                        $product_is_virtual 	= $row6->is_virtual;		//是否虚拟产品
+                        $product_default_imgurl = $row6->default_imgurl;	//商品封面图
+                        $product_yundian_id = $row6->yundian_id;        //商品云店id
+                        /*郑培强*/
+                        $is_QR_z                = $row6->is_QR;
+                        $QR_isforever           = $row6->QR_isforever;
+                        $QR_starttime           = $row6->QR_starttime;
+                        $QR_endtime             = $row6->QR_endtime;
+                        /*郑培强*/
                     }
-                }
 
-                /*计算单种产品的税金 start*/
-                $product_tax = 0;
-                $product_tax = get_product_tax($batchcode,$pid)[1];
-                /*计算单种产品的税金 end*/
+                    if(empty($product_default_imgurl)){
+                        $query6 = "select imgurl from weixin_commonshop_product_imgs where isvalid=true and customer_id=".$customer_id." and product_id=".$pid." limit 1";
 
-
-                /*-----------------计算产品可抵扣购物币数量----------------*/
-                $currency_percentage = -1;
-                $query = "SELECT currency_percentage from commonshop_product_discount_t where isvalid=true and pid=".$pid;
-                $result = _mysql_query($query) or die('Query_product_currency failed: ' . mysql_error());
-                while ($row = mysql_fetch_object($result)) {
-                    $currency_percentage = $row->currency_percentage;
-                }
-
-                if($currency_percentage<0){//-1使用全局配置
-                    $currency_percentage = $percentage;
-                }
-                $product_curr = $pro_totalprice*$currency_percentage;
-
-                $sum_curr +=  $product_curr;
-                //$sum_curr = round($sum_curr,2);
-                $sum_curr = bcadd($sum_curr,0,2);
-                /*-----------------计算产品可抵扣购物币数量----------------*/
-                ?>
-                <!-- 第一个商品 -->
-
-                <li class="itemWrapper item_goods button buttonclick" onclick="gotoProductDetail('<?php echo $pid;?>')">
-                    <div class="itemMainDiv" <?php if($is_collageActivities==1 && $aftersale_state == 0){echo 'style="padding: 15px 10px 15px 10px;"';}?>>
-                        <?php
-                        if( $is_collageActivities == 1 || $is_collageActivities == 2) {
-                            $collage_type = 1;		//团类型
-                            $collage_type_img = '';	//团类型标签
-                            $query_collage = "SELECT b.type FROM collage_crew_order_t AS a INNER JOIN collage_group_order_t AS b ON a.group_id=b.id WHERE a.batchcode='".$batchcode."'";
-                            $result_collage = _mysql_query($query_collage) or die('Query_collage failed:'.mysql_error());
-                            while( $row_collage = mysql_fetch_assoc($result_collage) ) {
-                                $collage_type = $row_collage['type'];
-                            }
-                            $query_activity1 = "SELECT type_name FROM collage_activities_explain_t WHERE customer_id=".$customer_id." and type=".$collage_type;
-                            $result_activity1 = _mysql_query($query_activity1) or die('Query_activity1 failed:'.mysql_error());
-                            $collage_type_img = mysql_fetch_assoc($result_activity1)['type_name'];
-                            ?>
-                            <i class="cell_icon"><?php echo $collage_type_img; ?></i>
-                            <?php
+                        $result6 = _mysql_query($query6) or die('query failed6'.mysql_error());
+                        while($row6 = mysql_fetch_object($result6)){
+                            $product_default_imgurl = $row6->imgurl;	//商品封面图
                         }
-                        ?>
-                        <img class="itemPhoto" src="<?php echo $product_default_imgurl;?>">
-                        <div class="contentLiDiv">
-                            <div class="itemProName">
-                                <span class="goodsName"><?php echo $product_name;?></span>
-                                <span class="goodsPrice">
+                    }
+
+                    /*计算单种产品的税金 start*/
+                    $product_tax = 0;
+                    $product_tax = get_product_tax($batchcode,$pid)[1];
+                    /*计算单种产品的税金 end*/
+
+
+                    /*-----------------计算产品可抵扣购物币数量----------------*/
+                    $currency_percentage = -1;
+                    $query = "SELECT currency_percentage from commonshop_product_discount_t where isvalid=true and pid=".$pid;
+                    $result = _mysql_query($query) or die('Query_product_currency failed: ' . mysql_error());
+                    while ($row = mysql_fetch_object($result)) {
+                        $currency_percentage = $row->currency_percentage;
+                    }
+
+                    if($currency_percentage<0){//-1使用全局配置
+                        $currency_percentage = $percentage;
+                    }
+                    $product_curr = $pro_totalprice*$currency_percentage;
+
+                    $sum_curr +=  $product_curr;
+                    //$sum_curr = round($sum_curr,2);
+                    $sum_curr = bcadd($sum_curr,0,2);
+                    /*-----------------计算产品可抵扣购物币数量----------------*/
+                    ?>
+                    <!-- 第一个商品 -->
+
+                    <li class="itemWrapper item_goods button buttonclick" onclick="gotoProductDetail('<?php echo $pid;?>')">
+                        <div class="itemMainDiv" <?php if($is_collageActivities==1 && $aftersale_state == 0){echo 'style="padding: 15px 10px 15px 10px;"';}?>>
+                            <?php
+                            if( $is_collageActivities == 1 || $is_collageActivities == 2) {
+                                $collage_type = 1;		//团类型
+                                $collage_type_img = '';	//团类型标签
+                                $query_collage = "SELECT b.type FROM collage_crew_order_t AS a INNER JOIN collage_group_order_t AS b ON a.group_id=b.id WHERE a.batchcode='".$batchcode."'";
+                                $result_collage = _mysql_query($query_collage) or die('Query_collage failed:'.mysql_error());
+                                while( $row_collage = mysql_fetch_assoc($result_collage) ) {
+                                    $collage_type = $row_collage['type'];
+                                }
+                                $query_activity1 = "SELECT type_name FROM collage_activities_explain_t WHERE customer_id=".$customer_id." and type=".$collage_type;
+                                $result_activity1 = _mysql_query($query_activity1) or die('Query_activity1 failed:'.mysql_error());
+                                $collage_type_img = mysql_fetch_assoc($result_activity1)['type_name'];
+                                ?>
+                                <i class="cell_icon"><?php echo $collage_type_img; ?></i>
+                                <?php
+                            }
+                            ?>
+                            <img class="itemPhoto" src="<?php echo $product_default_imgurl;?>">
+                            <div class="contentLiDiv">
+                                <div class="itemProName">
+                                    <span class="goodsName"><?php echo $product_name;?></span>
+                                    <span class="goodsPrice">
 									<?php if(OOF_P != 2) echo OOF_S ?>
-                                        <?php echo ceil(($pro_totalprice/$rcounts)*100)/100; ?>
+                                    <?php echo ceil(($pro_totalprice/$rcounts)*100)/100; ?>
                                     <?php if(OOF_P == 2) echo OOF_S ?>
 
 									</span>
-                            </div>
-                            <!--<span class="itemProContent goodsContent"></span>-->
-                            <div class="itemProContent goodsSize"><?php echo $prvstr;?><span>x <?php echo $rcounts;?></span></div>
+                                </div>
+                                <!--<span class="itemProContent goodsContent"></span>-->
+                                <div class="itemProContent goodsSize"><?php echo $prvstr;?><span>x <?php echo $rcounts;?></span></div>
 
-                            <?php if($is_exchange){?>
-                                <div class="tips-list"><span class="tips bg-red">赠</span></div>
-                            <?php } ?>
-                            <?php
-                            $delivery_id 	= -1;	//预配送时间设置id
-                            $delivery_name 	= '配送时间';	//预配送活动名称
-                            /* 查询是否预配送产品 */
-                            $query_delivery = "SELECT p.delivery_id, a.delivery_name FROM weixin_commonshop_pre_delivery_product_relation p INNER JOIN weixin_commonshop_pre_delivery a ON p.delivery_id=a.id WHERE p.pid=".$pid." AND p.isvalid=TRUE AND p.customer_id=".$customer_id." AND a.isvalid=TRUE";
-                            $result_delivery = _mysql_query($query_delivery) or die('Query_delivery failed:'.mysql_error());
-                            while( $row_delivery = mysql_fetch_object($result_delivery) ){
-                                $delivery_id = $row_delivery -> delivery_id;
-                                $delivery_name = $row_delivery -> delivery_name;
-                            }
-                            /* 查询是否预配送产品 */
-                            if ( $paystatus == 1 && strtotime($delivery_time_start) > 0 && strtotime($delivery_time_end) > 0 ) {
-                                $delivery_time_end_new = explode(' ', $delivery_time_end);
-                                $delivery_time_end_new1 = $delivery_time_end_new[1];
-                                ?>
-                                <div class="itemProContent movetime" style="margin-top:-55px;"><?php echo $delivery_time_start.'-'.$delivery_time_end_new1;?></div>
+                                <?php if($is_exchange){?>
+                                    <div class="tips-list"><span class="tips bg-red">赠</span></div>
+                                <?php } ?>
                                 <?php
-                            }
-                            $as_tip = '';
-                            if( $aftersale_state == 1){
-                                $as_tip = "已申请售后，等待商家确认...";
-                            }else if($aftersale_state == 2){
-                                $as_tip = "商家已同意售后申请，正在处理中...";
-                            }else if($aftersale_state == 3){
-                                $as_tip = "商家已驳回售后申请，原因:".$aftersale_reason;
-                            }else if($aftersale_state == 4){
-                                $as_tip = "售后已处理完成";
-                            }
-                            if($return_status == 2){
-                                if($return_type == 0){
-                                    $as_tip = "商家已同意申请，等待退款中...";
-                                }else if($return_type == 1){
-                                    $as_tip = "已同意退货申请";
-                                }else if($return_type == 2){
-                                    $as_tip = "已同意换货申请";
+                                $delivery_id 	= -1;	//预配送时间设置id
+                                $delivery_name 	= '配送时间';	//预配送活动名称
+                                /* 查询是否预配送产品 */
+                                $query_delivery = "SELECT p.delivery_id, a.delivery_name FROM weixin_commonshop_pre_delivery_product_relation p INNER JOIN weixin_commonshop_pre_delivery a ON p.delivery_id=a.id WHERE p.pid=".$pid." AND p.isvalid=TRUE AND p.customer_id=".$customer_id." AND a.isvalid=TRUE";
+                                $result_delivery = _mysql_query($query_delivery) or die('Query_delivery failed:'.mysql_error());
+                                while( $row_delivery = mysql_fetch_object($result_delivery) ){
+                                    $delivery_id = $row_delivery -> delivery_id;
+                                    $delivery_name = $row_delivery -> delivery_name;
+                                }
+                                /* 查询是否预配送产品 */
+                                if ( $paystatus == 1 && strtotime($delivery_time_start) > 0 && strtotime($delivery_time_end) > 0 ) {
+                                    $delivery_time_end_new = explode(' ', $delivery_time_end);
+                                    $delivery_time_end_new1 = $delivery_time_end_new[1];
+                                    ?>
+                                    <div class="itemProContent movetime" style="margin-top:-55px;"><?php echo $delivery_time_start.'-'.$delivery_time_end_new1;?></div>
+                                    <?php
+                                }
+                                $as_tip = '';
+                                if( $aftersale_state == 1){
+                                    $as_tip = "已申请售后，等待商家确认...";
+                                }else if($aftersale_state == 2){
+                                    $as_tip = "商家已同意售后申请，正在处理中...";
+                                }else if($aftersale_state == 3){
+                                    $as_tip = "商家已驳回售后申请，原因:".$aftersale_reason;
+                                }else if($aftersale_state == 4){
+                                    $as_tip = "售后已处理完成";
+                                }
+                                if($return_status == 2){
+                                    if($return_type == 0){
+                                        $as_tip = "商家已同意申请，等待退款中...";
+                                    }else if($return_type == 1){
+                                        $as_tip = "已同意退货申请";
+                                    }else if($return_type == 2){
+                                        $as_tip = "已同意换货申请";
+                                    }
+
+                                }else if($sendstatus == 3 && $return_status == 0){
+                                    if($return_type == 0){
+                                        $as_tip = "已申请退货(仅退款),等待商家确认中...";
+                                    }else if($return_type == 1){
+                                        $as_tip = "已申请退货,等待商家确认中...";
+                                    }else if($return_type == 2){
+                                        $as_tip = "已申请退货(换货),等待商家确认中...";
+                                    }
+                                }else if($return_status == 5){
+                                    $as_tip = "已退货，等待商家收货";
+                                }else if($return_status == 6){
+                                    $as_tip = "商家已收货";
+                                }else if($return_status == 4){
+                                    $as_tip = "已确认退货";
                                 }
 
-                            }else if($sendstatus == 3 && $return_status == 0){
-                                if($return_type == 0){
-                                    $as_tip = "已申请退货(仅退款),等待商家确认中...";
-                                }else if($return_type == 1){
-                                    $as_tip = "已申请退货,等待商家确认中...";
-                                }else if($return_type == 2){
-                                    $as_tip = "已申请退货(换货),等待商家确认中...";
+                                if($sendstatus==6){
+                                    $as_tip = "已退款完成";
                                 }
-                            }else if($return_status == 5){
-                                $as_tip = "已退货，等待商家收货";
-                            }else if($return_status == 6){
-                                $as_tip = "商家已收货";
-                            }else if($return_status == 4){
-                                $as_tip = "已确认退货";
-                            }
+                                if($sendstatus==4){
+                                    $as_tip = "已退货完成";
+                                    if($return_type == 0)$as_tip = "已退款完成";
+                                }
+                                if(!empty($as_tip)){
+                                    ?>
 
-                            if($sendstatus==6){
-                                $as_tip = "已退款完成";
-                            }
-                            if($sendstatus==4){
-                                $as_tip = "已退货完成";
-                                if($return_type == 0)$as_tip = "已退款完成";
-                            }
-                            if(!empty($as_tip)){
-                                ?>
+                                    <div class="goodsRedRect" style="float:right;">
+                                        <?php echo $as_tip;?>
+                                    </div>
+                                <?php	}?>
+                                <!--行邮税-->
+                                <?php if($total_tax_type>1){?>
+                                    <div class="tax" code="10008">
+                                        <button class="btn-shui"><div class="test5">
+                                                <span>税</span></div>
+                                            <div style="display:inline-block;padding-right:3px;"><?php echo $tax_name;?>：
+                                                <?php if(OOF_P != 2) echo OOF_S ?>
+                                                <?php echo $product_tax;?>
+                                                <?php if(OOF_P == 2) echo OOF_S ?>
+                                            </div>
+                                        </button>
+                                        <span style="font-size:12px;"></span>
+                                    </div>
+                                <?php }?>
+                                <!--行邮税-->
 
-                                <div class="goodsRedRect" style="float:right;">
-                                    <?php echo $as_tip;?>
-                                </div>
-                            <?php	}?>
-                            <!--行邮税-->
-                            <?php if($total_tax_type>1){?>
-                                <div class="tax" code="10008">
-                                    <button class="btn-shui"><div class="test5">
-                                            <span>税</span></div>
-                                        <div style="display:inline-block;padding-right:3px;"><?php echo $tax_name;?>：
-                                            <?php if(OOF_P != 2) echo OOF_S ?>
-                                            <?php echo $product_tax;?>
-                                            <?php if(OOF_P == 2) echo OOF_S ?>
-                                        </div>
-                                    </button>
-                                    <span style="font-size:12px;"></span>
-                                </div>
-                            <?php }?>
-                            <!--行邮税-->
-
+                            </div>
+                            <div style="clear:both"></div>
                         </div>
-                        <div style="clear:both"></div>
+
+                    </li>
+                <?php }?>
+                <?php	if($sendstatus==2 and empty($pay_batchcode) and $aftersale_state == 0 and $is_orderActivist==1 and $is_receipted != 1 and $is_collageActivities == 1 and $after_sale_button == 1) { ?>
+                    <!--拼团订单的售后按钮-->
+                    <div style="height:1px;float:right;">
+                        <span onclick="toAftersale('<?php echo $batchcode;?>')" class="am-navbar-label btnWhite2" style="width: auto;color: #f37b1d;background-color: #fff;font-size: 14px;line-height: 24px;height: 28px;position: relative;right: 0;top: -32px;">申请售后</span>
                     </div>
-
-                </li>
-            <?php }?>
-            <?php	if($sendstatus==2 and empty($pay_batchcode) and $aftersale_state == 0 and $is_orderActivist==1 and $is_receipted != 1 and $is_collageActivities == 1 and $after_sale_button == 1) { ?>
-                <!--拼团订单的售后按钮-->
-                <div style="height:1px;float:right;">
-                    <span onclick="toAftersale('<?php echo $batchcode;?>')" class="am-navbar-label btnWhite2" style="width: auto;color: #f37b1d;background-color: #fff;font-size: 14px;line-height: 24px;height: 28px;position: relative;right: 0;top: -32px;">申请售后</span>
-                </div>
-                <?php
-            }
-            ?>
-            <div class="line_white"></div>
-            <?php if($sendstatus == 1 && empty($pay_batchcode)){  //已发货?>
-                <div style="height:40px;text-align:center;">
-                    <?php 	if($is_delay == 0 && $product_yundian_id ==-1){?>
-
-                        <span onclick="order_delay('<?php echo $batchcode;?>')" class="am-navbar-label btnWhite3 skin-color">延时收货</span>
-                    <?php 	}	?>
-                    <?php if(($is_pay_on_delivery != 1 || $is_sign == 1) && $is_orderActivist==1 && ($aftersale_state ==0 || $aftersale_state ==3)){
-                        if ( $after_sale_button > 0 || ($after_sale_button > 0 && $is_integral_aftersale ==1 && $is_collageActivities==3)) { //CRM16950 ?>
-
-                            <?php if($yundian_id > 0 && $yundian_self ==1) { //HMJ-180503-v384 ?> 
-                                <span onclick="toAftersale_yundian_returnorexchange('<?php echo $batchcode;?>')" class="am-navbar-label btnWhite3 skin-color">申请退货</span>
-                            <?php } else { ?>
-                                <span onclick="toAftersale('<?php echo $batchcode;?>')" class="am-navbar-label btnWhite3 skin-color">申请退货</span>
-                            <?php } ?>
-
-
-                        <?php 	}
-                    }	?>
-                </div>
-            <?php	}
-            $origin_price  	= 0;
-            $totalprice  	= 0;
-            $NoExpPrice   	= 0;
-            $ExpressPrice 	= 0;
-            $CouponPrice  	= 0;
-            $needScore    	= 0;
-            $pay_currency 	= 0;
-            $card_discount 	= 1;
-
-
-            //查询订单价格表中的记录
-            $sql_price = "select origin_price,price,NoExpPrice,ExpressPrice,CouponPrice,needScore,pay_currency,card_discount,shareholder,O_8reward,tax_money,is_suning_order from weixin_commonshop_order_prices where isvalid=true and batchcode='".$batchcode."'";
-            $result_price = _mysql_query($sql_price) or die('Query sql_price failed: ' . mysql_error());
-            if ($row_price = mysql_fetch_object($result_price)) {
-                //获取订单的真实价格（可能是折扣总价）
-                $origin_price  = round($row_price->origin_price,2);		//原订单的订单总额(包括运费+行邮税)（不计算优惠）
-                $totalprice    = $row_price->price;				//实付金额
-                $NoExpPrice    = $row_price->NoExpPrice;		//不加运费
-                $ExpressPrice  = $row_price->ExpressPrice;		//运费
-                $CouponPrice   = $row_price->CouponPrice;		//优惠券金额
-                $needScore     = round($row_price->needScore,2);//订单需要积分
-                $pay_currency  = $row_price->pay_currency;		//购物币数量
-                $card_discount = $row_price->card_discount;		//会员卡折扣
-                $O_8reward 	   = $row_price->O_8reward;		//'自购8级分销抵扣',
-                $shareholder   = $row_price->shareholder;		//'自购股东抵扣',
-                $tax_money     = $row_price->tax_money;		//'税费',
-                $is_suning_order     = $row_price->is_suning_order;		//
-            }
-
-            if($paystyle=="找人代付"){//找人代付没有购物币
-                $pay_currency = 0;
-            }
-            
-            /*if($paystatus == 1 || $paystyle == '货到付款'){//没付款不算
-                $price = $totalprice - $pay_currency;
-            }else{
-                $price = $totalprice;
-            }*/
-            $price = $totalprice - $pay_currency;
-
-            $origin_price = round($origin_price - $ExpressPrice,2);
-            $sql_changeprice = "select totalprice,id from weixin_commonshop_changeprices where status=1 and isvalid=1 and batchcode='".$batchcode."' order by id desc limit 1";
-            $result_cp = _mysql_query($sql_changeprice) or die('Query sql_changeprice failed: ' . mysql_error());
-            
-            $change_id    = 0;
-            $change_price = 0;
-
-            if ($row_cp = mysql_fetch_object($result_cp)) {
-                $price        = $row_cp->totalprice;
-                $change_id    = $row_cp->id;
-                $change_price = $row_cp->totalprice;
-
-            }
-            $card_price = sprintf('%.2f',$origin_price - ($origin_price * $card_discount));//会员卡折扣费用
-
-
-            $sql_order_status = "select order_status from ".WSY_SHOP.".suning_orders where isvalid=true and batchcode='".$batchcode."'";
-            $result_order_status = _mysql_query($sql_order_status) or die('Query sql_order_status failed: ' . mysql_error());
-            if ($row_order_status = mysql_fetch_object($result_order_status)) {
-                $order_status    = $row_order_status->order_status;
-            }
-            ?>
-            <div class="horizLineGray"></div>
-            <?php
-            if( $delivery_id > 0 && $paystatus == 0 && $pay_batchcode == '' && strtotime($recovery_time)>$currtime ){
+                    <?php
+                }
                 ?>
-                <div class="itemWrapper itemOrderInfo" style="padding-bottom: 5px;height: auto;">
-                    <span id="delivery_time_start" style="display: none;"></span>
-                    <span id="delivery_time_end" style="display: none;"></span>
-                    <span class="text_left_13"><?php echo $delivery_name;?></span>
-                    <span class="text_left_13 select_delivery_span_r">
-					</span>
-                    <span class="text_right_13"><span class="select-delivery-time">选择时间</span><input type="text" id="select-delivery-time" style="display:none;"></span>
-                    <div style="clear:both;"></div>
-                </div>
+                <div class="line_white"></div>
+                <?php if($sendstatus == 1 && empty($pay_batchcode)){  //已发货?>
+                    <div style="height:40px;text-align:center;">
+                        <?php 	if($is_delay == 0 && $product_yundian_id ==-1){?>
+
+                            <span onclick="order_delay('<?php echo $batchcode;?>')" class="am-navbar-label btnWhite3 skin-color">延时收货</span>
+                        <?php 	}	?>
+                        <?php if(($is_pay_on_delivery != 1 || $is_sign == 1) && $is_orderActivist==1 && ($aftersale_state ==0 || $aftersale_state ==3)){
+                            if ( $after_sale_button > 0 || ($after_sale_button > 0 && $is_integral_aftersale ==1 && $is_collageActivities==3)) { //CRM16950 ?>
+
+                                <?php if($yundian_id > 0 && $yundian_self ==1) { //HMJ-180503-v384 ?>
+                                    <span onclick="toAftersale_yundian_returnorexchange('<?php echo $batchcode;?>')" class="am-navbar-label btnWhite3 skin-color">申请退货</span>
+                                <?php } else { ?>
+                                    <span onclick="toAftersale('<?php echo $batchcode;?>')" class="am-navbar-label btnWhite3 skin-color">申请退货</span>
+                                <?php } ?>
+
+
+                            <?php 	}
+                        }	?>
+                    </div>
+                <?php	}
+                $origin_price  	= 0;
+                $totalprice  	= 0;
+                $NoExpPrice   	= 0;
+                $ExpressPrice 	= 0;
+                $CouponPrice  	= 0;
+                $needScore    	= 0;
+                $pay_currency 	= 0;
+                $card_discount 	= 1;
+
+
+                //查询订单价格表中的记录
+                $sql_price = "select origin_price,price,NoExpPrice,ExpressPrice,CouponPrice,needScore,pay_currency,card_discount,shareholder,O_8reward,tax_money,is_suning_order from weixin_commonshop_order_prices where isvalid=true and batchcode='".$batchcode."'";
+                $result_price = _mysql_query($sql_price) or die('Query sql_price failed: ' . mysql_error());
+                if ($row_price = mysql_fetch_object($result_price)) {
+                    //获取订单的真实价格（可能是折扣总价）
+                    $origin_price  = round($row_price->origin_price,2);		//原订单的订单总额(包括运费+行邮税)（不计算优惠）
+                    $totalprice    = $row_price->price;				//实付金额
+                    $NoExpPrice    = $row_price->NoExpPrice;		//不加运费
+                    $ExpressPrice  = $row_price->ExpressPrice;		//运费
+                    $CouponPrice   = $row_price->CouponPrice;		//优惠券金额
+                    $needScore     = round($row_price->needScore,2);//订单需要积分
+                    $pay_currency  = $row_price->pay_currency;		//购物币数量
+                    $card_discount = $row_price->card_discount;		//会员卡折扣
+                    $O_8reward 	   = $row_price->O_8reward;		//'自购8级分销抵扣',
+                    $shareholder   = $row_price->shareholder;		//'自购股东抵扣',
+                    $tax_money     = $row_price->tax_money;		//'税费',
+                    $is_suning_order     = $row_price->is_suning_order;		//
+                }
+
+                if($paystyle=="找人代付"){//找人代付没有购物币
+                    $pay_currency = 0;
+                }
+
+                /*if($paystatus == 1 || $paystyle == '货到付款'){//没付款不算
+                    $price = $totalprice - $pay_currency;
+                }else{
+                    $price = $totalprice;
+                }*/
+                $price = $totalprice - $pay_currency;
+
+                $origin_price = round($origin_price - $ExpressPrice,2);
+                $sql_changeprice = "select totalprice,id from weixin_commonshop_changeprices where status=1 and isvalid=1 and batchcode='".$batchcode."' order by id desc limit 1";
+                $result_cp = _mysql_query($sql_changeprice) or die('Query sql_changeprice failed: ' . mysql_error());
+
+                $change_id    = 0;
+                $change_price = 0;
+
+                if ($row_cp = mysql_fetch_object($result_cp)) {
+                    $price        = $row_cp->totalprice;
+                    $change_id    = $row_cp->id;
+                    $change_price = $row_cp->totalprice;
+
+                }
+                $card_price = sprintf('%.2f',$origin_price - ($origin_price * $card_discount));//会员卡折扣费用
+
+
+                $sql_order_status = "select order_status from ".WSY_SHOP.".suning_orders where isvalid=true and batchcode='".$batchcode."'";
+                $result_order_status = _mysql_query($sql_order_status) or die('Query sql_order_status failed: ' . mysql_error());
+                if ($row_order_status = mysql_fetch_object($result_order_status)) {
+                    $order_status    = $row_order_status->order_status;
+                }
+                ?>
+                <div class="horizLineGray"></div>
                 <?php
-            }
-            ?>
-            <div class="itemWrapper itemOrderInfo">
-                <span class="text_left_13">商品总价</span>
-                <span class="text_right_13"><?php if(OOF_P != 2) echo OOF_S ?><?php echo $origin_price; ?><?php if(OOF_P == 2) echo OOF_S ?></span>
-            </div>
-            <?php if( $card_discount < 1 && $card_discount > 0 && $card_price > 0 ){?>
+                if( $delivery_id > 0 && $paystatus == 0 && $pay_batchcode == '' && strtotime($recovery_time)>$currtime ){
+                    ?>
+                    <div class="itemWrapper itemOrderInfo" style="padding-bottom: 5px;height: auto;">
+                        <span id="delivery_time_start" style="display: none;"></span>
+                        <span id="delivery_time_end" style="display: none;"></span>
+                        <span class="text_left_13"><?php echo $delivery_name;?></span>
+                        <span class="text_left_13 select_delivery_span_r">
+					</span>
+                        <span class="text_right_13"><span class="select-delivery-time">选择时间</span><input type="text" id="select-delivery-time" style="display:none;"></span>
+                        <div style="clear:both;"></div>
+                    </div>
+                    <?php
+                }
+                ?>
                 <div class="itemWrapper itemOrderInfo">
-                    <span class="text_left_13">会员卡折扣</span>
-                    <span class="text_right_13">-<?php if(OOF_P != 2) echo OOF_S ?><?php echo $card_price; ?><?php if(OOF_P == 2) echo OOF_S ?></span>
+                    <span class="text_left_13">商品总价</span>
+                    <span class="text_right_13"><?php if(OOF_P != 2) echo OOF_S ?><?php echo $origin_price; ?><?php if(OOF_P == 2) echo OOF_S ?></span>
                 </div>
-            <?php } ?>
-            <?php if( $CouponPrice > 0 ){?>
-                <div class="itemWrapper itemOrderInfo">
-                    <span class="text_left_13">使用优惠券</span>
-                    <span class="text_right_13">-<?php if(OOF_P != 2) echo OOF_S ?><?php echo $CouponPrice; ?><?php if(OOF_P == 2) echo OOF_S ?></span>
-                </div>
-            <?php } ?>
-            <?php if( $O_8reward > 0 ){?>
-                <div class="itemWrapper itemOrderInfo">
-                    <span class="text_left_13">复购推广优惠</span>
-                    <span class="text_right_13">-<?php if(OOF_P != 2) echo OOF_S ?><?php echo bcadd($O_8reward,0,2); ?><?php if(OOF_P == 2) echo OOF_S ?></span>
-                </div>
-            <?php } ?>
-            <?php if( $shareholder > 0 ){?>
-                <div class="itemWrapper itemOrderInfo">
-                    <span class="text_left_13">复购店铺优惠</span>
-                    <span class="text_right_13">-<?php if(OOF_P != 2) echo OOF_S ?><?php echo bcadd($shareholder,0,2); ?><?php if(OOF_P == 2) echo OOF_S ?></span>
-                </div>
-            <?php } ?>
-            <?php if ($or_code == -1) { ?>
-                <div class="itemWrapper itemOrderInfo">
-                    <span class="text_left_13">运费</span>
-                    <span class="text_right_13"><?php if(OOF_P != 2) echo OOF_S ?><?php if($ExpressPrice>0){echo $ExpressPrice;}else{echo '0';}?><?php if(OOF_P == 2) echo OOF_S ?></span>
-                </div>
-            <?php } ?>
-            <?php if(($pay_currency > 0) ||  ($paystyle == "货到付款" and $paystatus == 0 and $pay_currency > 0)){?>
-                <div class="itemWrapper itemOrderInfo">
-                    <span class="text_left_13">使用<?php echo defined('PAY_CURRENCY_NAME')? PAY_CURRENCY_NAME: '购物币'; ?></span>
-                    <span class="text_right_13">-<?php if(OOF_P != 2) echo OOF_S ?><?php echo $pay_currency; ?><?php if(OOF_P == 2) echo OOF_S ?></span>
-                </div>
-            <?php } ?>
-            <?php if( $needScore > 0 ){?>
-                <div class="itemWrapper itemOrderInfo">
-                    <span class="text_left_13">使用积分</span>
-                    <span class="text_right_13"><?php echo '-'.$needScore; ?></span>
-                </div>
-            <?php } ?>
+                <?php if( $card_discount < 1 && $card_discount > 0 && $card_price > 0 ){?>
+                    <div class="itemWrapper itemOrderInfo">
+                        <span class="text_left_13">会员卡折扣</span>
+                        <span class="text_right_13">-<?php if(OOF_P != 2) echo OOF_S ?><?php echo $card_price; ?><?php if(OOF_P == 2) echo OOF_S ?></span>
+                    </div>
+                <?php } ?>
+                <?php if( $CouponPrice > 0 ){?>
+                    <div class="itemWrapper itemOrderInfo">
+                        <span class="text_left_13">使用优惠券</span>
+                        <span class="text_right_13">-<?php if(OOF_P != 2) echo OOF_S ?><?php echo $CouponPrice; ?><?php if(OOF_P == 2) echo OOF_S ?></span>
+                    </div>
+                <?php } ?>
+                <?php if( $O_8reward > 0 ){?>
+                    <div class="itemWrapper itemOrderInfo">
+                        <span class="text_left_13">复购推广优惠</span>
+                        <span class="text_right_13">-<?php if(OOF_P != 2) echo OOF_S ?><?php echo bcadd($O_8reward,0,2); ?><?php if(OOF_P == 2) echo OOF_S ?></span>
+                    </div>
+                <?php } ?>
+                <?php if( $shareholder > 0 ){?>
+                    <div class="itemWrapper itemOrderInfo">
+                        <span class="text_left_13">复购店铺优惠</span>
+                        <span class="text_right_13">-<?php if(OOF_P != 2) echo OOF_S ?><?php echo bcadd($shareholder,0,2); ?><?php if(OOF_P == 2) echo OOF_S ?></span>
+                    </div>
+                <?php } ?>
+                <?php if ($or_code == -1) { ?>
+                    <div class="itemWrapper itemOrderInfo">
+                        <span class="text_left_13">运费</span>
+                        <span class="text_right_13"><?php if(OOF_P != 2) echo OOF_S ?><?php if($ExpressPrice>0){echo $ExpressPrice;}else{echo '0';}?><?php if(OOF_P == 2) echo OOF_S ?></span>
+                    </div>
+                <?php } ?>
+                <?php if(($pay_currency > 0) ||  ($paystyle == "货到付款" and $paystatus == 0 and $pay_currency > 0)){?>
+                    <div class="itemWrapper itemOrderInfo">
+                        <span class="text_left_13">使用<?php echo defined('PAY_CURRENCY_NAME')? PAY_CURRENCY_NAME: '购物币'; ?></span>
+                        <span class="text_right_13">-<?php if(OOF_P != 2) echo OOF_S ?><?php echo $pay_currency; ?><?php if(OOF_P == 2) echo OOF_S ?></span>
+                    </div>
+                <?php } ?>
+                <?php if( $needScore > 0 ){?>
+                    <div class="itemWrapper itemOrderInfo">
+                        <span class="text_left_13">使用积分</span>
+                        <span class="text_right_13"><?php echo '-'.$needScore; ?></span>
+                    </div>
+                <?php } ?>
 
-            <?php if($bbt_retuncurr>0){ ?>
-                <div class="itemWrapper itemOrderInfo">
-                    <span class="text_left_13">返赠<?php echo $custom;?></span>
-                    <span class="text_right_13">+<?php if(OOF_P != 2) echo OOF_S ?><?php echo $bbt_retuncurr;?><?php if(OOF_P == 2) echo OOF_S ?></span>
-                </div>
-            <?php }?>
-            <?php if( $poundage > 0 ){?>
-                <div class="itemWrapper itemOrderInfo">
-                    <span class="text_left_13">手续费</span>
-                    <span class="text_right_13"><?php if(OOF_P != 2) echo OOF_S ?><?php echo number_format($poundage, 2, '.', ''); ?><?php if(OOF_P == 2) echo OOF_S ?></span>
-                </div>
-            <?php }?>   
-            <div class="itemOrderMoney">
-                <span class="itemLeft">实付款</span>
-                <span class="itemRight"><?php if(OOF_P != 2) echo OOF_S ?><?php echo number_format(round($price+$poundage,2), 2, '.', '');?><?php if(OOF_P == 2) echo OOF_S ?></span>
-
-            </div>
-            <?php if( $store_show > 0 ){?>
+                <?php if($bbt_retuncurr>0){ ?>
+                    <div class="itemWrapper itemOrderInfo">
+                        <span class="text_left_13">返赠<?php echo $custom;?></span>
+                        <span class="text_right_13">+<?php if(OOF_P != 2) echo OOF_S ?><?php echo $bbt_retuncurr;?><?php if(OOF_P == 2) echo OOF_S ?></span>
+                    </div>
+                <?php }?>
+                <?php if( $poundage > 0 ){?>
+                    <div class="itemWrapper itemOrderInfo">
+                        <span class="text_left_13">手续费</span>
+                        <span class="text_right_13"><?php if(OOF_P != 2) echo OOF_S ?><?php echo number_format($poundage, 2, '.', ''); ?><?php if(OOF_P == 2) echo OOF_S ?></span>
+                    </div>
+                <?php }?>
                 <div class="itemOrderMoney">
-                    <span class="itemLeft"><?php echo $store_str1; ?>:<?php echo $store_str2; ?></span>
+                    <span class="itemLeft">实付款</span>
+                    <span class="itemRight"><?php if(OOF_P != 2) echo OOF_S ?><?php echo number_format(round($price+$poundage,2), 2, '.', '');?><?php if(OOF_P == 2) echo OOF_S ?></span>
+
                 </div>
-            <?php } ?>
-            <?php
+                <?php if( $store_show > 0 ){?>
+                    <div class="itemOrderMoney">
+                        <span class="itemLeft"><?php echo $store_str1; ?>:<?php echo $store_str2; ?></span>
+                    </div>
+                <?php } ?>
+                <?php
                 //查询订单是否是微米订单 区块链微米
                 $query_money = "select block_chain_status,block_chain_reward,block_chain_valid_time,is_block_chain from weixin_commonshop_order_prices where isvalid=true and batchcode='".$batchcode."' AND status = 1 AND is_block_chain = true limit 1";
                 $result_data = _mysql_query($query_money) or die('Query_time failed:'.mysql_error());
@@ -1735,14 +1735,14 @@ if($paystatus == 1 && $slyder_extend_id >0){
                     $is_block_chain = $order_money->is_block_chain;//过期时间
                 }
                 $order_timer = date("Y-m-d H:i:s");
-                if ($is_block_chain && $block_chain_status == 2 && $aftersale_type <= 0 && $sendstatus == 2) 
+                if ($is_block_chain && $block_chain_status == 2 && $aftersale_type <= 0 && $sendstatus == 2)
                 {
                     //查询区块链名称
                     $query_name = "select name from ".WSY_SHOP.".block_chain_setting where customer_id='" . $customer_id . "'";
                     $result_data = _mysql_query($query_name) or die('Query_time failed:'.mysql_error());
                     while($order_money = mysql_fetch_object($result_data)){
                         $block_chain_name  = $order_money->name; //区块链名称
-                        if (empty($block_chain_name)) 
+                        if (empty($block_chain_name))
                         {
                             $block_chain_name = '区块链积分';
                         }
@@ -1751,65 +1751,65 @@ if($paystatus == 1 && $slyder_extend_id >0){
                     <div class="itemOrderMoney">
                         <span class="itemLeft">获得<?php echo $block_chain_name; ?>:+<?php echo $block_chain_reward; ?></span>
                     </div>
-                    
-               <?php } ?>
-            <div class="horizLineGray"></div>
-                
-        <?php } ?>
-        </ul>
-        <?php	//	}
-        $shopcode_onoff = 0;		//购物币抵购开关
-        $shopcode_limit = 1;		//拼团限制：1-仅团长 2-仅团员 3-团长和团员
-        $shopcode_precent = 100;	//拼团购物币抵购比例
-        $is_head2 = 0;//未支付拼团订单专用，+2不要影响$is_head的数据
-        if( $is_collageActivities ==1 || $is_collageActivities ==2 ){
-            $query1 = "SELECT at.shopcode_onoff,at.shopcode_limit,at.shopcode_precent,ot.is_head FROM collage_activities_t AS at INNER JOIN collage_crew_order_t AS ot ON at.id=ot.activitie_id WHERE ot.isvalid=true AND ot.batchcode='".$batchcode."' AND ot.status=1 LIMIT 1";
-            $result1 = _mysql_query($query1);
-            while($row1 = mysql_fetch_object($result1)){
-                $shopcode_onoff = $row1->shopcode_onoff;
-                $shopcode_limit = $row1->shopcode_limit;
-                $shopcode_precent = $row1->shopcode_precent;
-                $is_head2 = $row1->is_head;
-            }
-        }
-        //加上拼团的开关判断
-        if(((( $is_collageActivities ==1 || $is_collageActivities ==2 ) &&( $shopcode_onoff==1 && ($shopcode_limit==3 || ($shopcode_limit==1 && $is_head2==1)|| ($shopcode_limit==2 && $is_head2==2)))) || ( $is_collageActivities==0 || $is_collageActivities==3) ) and $status == 0 and $paystatus == 0 and $paystyle != "货到付款" and $sendstatus == 0 and empty($pay_batchcode) and $isOpenCurrency == 1 and strtotime($recovery_time)>$currtime){
 
-            ?>
+                <?php } ?>
+                <div class="horizLineGray"></div>
 
-            <!--购物币（不能重新使用购物币）-->
-
-            <!--<div id="currency_div" class="itembutton" style="margin-top: -24px;margin-bottom: 30px;">
-			  <div class="top">
-                <?php
-            if($sum_curr>($price-$ExpressPrice-$tax_money)){//不算运费
-                $sum_curr = ($price-$ExpressPrice-$tax_money);
-            }
-
-            if($sum_curr < 0) $sum_curr = 0;
-
-            // echo $sum_curr;
-            ?>
-
-                <!--总复购金额-->
-            <script type="text/javascript">
-                var all_shareholder = '<?php echo $O_8reward+$shareholder;?>';
-            </script>
-
-            <?php 		//拼团购物币抵购
+                <?php } ?>
+            </ul>
+            <?php	//	}
+            $shopcode_onoff = 0;		//购物币抵购开关
+            $shopcode_limit = 1;		//拼团限制：1-仅团长 2-仅团员 3-团长和团员
+            $shopcode_precent = 100;	//拼团购物币抵购比例
+            $is_head2 = 0;//未支付拼团订单专用，+2不要影响$is_head的数据
             if( $is_collageActivities ==1 || $is_collageActivities ==2 ){
-                if($shopcode_onoff==1 && ($shopcode_limit==3 || ($shopcode_limit==1 && $group_id<0)|| ($shopcode_limit==2 && $group_id>0))){
-                    $collage_currency = floor($origin_price*$shopcode_precent*0.01*100)/100;
-                    // if($sum_curr > $collage_currency){
-                    $sum_curr = $collage_currency;
-                    // }
+                $query1 = "SELECT at.shopcode_onoff,at.shopcode_limit,at.shopcode_precent,ot.is_head FROM collage_activities_t AS at INNER JOIN collage_crew_order_t AS ot ON at.id=ot.activitie_id WHERE ot.isvalid=true AND ot.batchcode='".$batchcode."' AND ot.status=1 LIMIT 1";
+                $result1 = _mysql_query($query1);
+                while($row1 = mysql_fetch_object($result1)){
+                    $shopcode_onoff = $row1->shopcode_onoff;
+                    $shopcode_limit = $row1->shopcode_limit;
+                    $shopcode_precent = $row1->shopcode_precent;
+                    $is_head2 = $row1->is_head;
                 }
             }
+            //加上拼团的开关判断
+            if(((( $is_collageActivities ==1 || $is_collageActivities ==2 ) &&( $shopcode_onoff==1 && ($shopcode_limit==3 || ($shopcode_limit==1 && $is_head2==1)|| ($shopcode_limit==2 && $is_head2==2)))) || ( $is_collageActivities==0 || $is_collageActivities==3) ) and $status == 0 and $paystatus == 0 and $paystyle != "货到付款" and $sendstatus == 0 and empty($pay_batchcode) and $isOpenCurrency == 1 and strtotime($recovery_time)>$currtime){
 
-            ?>
+                ?>
+
+                <!--购物币（不能重新使用购物币）-->
+
+                <!--<div id="currency_div" class="itembutton" style="margin-top: -24px;margin-bottom: 30px;">
+			  <div class="top">
+                <?php
+                if($sum_curr>($price-$ExpressPrice-$tax_money)){//不算运费
+                    $sum_curr = ($price-$ExpressPrice-$tax_money);
+                }
+
+                if($sum_curr < 0) $sum_curr = 0;
+
+                // echo $sum_curr;
+                ?>
+
+                <!--总复购金额-->
+                <script type="text/javascript">
+                    var all_shareholder = '<?php echo $O_8reward+$shareholder;?>';
+                </script>
+
+                <?php 		//拼团购物币抵购
+                if( $is_collageActivities ==1 || $is_collageActivities ==2 ){
+                    if($shopcode_onoff==1 && ($shopcode_limit==3 || ($shopcode_limit==1 && $group_id<0)|| ($shopcode_limit==2 && $group_id>0))){
+                        $collage_currency = floor($origin_price*$shopcode_precent*0.01*100)/100;
+                        // if($sum_curr > $collage_currency){
+                        $sum_curr = $collage_currency;
+                        // }
+                    }
+                }
+
+                ?>
 
 
-            <!--<span>共有<?php echo $user_curr.$custom;?></span> (可抵扣：<span style="color:red;display: inline;padding: 0px;margin: 0px"><?php echo $sum_curr;?></span></span>)
+                <!--<span>共有<?php echo $user_curr.$custom;?></span> (可抵扣：<span style="color:red;display: inline;padding: 0px;margin: 0px"><?php echo $sum_curr;?></span></span>)
 				<input type="checkbox" id="checkbox_c1" class="chk_3" >
 				<label for="checkbox_c1" open_val="0" class="open_curr">
 					  <div class="slide_body"></div>
@@ -1824,298 +1824,298 @@ if($paystatus == 1 && $slyder_extend_id >0){
 				  </div>
 			  </div>
 			</div>-->
-            <!--购物币-->
-        <?php	}?>
-        <!-- 订单编号，各种时间信息 -->
-        <div class="infoWrapper" style="padding-bottom:10px;<?php if(!empty($pay_batchcode)){echo 'border-bottom:0;margin-top:0;';}?>">
-            <?php
-            if($paystyle =="通联分期支付"){
-                $tonglian_sql = "select real_pay_price,allinpay_nper from system_order_pay_log where pay_batchcode='".$pay_batchcode2."'";
-                $res_tonglian = _mysql_query($tonglian_sql)or die('Query failed tonglian_sql 1'.mysql_error());
-                while($row_tonglian= mysql_fetch_object($res_tonglian)){
-                    $real_pay_price = $row_tonglian->real_pay_price;
-                    $allinpay_nper = $row_tonglian->allinpay_nper;
-                }
-
-                ?>
-                <span class="text_gray_13">分期详情：￥<?php echo bcdiv($real_pay_price,$allinpay_nper,2);echo "　X　";echo $allinpay_nper."期"?></span></br>
+                <!--购物币-->
+            <?php	}?>
+            <!-- 订单编号，各种时间信息 -->
+            <div class="infoWrapper" style="padding-bottom:10px;<?php if(!empty($pay_batchcode)){echo 'border-bottom:0;margin-top:0;';}?>">
                 <?php
-            }
-            ?>
+                if($paystyle =="通联分期支付"){
+                    $tonglian_sql = "select real_pay_price,allinpay_nper from system_order_pay_log where pay_batchcode='".$pay_batchcode2."'";
+                    $res_tonglian = _mysql_query($tonglian_sql)or die('Query failed tonglian_sql 1'.mysql_error());
+                    while($row_tonglian= mysql_fetch_object($res_tonglian)){
+                        $real_pay_price = $row_tonglian->real_pay_price;
+                        $allinpay_nper = $row_tonglian->allinpay_nper;
+                    }
 
-            <?php if((!empty($pay_batchcode) || !empty($pay_batchcode2)) && $paystyle !=''){?>
-                <span class="content-line">订单号：<?php echo $batchcode;?></span>
-                <span id="batchcode" class="content-line">支付订单号：<?php if($pay_batchcode){echo $pay_batchcode;}else{echo $pay_batchcode2;} ?>
+                    ?>
+                    <span class="text_gray_13">分期详情：￥<?php echo bcdiv($real_pay_price,$allinpay_nper,2);echo "　X　";echo $allinpay_nper."期"?></span></br>
+                    <?php
+                }
+                ?>
+
+                <?php if((!empty($pay_batchcode) || !empty($pay_batchcode2)) && $paystyle !=''){?>
+                    <span class="content-line">订单号：<?php echo $batchcode;?></span>
+                    <span id="batchcode" class="content-line">支付订单号：<?php if($pay_batchcode){echo $pay_batchcode;}else{echo $pay_batchcode2;} ?>
                     <div id="copy_btn" style="margin-bottom :20px;" class="button buttonclick" data-clipboard-action="copy" data-clipboard-target="#batchcode" data-clipboard-text="<?php if(!empty($pay_batchcode)){echo $pay_batchcode;}else{echo $batchcode;}?>">复制</div>
 					</span>
-                <span class="content-line">支付方式：<?php echo $paystyle;?></span>
-            <?php }else{ ?>
-                <span id="batchcode" class="content-line">订单号：<?php echo $batchcode;?>
+                    <span class="content-line">支付方式：<?php echo $paystyle;?></span>
+                <?php }else{ ?>
+                    <span id="batchcode" class="content-line">订单号：<?php echo $batchcode;?>
                     <div id="copy_btn" style="margin-bottom :20px;" class="button buttonclick" data-clipboard-action="copy" data-clipboard-target="#batchcode" data-clipboard-text="<?php if(!empty($batchcode)){echo $batchcode;}else{echo $pay_batchcode;}?>">复制</div>
 					</span>
-            <?php } ?>
-
-
-
-            <?php if( $o_shop_id > 0 && $sendstyle == '门店自提' && $paystatus == 1 ){
-                //查询门店信息
-                if($or_shop_type==2) {  //2时为子门店
-                    $o_shop = "select branch_name,apply_phone,province,city,area,address,location from ".WSY_DH.".orderingretail_shop_branch where id=" . $o_shop_id;
-                    $result_o_shop = _mysql_query($o_shop) or die('Query o_shop failed: ' . mysql_error());
-                    if ($row_o_shop = mysql_fetch_object($result_o_shop)) {
-
-                        $shop_name = $row_o_shop->branch_name;
-                        $shop_tel = $row_o_shop->apply_phone;
-                        $addr_prov = $row_o_shop->province;
-                        $addr_city = $row_o_shop->city;
-                        $addr_area = $row_o_shop->area;
-                        $address = $row_o_shop->address;
-                        $location = $row_o_shop->location;
-                    }
-                }else{
-                    $o_shop = "select shop_name,shop_tel,addr_prov,addr_city,addr_area,address from ".WSY_DH.".orderingretail_shop where id=" . $o_shop_id;
-                    $result_o_shop = _mysql_query($o_shop) or die('Query o_shop failed: ' . mysql_error());
-                    if ($row_o_shop = mysql_fetch_object($result_o_shop)) {
-
-                        $shop_name = $row_o_shop->shop_name;
-                        $shop_tel = $row_o_shop->shop_tel;
-                        $addr_prov = $row_o_shop->addr_prov;
-                        $addr_city = $row_o_shop->addr_city;
-                        $addr_area = $row_o_shop->addr_area;
-                        $address = $row_o_shop->address;
-                    }
-                }
-
-                ?>
-                <?php if($system_send_id>0){ ?>
-                    <?php if($is_sendorder == 1){?>
-                    <span class="content-line">核销码：<?php echo $o_verification_code;?> <span style="float:right;margin-right:10px;"><?php if( $sendstatus != 2){echo '未核销';}else{echo '已核销';}?></span></span>
-                    <div id="o_verification_code" style="width: 80px;text-align: center;background: white;opacity: 0.8;padding:10px 0 10px 0;float:none;margin-left:90px;" class="QR_width_nei" onclick="big_img()"></div>
-                    <script type="text/javascript">
-                        var href = "<?php echo $o_verification_code;?>";
-                        $("#o_verification_code").qrcode({
-                            render: "canvas", //table方式
-                            width: 60, //宽度
-                            height:60, //高度
-                            text: href //任意内容
-                        });
-                    </script>
-                <?php }?>
-                    <span class="content-line">配送方式：<?php echo $sendstyle;?></span>
-                    <span class="content-line">已选门店：<?php echo $shop_name;?> <a <?php if($or_shop_type==1){ ?>href="/addons/index.php/ordering_retail/Shop/shop_list_map?customer_id=<?php echo $customer_id;?>&shop_id=<?php echo $o_shop_id;?>" <?php }else{ ?>href="/addons/index.php/ordering_retail/Shop/shop_branch_navigation?customer_id=<?php echo $customer_id;?>&shop_branch_id=<?php echo $o_shop_id;?>"<?php } ?>  class="to-nav">导航</a></span>
-                    <span class="content-line">门店地址：<?php echo $addr_prov.$addr_city.$addr_area.$address;?></span>
-                    <span class="content-line">门店电话：<?php echo $shop_tel;?></span>
-
-                <?php }} ?>
-            <?php if(!empty($allipay_orderid)){?>
-                <span class="content-line">支付宝交易号：<?php echo $allipay_orderid;?></span>
-                <?php
-            }
-            if(strtotime($as_createtime)>0){
-                ?>
-                <span class="content-line">申请售后时间：<?php echo $as_createtime;?></span>
-                <?php
-            }else if(strtotime($createtime)>0){
-                ?>
-                <span class="content-line">创建时间：<?php echo $createtime;?></span>
-            <?php	}
-            if($status == 0 and $paystatus == 0 and $paystyle != "货到付款" and $sendstatus == 0){
-                ?>
-                <span class="content-line">支付失效时间：<?php echo $recovery_time;?></span>
-                <?php
-            }
-            if(strtotime($paytime) > 0){
-                ?>
-                <span class="content-line">付款时间：<?php echo $paytime;?></span>
-                <?php
-            }
-            if(strtotime($confirm_sendtime) > 0){
-                ?>
-                <span class="content-line">发货时间：<?php echo $confirm_sendtime;?></span>
-                <?php
-            }
-            if(strtotime($confirm_receivetime) > 0){
-                ?>
-                <span class="content-line">成交时间：<?php echo $confirm_receivetime;?></span>
-                <?php
-            }
-            if(strtotime($checktime) > 0){
-                ?>
-                <span class="content-line">商家处理时间：<?php echo $checktime;?></span>
-                <?php
-            }
-            if($sendstatus == 1){
-                ?>
-                <span class="content-line">自动收货时间：<?php echo $auto_receivetime;?></span>
-                <?php
-            }
-            ?>
-            <?php
-            if( $pay_user_id > 0 ){
-                ?>
-                <span class="content-line">代付人：<?php echo $pay_username;?></span>
-                <span class="content-line">代付留言：<?php echo $note;?></span>
-                <?php
-            }
-            ?>
-            <?php if (!empty($camilo_row)) {?>
-                <span class="content-line">关联卡密：<?php echo $camilo_find;?></span>
-                <?php if ($camilo_count > 1) {?>
-                    <span class="content-line" id="WSY_camilo_str" style="display: none;"><?php echo $camilo_str;?></span>
-                    <span class="content-line" id="WSY_camilo" info="1" style="font-size: 25px;margin-left:45%">︾</span>
                 <?php } ?>
-            <?php }?>
-        </div>
 
-        <!-- 二维码核销 -->
-        <?php if($is_QR && $sendstatus >0){
 
-            $qr_img = "";
-            $encrypcode = "";
 
-            $query_qr = "select qr,encrypcode from weixin_commonshop_order_qr where batchcode = '".$batchcode."'";
-            $result_qr = _mysql_query($query_qr) or die("query_qr Query_qr error : ".mysql_error());
-            $qr_img = mysql_result($result_qr,0,0);
-            $encrypcode = mysql_result($result_qr,0,1);
-            ?>
-            <!--郑培强-->
-            <div class="QR_class" style="position: relative;" >
-                <?php
-                if($status==1){
-                    echo '<div style="position: absolute;top: 0px;height: 264px;background: white;text-align: center;opacity:0.3;" class="QR_width_wai" ></div>';
-                    echo '<div style="position: absolute;top: 32px;height: 200px;width: 200px;background: white;text-align: center;opacity:0.7;" class="QR_width"></div>';
-                    echo '<div style="position: absolute;top: 70px;height: 120px;font-size: 22px;width: 120px;text-align: center;background: white;border-radius: 50%;opacity: 0.8;" class="QR_width_nei"><img src="images/QR_status_2.png" ></div>';
-                }else{
-                    $QR_now=time();
-                    if($QR_isforever==1){
-                        $QR_start=strtotime($QR_starttime);
-                        $QR_end=strtotime($QR_endtime);
-                        if($QR_now<$QR_start){
-                            echo '<div style="position: absolute;top: 0px;height: 264px;background: white;text-align: center;opacity:0.3;" class="QR_width_wai" ></div>';
-                            echo '<div style="position: absolute;top: 32px;height: 200px;width: 200px;background: white;text-align: center;opacity:0.7;" class="QR_width" ></div>';
-                            echo '<div style="position: absolute;top: 70px;height: 120px;font-size: 22px;width: 120px;text-align: center;background: white;border-radius: 50%;opacity: 0.8;" class="QR_width_nei"><img src="images/QR_status_3.png" ></div>';
-                        }else{
-                            if($QR_end<$QR_now){
-                                echo '<div style="position: absolute;top: 0px;height: 264px;background: white;text-align: center;opacity:0.3;" class="QR_width_wai" ></div>';
-                                echo '<div style="position: absolute;top: 32px;height: 200px;width: 200px;background: white;text-align: center;opacity:0.7;" class="QR_width" ></div>';
-                                echo '<div style="position: absolute;top: 70px;height: 120px;font-size: 22px;width: 120px;text-align: center;background: white;border-radius: 50%;opacity: 0.8;" class="QR_width_nei"><img src="images/QR_status_1.png" ></div>';
-                            }
+                <?php if( $o_shop_id > 0 && $sendstyle == '门店自提' && $paystatus == 1 ){
+                    //查询门店信息
+                    if($or_shop_type==2) {  //2时为子门店
+                        $o_shop = "select branch_name,apply_phone,province,city,area,address,location from ".WSY_DH.".orderingretail_shop_branch where id=" . $o_shop_id;
+                        $result_o_shop = _mysql_query($o_shop) or die('Query o_shop failed: ' . mysql_error());
+                        if ($row_o_shop = mysql_fetch_object($result_o_shop)) {
+
+                            $shop_name = $row_o_shop->branch_name;
+                            $shop_tel = $row_o_shop->apply_phone;
+                            $addr_prov = $row_o_shop->province;
+                            $addr_city = $row_o_shop->city;
+                            $addr_area = $row_o_shop->area;
+                            $address = $row_o_shop->address;
+                            $location = $row_o_shop->location;
                         }
-                    }else if($QR_isforever==2){
-                        $QR_end=strtotime($paytime)+strtotime($QR_endtime)-strtotime($QR_starttime)+1;
-                        if($QR_end<$QR_now){
-                            echo '<div style="position: absolute;top: 0px;height: 264px;background: white;text-align: center;opacity:0.3;" class="QR_width_wai" ></div>';
-                            echo '<div style="position: absolute;top: 32px;height: 200px;width: 200px;background: white;text-align: center;opacity:0.7;" class="QR_width" ></div>';
-                            echo '<div style="position: absolute;top: 70px;height: 120px;font-size: 22px;width: 120px;text-align: center;background: white;border-radius: 50%;opacity: 0.8;" class="QR_width_nei"><img src="images/QR_status_1.png" ></div>';
+                    }else{
+                        $o_shop = "select shop_name,shop_tel,addr_prov,addr_city,addr_area,address from ".WSY_DH.".orderingretail_shop where id=" . $o_shop_id;
+                        $result_o_shop = _mysql_query($o_shop) or die('Query o_shop failed: ' . mysql_error());
+                        if ($row_o_shop = mysql_fetch_object($result_o_shop)) {
+
+                            $shop_name = $row_o_shop->shop_name;
+                            $shop_tel = $row_o_shop->shop_tel;
+                            $addr_prov = $row_o_shop->addr_prov;
+                            $addr_city = $row_o_shop->addr_city;
+                            $addr_area = $row_o_shop->addr_area;
+                            $address = $row_o_shop->address;
                         }
                     }
+
+                    ?>
+                    <?php if($system_send_id>0){ ?>
+                        <?php if($is_sendorder == 1){?>
+                        <span class="content-line">核销码：<?php echo $o_verification_code;?> <span style="float:right;margin-right:10px;"><?php if( $sendstatus != 2){echo '未核销';}else{echo '已核销';}?></span></span>
+                        <div id="o_verification_code" style="width: 80px;text-align: center;background: white;opacity: 0.8;padding:10px 0 10px 0;float:none;margin-left:90px;" class="QR_width_nei" onclick="big_img()"></div>
+                        <script type="text/javascript">
+                            var href = "<?php echo $o_verification_code;?>";
+                            $("#o_verification_code").qrcode({
+                                render: "canvas", //table方式
+                                width: 60, //宽度
+                                height:60, //高度
+                                text: href //任意内容
+                            });
+                        </script>
+                    <?php }?>
+                        <span class="content-line">配送方式：<?php echo $sendstyle;?></span>
+                        <span class="content-line">已选门店：<?php echo $shop_name;?> <a <?php if($or_shop_type==1){ ?>href="/addons/index.php/ordering_retail/Shop/shop_list_map?customer_id=<?php echo $customer_id;?>&shop_id=<?php echo $o_shop_id;?>" <?php }else{ ?>href="/addons/index.php/ordering_retail/Shop/shop_branch_navigation?customer_id=<?php echo $customer_id;?>&shop_branch_id=<?php echo $o_shop_id;?>"<?php } ?>  class="to-nav">导航</a></span>
+                        <span class="content-line">门店地址：<?php echo $addr_prov.$addr_city.$addr_area.$address;?></span>
+                        <span class="content-line">门店电话：<?php echo $shop_tel;?></span>
+
+                    <?php }} ?>
+                <?php if(!empty($allipay_orderid)){?>
+                    <span class="content-line">支付宝交易号：<?php echo $allipay_orderid;?></span>
+                    <?php
+                }
+                if(strtotime($as_createtime)>0){
+                    ?>
+                    <span class="content-line">申请售后时间：<?php echo $as_createtime;?></span>
+                    <?php
+                }else if(strtotime($createtime)>0){
+                    ?>
+                    <span class="content-line">创建时间：<?php echo $createtime;?></span>
+                <?php	}
+                if($status == 0 and $paystatus == 0 and $paystyle != "货到付款" and $sendstatus == 0){
+                    ?>
+                    <span class="content-line">支付失效时间：<?php echo $recovery_time;?></span>
+                    <?php
+                }
+                if(strtotime($paytime) > 0){
+                    ?>
+                    <span class="content-line">付款时间：<?php echo $paytime;?></span>
+                    <?php
+                }
+                if(strtotime($confirm_sendtime) > 0){
+                    ?>
+                    <span class="content-line">发货时间：<?php echo $confirm_sendtime;?></span>
+                    <?php
+                }
+                if(strtotime($confirm_receivetime) > 0){
+                    ?>
+                    <span class="content-line">成交时间：<?php echo $confirm_receivetime;?></span>
+                    <?php
+                }
+                if(strtotime($checktime) > 0){
+                    ?>
+                    <span class="content-line">商家处理时间：<?php echo $checktime;?></span>
+                    <?php
+                }
+                if($sendstatus == 1){
+                    ?>
+                    <span class="content-line">自动收货时间：<?php echo $auto_receivetime;?></span>
+                    <?php
                 }
                 ?>
-                <script>
-                    var QR_width=($(window).width()-200)/2
-                    var QR_width_nei=($(window).width()-120)/2
-                    $(".QR_width").css("left",QR_width+"px")
-                    $(".QR_width_wai").css("width",$(window).width()+"px")
-                    $(".QR_width_nei").css("left",QR_width_nei+"px")
-                </script>
-                <a href="../common_shop/jiushop/qr_deliver.php?customer_id=<?php echo $customer_id_en; ?>&batchcode=<?php echo $batchcode;?>&user_id=<?php echo passport_encrypt($user_id);?>&type=1">
-                    <img class="tpl-stuff-img" style="margin:0 auto;display:block;" src="<?php echo $new_baseurl."../".$qr_img; ?>"></a>
-                <div style="text-align:center;margin-top:-30px;">
-                    <div style="color:gray;opacity:0.6;" >[点击二维码，分享给好友]</div>
+                <?php
+                if( $pay_user_id > 0 ){
+                    ?>
+                    <span class="content-line">代付人：<?php echo $pay_username;?></span>
+                    <span class="content-line">代付留言：<?php echo $note;?></span>
+                    <?php
+                }
+                ?>
+                <?php if (!empty($camilo_row)) {?>
+                    <span class="content-line">关联卡密：<?php echo $camilo_find;?></span>
+                    <?php if ($camilo_count > 1) {?>
+                        <span class="content-line" id="WSY_camilo_str" style="display: none;"><?php echo $camilo_str;?></span>
+                        <span class="content-line" id="WSY_camilo" info="1" style="font-size: 25px;margin-left:45%">︾</span>
+                    <?php } ?>
+                <?php }?>
+            </div>
+
+            <!-- 二维码核销 -->
+            <?php if($is_QR && $sendstatus >0){
+
+                $qr_img = "";
+                $encrypcode = "";
+
+                $query_qr = "select qr,encrypcode from weixin_commonshop_order_qr where batchcode = '".$batchcode."'";
+                $result_qr = _mysql_query($query_qr) or die("query_qr Query_qr error : ".mysql_error());
+                $qr_img = mysql_result($result_qr,0,0);
+                $encrypcode = mysql_result($result_qr,0,1);
+                ?>
+                <!--郑培强-->
+                <div class="QR_class" style="position: relative;" >
                     <?php
                     if($status==1){
-                        echo '<div style="color:gray;opacity:0.6;text-decoration:line-through" >核销码：'.$encrypcode.'</div>';
+                        echo '<div style="position: absolute;top: 0px;height: 264px;background: white;text-align: center;opacity:0.3;" class="QR_width_wai" ></div>';
+                        echo '<div style="position: absolute;top: 32px;height: 200px;width: 200px;background: white;text-align: center;opacity:0.7;" class="QR_width"></div>';
+                        echo '<div style="position: absolute;top: 70px;height: 120px;font-size: 22px;width: 120px;text-align: center;background: white;border-radius: 50%;opacity: 0.8;" class="QR_width_nei"><img src="images/QR_status_2.png" ></div>';
                     }else{
                         $QR_now=time();
                         if($QR_isforever==1){
                             $QR_start=strtotime($QR_starttime);
                             $QR_end=strtotime($QR_endtime);
                             if($QR_now<$QR_start){
-                                echo '<div style="color:gray;opacity:0.6;text-decoration:line-through" >核销码：'.$encrypcode.'</div>';
+                                echo '<div style="position: absolute;top: 0px;height: 264px;background: white;text-align: center;opacity:0.3;" class="QR_width_wai" ></div>';
+                                echo '<div style="position: absolute;top: 32px;height: 200px;width: 200px;background: white;text-align: center;opacity:0.7;" class="QR_width" ></div>';
+                                echo '<div style="position: absolute;top: 70px;height: 120px;font-size: 22px;width: 120px;text-align: center;background: white;border-radius: 50%;opacity: 0.8;" class="QR_width_nei"><img src="images/QR_status_3.png" ></div>';
                             }else{
                                 if($QR_end<$QR_now){
-                                    echo '<div style="color:gray;opacity:0.6;text-decoration:line-through" >核销码：'.$encrypcode.'</div>';
-                                }else{
-                                    echo '<div >核销码：'.$encrypcode.'</div>';
+                                    echo '<div style="position: absolute;top: 0px;height: 264px;background: white;text-align: center;opacity:0.3;" class="QR_width_wai" ></div>';
+                                    echo '<div style="position: absolute;top: 32px;height: 200px;width: 200px;background: white;text-align: center;opacity:0.7;" class="QR_width" ></div>';
+                                    echo '<div style="position: absolute;top: 70px;height: 120px;font-size: 22px;width: 120px;text-align: center;background: white;border-radius: 50%;opacity: 0.8;" class="QR_width_nei"><img src="images/QR_status_1.png" ></div>';
                                 }
                             }
                         }else if($QR_isforever==2){
                             $QR_end=strtotime($paytime)+strtotime($QR_endtime)-strtotime($QR_starttime)+1;
                             if($QR_end<$QR_now){
-                                echo '<div style="color:gray;opacity:0.6;text-decoration:line-through" >核销码：'.$encrypcode.'</div>';
-                            }else{
-                                echo '<div >核销码：'.$encrypcode.'</div>';
+                                echo '<div style="position: absolute;top: 0px;height: 264px;background: white;text-align: center;opacity:0.3;" class="QR_width_wai" ></div>';
+                                echo '<div style="position: absolute;top: 32px;height: 200px;width: 200px;background: white;text-align: center;opacity:0.7;" class="QR_width" ></div>';
+                                echo '<div style="position: absolute;top: 70px;height: 120px;font-size: 22px;width: 120px;text-align: center;background: white;border-radius: 50%;opacity: 0.8;" class="QR_width_nei"><img src="images/QR_status_1.png" ></div>';
                             }
-                        }else{
-                            echo '<div >核销码：'.$encrypcode.'</div>';
                         }
                     }
                     ?>
-                    <!--<div >核销码：</div>-->
-                    <div style="margin-top:0px;color:gray;opacity:0.6;line-height:15px;">有效时间：
-                        <?php if($QR_isforever==1){
-                            //echo substr($QR_starttime,0,10).'—'.substr($QR_endtime,0,10).'可使用';
-                            echo $QR_starttime.'至<br/>'.$QR_endtime.'可使用';
-                        }else if($QR_isforever==2){
-                            $QR_ending=strtotime($paytime)+strtotime($QR_endtime)-strtotime($QR_starttime)+1;
-                            //echo date("Y-m-d H:i:s",$QR_ending).'前可使用';
-                            echo substr(date("Y-m-d H:i:s",$QR_ending),0,10).'前可使用';
+                    <script>
+                        var QR_width=($(window).width()-200)/2
+                        var QR_width_nei=($(window).width()-120)/2
+                        $(".QR_width").css("left",QR_width+"px")
+                        $(".QR_width_wai").css("width",$(window).width()+"px")
+                        $(".QR_width_nei").css("left",QR_width_nei+"px")
+                    </script>
+                    <a href="../common_shop/jiushop/qr_deliver.php?customer_id=<?php echo $customer_id_en; ?>&batchcode=<?php echo $batchcode;?>&user_id=<?php echo passport_encrypt($user_id);?>&type=1">
+                        <img class="tpl-stuff-img" style="margin:0 auto;display:block;" src="<?php echo $new_baseurl."../".$qr_img; ?>"></a>
+                    <div style="text-align:center;margin-top:-30px;">
+                        <div style="color:gray;opacity:0.6;" >[点击二维码，分享给好友]</div>
+                        <?php
+                        if($status==1){
+                            echo '<div style="color:gray;opacity:0.6;text-decoration:line-through" >核销码：'.$encrypcode.'</div>';
                         }else{
-                            echo "永久有效";
-                        }?></div>
+                            $QR_now=time();
+                            if($QR_isforever==1){
+                                $QR_start=strtotime($QR_starttime);
+                                $QR_end=strtotime($QR_endtime);
+                                if($QR_now<$QR_start){
+                                    echo '<div style="color:gray;opacity:0.6;text-decoration:line-through" >核销码：'.$encrypcode.'</div>';
+                                }else{
+                                    if($QR_end<$QR_now){
+                                        echo '<div style="color:gray;opacity:0.6;text-decoration:line-through" >核销码：'.$encrypcode.'</div>';
+                                    }else{
+                                        echo '<div >核销码：'.$encrypcode.'</div>';
+                                    }
+                                }
+                            }else if($QR_isforever==2){
+                                $QR_end=strtotime($paytime)+strtotime($QR_endtime)-strtotime($QR_starttime)+1;
+                                if($QR_end<$QR_now){
+                                    echo '<div style="color:gray;opacity:0.6;text-decoration:line-through" >核销码：'.$encrypcode.'</div>';
+                                }else{
+                                    echo '<div >核销码：'.$encrypcode.'</div>';
+                                }
+                            }else{
+                                echo '<div >核销码：'.$encrypcode.'</div>';
+                            }
+                        }
+                        ?>
+                        <!--<div >核销码：</div>-->
+                        <div style="margin-top:0px;color:gray;opacity:0.6;line-height:15px;">有效时间：
+                            <?php if($QR_isforever==1){
+                                //echo substr($QR_starttime,0,10).'—'.substr($QR_endtime,0,10).'可使用';
+                                echo $QR_starttime.'至<br/>'.$QR_endtime.'可使用';
+                            }else if($QR_isforever==2){
+                                $QR_ending=strtotime($paytime)+strtotime($QR_endtime)-strtotime($QR_starttime)+1;
+                                //echo date("Y-m-d H:i:s",$QR_ending).'前可使用';
+                                echo substr(date("Y-m-d H:i:s",$QR_ending),0,10).'前可使用';
+                            }else{
+                                echo "永久有效";
+                            }?></div>
+                    </div>
                 </div>
-            </div>
-            <!--郑培强-->
-            <div class="detail">
-                <div class="mall-order-detail-stuff-list-item-con-name black-font blod-font tpl-stuff-name" style="padding-top: 12px;"><?php if($status==0){echo '<a style="color:#20941e;">(未提货)</a>';}else if($status==1){echo '<a style="color:#f30022;">(已提货)</a>';}else{echo '<a style="color:#5a5a5a;">(已取消)</a>';} ?>提货码:<?php echo $encrypcode; ?></div>
-            </div>
-        <?php if($_POST["search_class"] == 2) {
-        var_dump('zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz');
-        ?>
-            <script>
-                $.ajax({
-                    url: "../back_newshops/Order/order.class.php",
-                    type:"POST",
-                    data:{'batchcode':batchcode,'op':"send"},
-                    dataType:"json",
-                    success: function(res){
-
-                    },
-                    error:function(res){
-
-                        layer.close(index_layer);
-                        layer.alert("网络错误请检查网络");
-                    }
-                });
-            </script>
-        <?php }?>
-        <?php }?>
-        <!-- 留言，回复信息 -->
-        <?php
-        if(!empty($remark) && empty($pay_batchcode)){
+                <!--郑培强-->
+                <div class="detail">
+                    <div class="mall-order-detail-stuff-list-item-con-name black-font blod-font tpl-stuff-name" style="padding-top: 12px;"><?php if($status==0){echo '<a style="color:#20941e;">(未提货)</a>';}else if($status==1){echo '<a style="color:#f30022;">(已提货)</a>';}else{echo '<a style="color:#5a5a5a;">(已取消)</a>';} ?>提货码:<?php echo $encrypcode; ?></div>
+                </div>
+            <?php if($_POST["search_class"] == 2) {
+            var_dump('zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz');
             ?>
-            <div class="comment-frame">
-                <span class="content-line2" style="color:red;">买家留言:</span>
-                <span class="content-line2"><?php echo $remark;?></span>
-            </div>
+                <script>
+                    $.ajax({
+                        url: "../back_newshops/Order/order.class.php",
+                        type:"POST",
+                        data:{'batchcode':batchcode,'op':"send"},
+                        dataType:"json",
+                        success: function(res){
+
+                        },
+                        error:function(res){
+
+                            layer.close(index_layer);
+                            layer.alert("网络错误请检查网络");
+                        }
+                    });
+                </script>
+            <?php }?>
+            <?php }?>
+            <!-- 留言，回复信息 -->
             <?php
-            if(!empty($merchant_remark)){
+            if(!empty($remark) && empty($pay_batchcode)){
                 ?>
                 <div class="comment-frame">
-                    <span class="content-line2" style="color:red;">商家回复:</span>
-                    <span class="content-line2"><?php echo $merchant_remark;?></span>
+                    <span class="content-line2" style="color:red;">买家留言:</span>
+                    <span class="content-line2"><?php echo $remark;?></span>
                 </div>
                 <?php
+                if(!empty($merchant_remark)){
+                    ?>
+                    <div class="comment-frame">
+                        <span class="content-line2" style="color:red;">商家回复:</span>
+                        <span class="content-line2"><?php echo $merchant_remark;?></span>
+                    </div>
+                    <?php
+                }
             }
-        }
-        ?>
+            ?>
+        </div>
     </div>
-</div>
-<!-- 基本地区-终结 -->
-<div class="copy_tip">
-    <span>已复制</span>
-</div>
-<!-- 下面的按钮地区 - 开始 -->
+    <!-- 基本地区-终结 -->
+    <div class="copy_tip">
+        <span>已复制</span>
+    </div>
+    <!-- 下面的按钮地区 - 开始 -->
     <div class="white-list">
         <div style="width:100%;">
             <ul class="am-navbar-nav am-cf am-avg-sm-1">
@@ -2145,7 +2145,7 @@ if($paystatus == 1 && $slyder_extend_id >0){
                                             <span onclick="toAftersale('<?php echo $batchcode;?>')" class="am-navbar-label btnWhite4" style="width:auto;">申请退款</span>
                                         <?php } ?>
                                     <?php } ?>
-                                <?php } ?>    
+                                <?php } ?>
                             <?php } ?>
 
                             <?php
@@ -2158,16 +2158,16 @@ if($paystatus == 1 && $slyder_extend_id >0){
 
                     if($return_status == 2 && ($return_type == 1 || $return_type == 2)) { //同意退货后，仅退款不需要填写退货单号
 
-                    		if($yundian != 1) {
-                        ?>
-                        <span onclick="order_return('<?php echo $batchcode;?>')"
+                        if($yundian != 1) {
+                            ?>
+                            <span onclick="order_return('<?php echo $batchcode;?>')"
 
-                              class="am-navbar-label btnWhite4" style="width:auto;">填写退货单</span>
+                                  class="am-navbar-label btnWhite4" style="width:auto;">填写退货单</span>
                         <?php } else { ?>
 
-                        <span onclick="order_return_yundian('<?php echo $batchcode;?>')"
+                            <span onclick="order_return_yundian('<?php echo $batchcode;?>')"
 
-                              class="am-navbar-label btnWhite4" style="width:auto;">填写退货单</span>
+                                  class="am-navbar-label btnWhite4" style="width:auto;">填写退货单</span>
 
                         <?php }
                     }
@@ -2181,12 +2181,21 @@ if($paystatus == 1 && $slyder_extend_id >0){
                     }
                     if($status == 0 && $paystatus == 1 && $sendstatus == 0 && $is_orderActivist==1 && ($is_collageActivities == 0 || $is_collageActivities == 3) && $if_refund == 1 ){ ?>
 
-                    <?php if($yundian_id > 0 && $yundian_self ==1) { //HMJ-180503-v384 ?>
-                        <span onclick="toAftersale_yundian_refund('<?php echo $batchcode;?>')" class="am-navbar-label btnWhite4" style="width:auto;">申请退款</span>
-                    <?php } else { ?>
+                        <?php if($yundian_id > 0 && $yundian_self ==1) { //HMJ-180503-v384 ?>
+                            <span onclick="toAftersale_yundian_refund('<?php echo $batchcode;?>')" class="am-navbar-label btnWhite4" style="width:auto;">申请退款</span>
+                        <?php } else { ?>
 
-                        <?php if(!empty($store_number_off)){ //判断订单是否与积分有关，售后的按钮显示由商城的售后开关和积分系统的售后开关控制?>
-                            <?php if($store_type_off_check == 1 ){  ?>
+                            <?php if(!empty($store_number_off)){ //判断订单是否与积分有关，售后的按钮显示由商城的售后开关和积分系统的售后开关控制?>
+                                <?php if($store_type_off_check == 1 ){  ?>
+                                    <?php if($is_suning_order==0){ ?>
+                                        <span onclick="toAftersale('<?php echo $batchcode;?>')" class="am-navbar-label btnWhite4" style="width:auto;">申请退款</span>
+                                    <?php }else if($is_suning_order==1){?>
+                                        <?php if(!$order_status){ ?>
+                                            <span onclick="toAftersale('<?php echo $batchcode;?>')" class="am-navbar-label btnWhite4" style="width:auto;">申请退款</span>
+                                        <?php } ?>
+                                    <?php } ?>
+                                <?php }else{}  ?>
+                            <?php }else{  ?>
                                 <?php if($is_suning_order==0){ ?>
                                     <span onclick="toAftersale('<?php echo $batchcode;?>')" class="am-navbar-label btnWhite4" style="width:auto;">申请退款</span>
                                 <?php }else if($is_suning_order==1){?>
@@ -2194,18 +2203,9 @@ if($paystatus == 1 && $slyder_extend_id >0){
                                         <span onclick="toAftersale('<?php echo $batchcode;?>')" class="am-navbar-label btnWhite4" style="width:auto;">申请退款</span>
                                     <?php } ?>
                                 <?php } ?>
-                            <?php }else{}  ?>
-                        <?php }else{  ?>
-                            <?php if($is_suning_order==0){ ?>
-                                <span onclick="toAftersale('<?php echo $batchcode;?>')" class="am-navbar-label btnWhite4" style="width:auto;">申请退款</span>
-                            <?php }else if($is_suning_order==1){?>
-                                <?php if(!$order_status){ ?>
-                                    <span onclick="toAftersale('<?php echo $batchcode;?>')" class="am-navbar-label btnWhite4" style="width:auto;">申请退款</span>
-                                <?php } ?>
                             <?php } ?>
-                        <?php } ?>
 
-                    <?php } ?>
+                        <?php } ?>
 
                         <?php
                     }
@@ -2229,11 +2229,11 @@ if($paystatus == 1 && $slyder_extend_id >0){
                         if($is_QR)  //如果是核销订单则不判断收货自动结算开关
                         {
                             if($aftersale_state == 0 and $is_orderActivist==1 and ($is_collageActivities == 0 || $is_collageActivities == 3) and $after_sale_button == 1) {
-                            ?>
+                                ?>
 
-                            <?php if($yundian_id > 0 && $yundian_self ==1) { //HMJ-180503-v384 ?> 
-                                <span onclick="toAftersale_yundian_returnorexchange('<?php echo $batchcode;?>')" class="am-navbar-label btnWhite2" style="width:auto;">申请售后</span>
-                            <?php } else { ?>
+                                <?php if($yundian_id > 0 && $yundian_self ==1) { //HMJ-180503-v384 ?>
+                                    <span onclick="toAftersale_yundian_returnorexchange('<?php echo $batchcode;?>')" class="am-navbar-label btnWhite2" style="width:auto;">申请售后</span>
+                                <?php } else { ?>
 
                                     <?php if(!empty($store_number_off)){ //判断订单是否与积分有关，售后的按钮显示由商城的售后开关和积分系统的售后开关控制?>
                                         <?php if($store_type_off_check == 1){  ?>
@@ -2243,27 +2243,27 @@ if($paystatus == 1 && $slyder_extend_id >0){
                                         <span onclick="toAftersale('<?php echo $batchcode;?>')" class="am-navbar-label btnWhite2" style="width:auto;">申请售后</span>
                                     <?php } ?>
 
-                            <?php } ?>
+                                <?php } ?>
 
-                                    <?php
-                                }
+                                <?php
+                            }
                         }else{
                             if($aftersale_state == 0 and $is_orderActivist==1 and $is_receipted != 1 and ($is_collageActivities == 0 || $is_collageActivities == 3) and $after_sale_button == 1) {
                                 ?>
 
-                        <?php if($yundian_id > 0 && $yundian_self ==1) { //HMJ-180503-v384 ?> 
-                            <span onclick="toAftersale_yundian_returnorexchange('<?php echo $batchcode;?>')" class="am-navbar-label btnWhite2" style="width:auto;">申请售后</span>
-                        <?php } else { ?>
+                                <?php if($yundian_id > 0 && $yundian_self ==1) { //HMJ-180503-v384 ?>
+                                    <span onclick="toAftersale_yundian_returnorexchange('<?php echo $batchcode;?>')" class="am-navbar-label btnWhite2" style="width:auto;">申请售后</span>
+                                <?php } else { ?>
 
-                                <?php if(!empty($store_number_off)){ //判断订单是否与积分有关，售后的按钮显示由商城的售后开关和积分系统的售后开关控制?>
-                                    <?php if($store_type_off_check == 1){  ?>
+                                    <?php if(!empty($store_number_off)){ //判断订单是否与积分有关，售后的按钮显示由商城的售后开关和积分系统的售后开关控制?>
+                                        <?php if($store_type_off_check == 1){  ?>
+                                            <span onclick="toAftersale('<?php echo $batchcode;?>')" class="am-navbar-label btnWhite2" style="width:auto;">申请售后</span>
+                                        <?php }else{}  ?>
+                                    <?php }else{  ?>
                                         <span onclick="toAftersale('<?php echo $batchcode;?>')" class="am-navbar-label btnWhite2" style="width:auto;">申请售后</span>
-                                    <?php }else{}  ?>
-                                <?php }else{  ?>
-                                    <span onclick="toAftersale('<?php echo $batchcode;?>')" class="am-navbar-label btnWhite2" style="width:auto;">申请售后</span>
-                                <?php } ?>
+                                    <?php } ?>
 
-                        <?php } ?>
+                                <?php } ?>
 
                                 <?php
                             }
@@ -2283,7 +2283,7 @@ if($paystatus == 1 && $slyder_extend_id >0){
                         $result_data = _mysql_query($query_name) or die('Query_time failed:'.mysql_error());
                         while($order_money = mysql_fetch_object($result_data)){
                             $block_chain_name  = $order_money->name; //区块链名称
-                            if (empty($block_chain_name)) 
+                            if (empty($block_chain_name))
                             {
                                 $block_chain_name = '区块链积分';
                             }
@@ -2425,7 +2425,7 @@ if($paystatus == 1 && $slyder_extend_id >0){
     </div>
     <!-- 支付方式 end -->
     <div class="am-dimmer am-active" data-am-dimmer="" style="display: none;"></div>
-<?php 
+    <?php
     if( $is_collageActivities > 0 ){
         $query1 = "SELECT ot.group_id FROM collage_activities_t AS at INNER JOIN collage_crew_order_t AS ot ON at.id=ot.activitie_id WHERE ot.isvalid=true AND ot.batchcode='".$batchcode."' AND ot.status>1 LIMIT 1";
         $result1 = _mysql_query($query1);
@@ -2445,8 +2445,8 @@ if($paystatus == 1 && $slyder_extend_id >0){
         }
     }
 
-?>
-<!-- 下面的按钮地区 - 终结 -->
+    ?>
+    <!-- 下面的按钮地区 - 终结 -->
 
 
 </body>
@@ -2497,7 +2497,7 @@ if($paystatus == 1 && $slyder_extend_id >0){
 
     var yundian         = '<?php echo $yundian_id; ?>';        //云店ID
     var yundian_id      = '<?php echo $yundian_id; ?>';        //云店ID
-    var is_from_pay     = '<?php echo $is_from_pay; ?>'; 
+    var is_from_pay     = '<?php echo $is_from_pay; ?>';
 
     // 返回上一页操作
     $(function() {
@@ -2507,16 +2507,16 @@ if($paystatus == 1 && $slyder_extend_id >0){
             }else{
                 var url = '/weixinpl/mshop/orderlist.php?customer_id='+customer_id_en+'&currtype=1&is_from_pay='+is_from_pay;
             }
-           if (window.history && window.history.pushState) {
+            if (window.history && window.history.pushState) {
                 window.addEventListener('load', function() {   //CRM16969，防止苹果手机自动触发返回；无法重现，不知道效果  
-                    setTimeout(function() {       
-                       $(window).on('popstate', function () {
+                    setTimeout(function() {
+                        $(window).on('popstate', function () {
                             window.location.href = url;
                             /*		　　window.history.pushState('forward', null, '#');
                              　　window.history.forward('#');*/  //2018-3-13 HJW屏蔽 苹果手机无法返回
-                        });   
-                    }, 0);   
-                 })
+                        });
+                    }, 0);
+                })
             }
             // window.location.href = url;
             //CRM17421，屏蔽下面两行，↓IE连商城首页都打不开，还必须个毛线啊↓↓↓↓↓↓↓↓
@@ -2530,11 +2530,11 @@ if($paystatus == 1 && $slyder_extend_id >0){
         }
     })
     function isIE() { //ie?
-     if (!!window.ActiveXObject || "ActiveXObject" in window)
-      return true;
-      else
-      return false;
-     }
+        if (!!window.ActiveXObject || "ActiveXObject" in window)
+            return true;
+        else
+            return false;
+    }
 
     var is_pay_on_delivery = '<?php echo $is_pay_on_delivery;?>';
     var text_v    		= '请选择配送时间';
@@ -2571,8 +2571,8 @@ if($paystatus == 1 && $slyder_extend_id >0){
     }
     //退货填写退货单
     function order_return_yundian(batchcode){
-        location.href='../../../mshop/web/index?m=yundian&a=return_address_user_in&batchcode='+batchcode+"&customer_id=<?php echo $customer_id_en;?>&yundian=<?php echo $yundian; ?>";            
-    } 
+        location.href='../../../mshop/web/index?m=yundian&a=return_address_user_in&batchcode='+batchcode+"&customer_id=<?php echo $customer_id_en;?>&yundian=<?php echo $yundian; ?>";
+    }
 
 
     //支付成功,获得大转盘抽奖次数 start
@@ -2860,14 +2860,14 @@ if($paystatus == 1 && $slyder_extend_id >0){
                     }
                     var pay_currency = <?php echo $pay_currency; ?>;
                     var card_price = <?php echo $card_price; ?>;
-                    if (parseFloat(CouponPrice) > 0 || parseFloat(pay_currency) > 0 || parseFloat(card_price) > 0) 
+                    if (parseFloat(CouponPrice) > 0 || parseFloat(pay_currency) > 0 || parseFloat(card_price) > 0)
                     {
                         is_payother = 0;
-                        if (custom == '' || custom == undefined) 
+                        if (custom == '' || custom == undefined)
                         {
                             custom = "优惠抵扣";
                         }
-                        is_payother_msg = '找人代付不能使用'+custom;  
+                        is_payother_msg = '找人代付不能使用'+custom;
                     }
                     var open_curr = $(".open_curr").attr('open_val');
                     if(open_curr == 1){
@@ -2878,7 +2878,7 @@ if($paystatus == 1 && $slyder_extend_id >0){
                     post_data['is_payother_msg'] = is_payother_msg;
 
                     post_data['yundian'] = yundian;
-                    
+
 
                     var json = {};
                     for( i in post_data ){
@@ -3328,12 +3328,12 @@ if($paystatus == 1 && $slyder_extend_id >0){
     //HMJ-18-05-03 --云店申请退款
     function toAftersale_yundian_refund(batchcode){
         location.href='../../../mshop/web/index?m=yundian&a=application_for_refund_in&batchcode='+batchcode+"&customer_id=<?php echo $customer_id_en;?>&yundian=<?php echo $yundian; ?>";
-    }    
+    }
 
     //HMJ-18-05-03 --云店申请售后
     function toAftersale_yundian_returnorexchange(batchcode){
         location.href='../../../mshop/web/index?m=yundian&a=application_for_return_in&batchcode='+batchcode+"&customer_id=<?php echo $customer_id_en;?>&yundian=<?php echo $yundian; ?>";
-    } 
+    }
 
 
     //取消订单
@@ -3648,10 +3648,10 @@ if($paystatus == 1 && $slyder_extend_id >0){
                 $('.select-delivery-time').hide();
                 clearInterval(timeid);
                 if(timestamp>=0)
-				{
-					window.location.reload();
-				}
-                
+                {
+                    window.location.reload();
+                }
+
             }
         }
     }
@@ -3779,16 +3779,16 @@ if($paystatus == 1 && $slyder_extend_id >0){
         });
     }
 
-$(function(){
+    $(function(){
 
-    window.addEventListener("popstate", function(e) {
-        if(is_collageActivities > 0)
-        {   
-            window.location.href = '/weixinpl/mshop/collageActivities/my_collages_record_list_view.php?customer_id='+customer_id_en+'&user_id='+user_id_en;
-        }
-    }, false);
+        window.addEventListener("popstate", function(e) {
+            if(is_collageActivities > 0)
+            {
+                window.location.href = '/weixinpl/mshop/collageActivities/my_collages_record_list_view.php?customer_id='+customer_id_en+'&user_id='+user_id_en;
+            }
+        }, false);
 
-});    
+    });
 </script>
 
 <!--引入微信分享文件----start-->
@@ -3897,7 +3897,7 @@ $(function(){
             success:function(res)
             {
                 console.log(res);
-                if (res.errcode == 1) 
+                if (res.errcode == 1)
                 {
                     window.location.href = '/mshop/web/index.php?m=block_chain&a=binding&user_id='+user_id+'&batchcode='+batchcode;
                     $(obj).attr('onclick','receive_micron(this,"'+batchcode+'")');
@@ -3915,7 +3915,7 @@ $(function(){
                     return;
                 }
             }
-        }); 
+        });
     }
 
     //弹窗
@@ -3926,7 +3926,7 @@ $(function(){
         $(".sharebg").addClass("sharebg-active");
         $("body").append('<div class="am-share alert" style="top:100%"></div>');
         $(".alert").animate({"top":0})
-        $(".alert").addClass("am-modal-active");      
+        $(".alert").addClass("am-modal-active");
         var html = "";
         html += '<div class = "close_button">';
         html += '<img src = "/weixinpl/mshop/images/info_image/btn_close.png"  width = "30">';
@@ -3947,7 +3947,7 @@ $(function(){
         html += '    <span style="color: #1c1f20;">'+cancel_btn+'</span>';
         html += '</div>';
         html += '</div>';
-        $(".alert").html(html); 
+        $(".alert").html(html);
         // dialog cancel_btn按键点击事件  
         $(".sharebg-active,.share_btn, .cancel, .close_button").click(function()
         {

@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="603d6503-a980-4ae7-a14f-230d32b0fa2f" name="Default Changelist" comment="" />
+    <list default="true" id="603d6503-a980-4ae7-a14f-230d32b0fa2f" name="Default Changelist" comment="init">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/readme.txt" beforeDir="false" afterPath="$PROJECT_DIR$/readme.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/weixin_platform/market/web/collageActivities/product_list_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/weixin_platform/market/web/collageActivities/product_list_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/weixin_platform/weixinpl/function_model/collageActivities.php" beforeDir="false" afterPath="$PROJECT_DIR$/weixin_platform/weixinpl/function_model/collageActivities.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/weixin_platform/weixinpl/mshop/orderlist_detail.php" beforeDir="false" afterPath="$PROJECT_DIR$/weixin_platform/weixinpl/mshop/orderlist_detail.php" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -9,68 +15,80 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/weixin_platform/market/admin/MarkPro/collageActivities/activityList.php">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/weixin_platform/market/admin/MarkPro/collageActivities/type.php">
+        <entry file="file://$PROJECT_DIR$/weixin_platform/weixinpl/function_model/collageActivities.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="91" column="29" selection-start-line="91" selection-start-column="29" selection-end-line="91" selection-end-column="29" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/weixin_platform/market/admin/MarkPro/collageActivities/addActivity.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="871" column="9" selection-start-line="871" selection-start-column="9" selection-end-line="871" selection-end-column="9" />
+            <state relative-caret-position="3769">
+              <caret line="2485" column="33" selection-start-line="2485" selection-start-column="33" selection-end-line="2485" selection-end-column="33" />
               <folding>
-                <element signature="n#style#0;n#input#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#img#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#img#1;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#td#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#1;n#td#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#img#0;n#td#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#td#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#dl#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#dd#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#ul#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#p#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#ul#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#p#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
+                <element signature="n#getProductRecommendationSet#0;n#collageActivities#0;n#!!top" />
+                <element signature="n#get_recommendation_product#0;n#collageActivities#0;n#!!top" />
+                <element signature="n#get_recommendation_product_system#0;n#collageActivities#0;n#!!top" />
+                <element signature="n#addProductRecommendationSet#0;n#collageActivities#0;n#!!top" />
+                <element signature="n#getExplain#0;n#collageActivities#0;n#!!top" />
+                <element signature="n#style#0;n#span#0;n#p#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#br#0;n#p#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#1;n#p#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#br#1;n#p#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#2;n#p#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#br#2;n#p#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#3;n#p#0;n#!!top" expanded="true" />
+                <element signature="n#getTypes2#0;n#collageActivities#0;n#!!top" />
+                <element signature="n#addExplain#0;n#collageActivities#0;n#!!top" />
+                <element signature="n#addGroupRecommendation#0;n#collageActivities#0;n#!!top" />
+                <element signature="n#get_activities_product#0;n#collageActivities#0;n#!!top" />
+                <element signature="n#get_group_order#0;n#collageActivities#0;n#!!top" />
+                <element signature="n#get_crew_order_mes#0;n#collageActivities#0;n#!!top" />
+                <element signature="n#get_activities_user#0;n#collageActivities#0;n#!!top" />
+                <element signature="n#get_bbt_user#0;n#collageActivities#0;n#!!top" />
+                <element signature="n#getActivitiesMes#0;n#collageActivities#0;n#!!top" />
+                <element signature="n#getActivitiesProduct#0;n#collageActivities#0;n#!!top" />
+                <element signature="n#change_group_products_t#0;n#collageActivities#0;n#!!top" />
+                <element signature="n#update_group_products#0;n#collageActivities#0;n#!!top" />
+                <element signature="n#new_get_crew_order#0;n#collageActivities#0;n#!!top" />
+                <element signature="n#get_group_type#0;n#collageActivities#0;n#!!top" />
+                <element signature="n#select_front_group#0;n#collageActivities#0;n#!!top" />
+                <element signature="n#select_front_group2#0;n#collageActivities#0;n#!!top" />
+                <element signature="n#select_count_crew_order#0;n#collageActivities#0;n#!!top" />
+                <element signature="n#select_front_crew#0;n#collageActivities#0;n#!!top" />
+                <element signature="n#get_group_recommendation#0;n#collageActivities#0;n#!!top" />
+                <element signature="n#get_user_crew_order#0;n#collageActivities#0;n#!!top" />
+                <element signature="n#get_front_group#0;n#collageActivities#0;n#!!top" />
+                <element signature="n#get_front_group_type#0;n#collageActivities#0;n#!!top" />
+                <element signature="n#select_raffle_list#0;n#collageActivities#0;n#!!top" />
+                <element signature="n#update_group_order#0;n#collageActivities#0;n#!!top" />
+                <element signature="n#insert_group_order#0;n#collageActivities#0;n#!!top" />
+                <element signature="n#insert_crew_order#0;n#collageActivities#0;n#!!top" />
+                <element signature="n#insert_pro_mes#0;n#collageActivities#0;n#!!top" />
+                <element signature="n#select_activities_user#0;n#collageActivities#0;n#!!top" />
+                <element signature="n#insert_activities_user#0;n#collageActivities#0;n#!!top" />
+                <element signature="n#update_activities_user#0;n#collageActivities#0;n#!!top" />
+                <element signature="n#get_pay_batchcode_info#0;n#collageActivities#0;n#!!top" />
+                <element signature="n#get_paying_user#0;n#collageActivities#0;n#!!top" />
+                <element signature="e#72275#73292#0#PHP" />
+                <element signature="e#78379#79795#0#PHP" />
+                <element signature="e#80564#82511#0#PHP" />
+                <element signature="n#check_qualification#0;n#collageActivities#0;n#!!top" />
+                <element signature="n#refund_all#0;n#collageActivities#0;n#!!top" />
+                <element signature="n#group_refund#0;n#collageActivities#0;n#!!top" />
+                <element signature="n#free_group_cashback#0;n#collageActivities#0;n#!!top" />
+                <element signature="n#cal_cuddle_coefficient#0;n#collageActivities#0;n#!!top" />
+                <element signature="n#cal_back_currency#0;n#collageActivities#0;n#!!top" />
+                <element signature="n#collage_success_operate#0;n#collageActivities#0;n#!!top" />
+                <element signature="n#cuddle_group_log#0;n#collageActivities#0;n#!!top" />
+                <element signature="n#cuddle_order_log#0;n#collageActivities#0;n#!!top" />
+                <element signature="n#insert_free_currency_log#0;n#collageActivities#0;n#!!top" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/weixin_platform/weixinpl/mshop/collage_success.php">
+        <entry file="file://$PROJECT_DIR$/weixin_platform/market/web/collageActivities/test.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="36" column="28" selection-start-line="36" selection-start-column="16" selection-end-line="36" selection-end-column="28" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/weixin_platform/weixinpl/mshop/save_order_new.php">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/weixin_platform/weixinpl/mshop/save_order.class.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-152">
-              <caret line="13" column="57" selection-start-line="13" selection-start-column="40" selection-end-line="13" selection-end-column="57" />
+            <state relative-caret-position="285">
+              <caret line="15" column="37" selection-start-line="15" selection-start-column="30" selection-end-line="15" selection-end-column="37" />
             </state>
           </provider>
         </entry>
@@ -78,8 +96,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/weixin_platform/weixinpl/mshop/orderlist_detail.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="52">
-              <caret line="2084" lean-forward="true" selection-start-line="2084" selection-end-line="2084" />
+            <state relative-caret-position="521">
+              <caret line="3988" column="7" selection-start-line="3988" selection-start-column="7" selection-end-line="3988" selection-end-column="7" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
@@ -117,45 +135,6 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/weixin_platform/market/web/collageActivities/activities_detail_view.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="38" column="46" selection-start-line="38" selection-start-column="28" selection-end-line="38" selection-end-column="46" />
-              <folding>
-                <element signature="n#style#0;n#p#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/weixin_platform/weixinpl/mshop/create_shop_order.class.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2302">
-              <caret line="122" column="49" selection-start-line="122" selection-start-column="49" selection-end-line="122" selection-end-column="49" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/weixin_platform/weixinpl/function_model/collageActivities.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="101">
-              <caret line="1263" column="13" selection-start-line="1263" selection-start-column="8" selection-end-line="1263" selection-end-column="13" />
-              <folding>
-                <element signature="n#style#0;n#span#0;n#p#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#br#0;n#p#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#1;n#p#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#br#1;n#p#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#2;n#p#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#br#2;n#p#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#3;n#p#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FindInProjectRecents">
@@ -165,12 +144,18 @@
       <find>collage_group_order_t</find>
       <find>collagroup</find>
       <find>group</find>
-      <find>update_pay_crew_order</find>
-      <find>crew_order</find>
       <find>group_addwork</find>
       <find>$group_status</find>
       <find>collageActivities</find>
       <find>拼团</find>
+      <find>order</find>
+      <find>update_crew_order</find>
+      <find>update_pay_crew_order</find>
+      <find>cgot</find>
+      <find>get_crew_order</find>
+      <find>collage_crew_order_t</find>
+      <find>crew_order</find>
+      <find>lottery</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -183,19 +168,21 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/weixin_platform/market/admin/MarkPro/collageActivities/explain.php" />
-        <option value="$PROJECT_DIR$/readme.txt" />
-        <option value="$PROJECT_DIR$/weixin_platform/weixinpl/function_model/collageActivities.php" />
         <option value="$PROJECT_DIR$/weixin_platform/market/admin/MarkPro/collageActivities/type.php" />
         <option value="$PROJECT_DIR$/weixin_platform/market/admin/MarkPro/collageActivities/addActivity.php" />
         <option value="$PROJECT_DIR$/weixin_platform/weixinpl/mshop/collage_success.php" />
-        <option value="$PROJECT_DIR$/weixin_platform/weixinpl/mshop/orderlist_detail.php" />
         <option value="$PROJECT_DIR$/weixin_platform/market/web/collageActivities/activities_detail_view.php" />
+        <option value="$PROJECT_DIR$/weixin_platform/market/web/collageActivities/product_list_view.php" />
+        <option value="$PROJECT_DIR$/readme.txt" />
+        <option value="$PROJECT_DIR$/weixin_platform/market/web/collageActivities/test.php" />
+        <option value="$PROJECT_DIR$/weixin_platform/weixinpl/function_model/collageActivities.php" />
+        <option value="$PROJECT_DIR$/weixin_platform/weixinpl/mshop/orderlist_detail.php" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="65" />
-    <option name="y" value="432" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
     <option name="width" value="1936" />
     <option name="height" value="1096" />
   </component>
@@ -239,6 +226,26 @@
               <item name="web" type="462c0819:PsiDirectoryNode" />
               <item name="collageActivities" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="hmj_wsy_choujiangpingtuan" type="b2602c69:ProjectViewProjectNode" />
+              <item name="hmj_wsy_choujiangpingtuan" type="462c0819:PsiDirectoryNode" />
+              <item name="weixin_platform" type="462c0819:PsiDirectoryNode" />
+              <item name="weixinpl" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="hmj_wsy_choujiangpingtuan" type="b2602c69:ProjectViewProjectNode" />
+              <item name="hmj_wsy_choujiangpingtuan" type="462c0819:PsiDirectoryNode" />
+              <item name="weixin_platform" type="462c0819:PsiDirectoryNode" />
+              <item name="weixinpl" type="462c0819:PsiDirectoryNode" />
+              <item name="function_model" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="hmj_wsy_choujiangpingtuan" type="b2602c69:ProjectViewProjectNode" />
+              <item name="hmj_wsy_choujiangpingtuan" type="462c0819:PsiDirectoryNode" />
+              <item name="weixin_platform" type="462c0819:PsiDirectoryNode" />
+              <item name="weixinpl" type="462c0819:PsiDirectoryNode" />
+              <item name="mshop" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -248,9 +255,14 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/weixin_platform/market/web/collageActivities" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\www\yidao\hmj_wsy_choujiangpingtuan\weixin_platform\market\web\collageActivities" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -274,7 +286,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1576824250550</updated>
-      <workItem from="1576824251895" duration="10335000" />
+      <workItem from="1576824251895" duration="10755000" />
+      <workItem from="1576905238828" duration="9147000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1576826210652</created>
@@ -294,20 +307,15 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10335000" />
+    <option name="totallyTimeSpent" value="19902000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15795091" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15955175" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Database Changes" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
-      <window_info anchor="bottom" id="File Transfer" weight="0.20104167" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -315,10 +323,16 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="Database" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="8" visible="true" weight="0.32985386" />
+      <window_info anchor="bottom" id="File Transfer" order="9" weight="0.73590815" />
+      <window_info anchor="bottom" id="Database Changes" order="10" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.32985386" />
+      <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" />
     </layout>
     <layout-to-restore>
       <window_info id="Favorites" order="0" side_tool="true" />
@@ -350,6 +364,17 @@
     <MESSAGE value="init" />
     <option name="LAST_COMMIT_MESSAGE" value="init" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/weixin_platform/weixinpl/function_model/collageActivities.php</url>
+          <line>2888</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/weixin_platform/weixinpl/function_model/old_collageActivities.php">
       <provider selected="true" editor-type-id="text-editor">
@@ -369,88 +394,109 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/readme.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="46" selection-start-line="2" selection-start-column="46" selection-end-line="2" selection-end-column="46" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/weixin_platform/market/admin/MarkPro/collageActivities/activityList.php">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/weixin_platform/weixinpl/mshop/create_shop_order.class.php">
+    <entry file="file://$PROJECT_DIR$/weixin_platform/market/admin/MarkPro/collageActivities/type.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2302">
-          <caret line="122" column="49" selection-start-line="122" selection-start-column="49" selection-end-line="122" selection-end-column="49" />
+        <state relative-caret-position="1729">
+          <caret line="91" column="29" selection-start-line="91" selection-start-column="29" selection-end-line="91" selection-end-column="29" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/weixin_platform/market/admin/MarkPro/collageActivities/addActivity.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
+        <state relative-caret-position="16530">
           <caret line="871" column="9" selection-start-line="871" selection-start-column="9" selection-end-line="871" selection-end-column="9" />
-          <folding>
-            <element signature="n#style#0;n#input#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#1;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#td#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#1;n#td#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#td#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#td#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#dl#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#dd#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ul#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#p#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ul#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#p#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/weixin_platform/market/admin/MarkPro/collageActivities/type.php">
+    <entry file="file://$PROJECT_DIR$/weixin_platform/weixinpl/mshop/collage_success.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="91" column="29" selection-start-line="91" selection-start-column="29" selection-end-line="91" selection-end-column="29" />
+        <state relative-caret-position="216">
+          <caret line="110" column="28" selection-start-line="110" selection-start-column="23" selection-end-line="110" selection-end-column="28" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/weixin_platform/market/admin/MarkPro/collageActivities/activityList.php">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/weixin_platform/market/admin/MarkPro/collageActivities/ajax_handle.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="558" column="40" selection-start-line="558" selection-start-column="40" selection-end-line="558" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/readme.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="6" column="106" selection-start-line="6" selection-start-column="106" selection-end-line="6" selection-end-column="106" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/weixin_platform/weixinpl/mshop/save_order_new.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/weixin_platform/weixinpl/mshop/collage_success.php">
+    <entry file="file://$PROJECT_DIR$/weixin_platform/weixinpl/mshop/save_order.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="36" column="28" selection-start-line="36" selection-start-column="16" selection-end-line="36" selection-end-column="28" />
+        <state relative-caret-position="19">
+          <caret line="13" column="57" selection-start-line="13" selection-start-column="40" selection-end-line="13" selection-end-column="57" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/weixin_platform/weixinpl/mshop/save_order.class.php">
+    <entry file="file://$PROJECT_DIR$/weixin_platform/market/web/collageActivities/product_list_view.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-152">
-          <caret line="13" column="57" selection-start-line="13" selection-start-column="40" selection-end-line="13" selection-end-column="57" />
+        <state relative-caret-position="266">
+          <caret line="62" column="8" lean-forward="true" selection-start-line="62" selection-start-column="8" selection-end-line="62" selection-end-column="8" />
+          <folding>
+            <element signature="n#style#0;n#button#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#ol#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#ol#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/weixin_platform/market/web/collageActivities/activities_detail_view.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
+        <state relative-caret-position="-3382">
           <caret line="38" column="46" selection-start-line="38" selection-start-column="28" selection-end-line="38" selection-end-column="46" />
-          <folding>
-            <element signature="n#style#0;n#p#0;n#!!top" expanded="true" />
-          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/weixin_platform/weixinpl/mshop/create_shop_order.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="122" column="49" selection-start-line="122" selection-start-column="49" selection-end-line="122" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/stubs/mysql/mysql.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1179">
+          <caret line="460" column="9" selection-start-line="460" selection-start-column="9" selection-end-line="460" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/weixin_platform/market/web/collageActivities/test.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="15" column="37" selection-start-line="15" selection-start-column="30" selection-end-line="15" selection-end-column="37" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/weixin_platform/weixinpl/function_model/collageActivities.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="101">
-          <caret line="1263" column="13" selection-start-line="1263" selection-start-column="8" selection-end-line="1263" selection-end-column="13" />
+        <state relative-caret-position="3769">
+          <caret line="2485" column="33" selection-start-line="2485" selection-start-column="33" selection-end-line="2485" selection-end-column="33" />
           <folding>
+            <element signature="n#getProductRecommendationSet#0;n#collageActivities#0;n#!!top" />
+            <element signature="n#get_recommendation_product#0;n#collageActivities#0;n#!!top" />
+            <element signature="n#get_recommendation_product_system#0;n#collageActivities#0;n#!!top" />
+            <element signature="n#addProductRecommendationSet#0;n#collageActivities#0;n#!!top" />
+            <element signature="n#getExplain#0;n#collageActivities#0;n#!!top" />
             <element signature="n#style#0;n#span#0;n#p#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#br#0;n#p#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#span#1;n#p#0;n#!!top" expanded="true" />
@@ -458,14 +504,59 @@
             <element signature="n#style#0;n#span#2;n#p#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#br#2;n#p#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#span#3;n#p#0;n#!!top" expanded="true" />
+            <element signature="n#getTypes2#0;n#collageActivities#0;n#!!top" />
+            <element signature="n#addExplain#0;n#collageActivities#0;n#!!top" />
+            <element signature="n#addGroupRecommendation#0;n#collageActivities#0;n#!!top" />
+            <element signature="n#get_activities_product#0;n#collageActivities#0;n#!!top" />
+            <element signature="n#get_group_order#0;n#collageActivities#0;n#!!top" />
+            <element signature="n#get_crew_order_mes#0;n#collageActivities#0;n#!!top" />
+            <element signature="n#get_activities_user#0;n#collageActivities#0;n#!!top" />
+            <element signature="n#get_bbt_user#0;n#collageActivities#0;n#!!top" />
+            <element signature="n#getActivitiesMes#0;n#collageActivities#0;n#!!top" />
+            <element signature="n#getActivitiesProduct#0;n#collageActivities#0;n#!!top" />
+            <element signature="n#change_group_products_t#0;n#collageActivities#0;n#!!top" />
+            <element signature="n#update_group_products#0;n#collageActivities#0;n#!!top" />
+            <element signature="n#new_get_crew_order#0;n#collageActivities#0;n#!!top" />
+            <element signature="n#get_group_type#0;n#collageActivities#0;n#!!top" />
+            <element signature="n#select_front_group#0;n#collageActivities#0;n#!!top" />
+            <element signature="n#select_front_group2#0;n#collageActivities#0;n#!!top" />
+            <element signature="n#select_count_crew_order#0;n#collageActivities#0;n#!!top" />
+            <element signature="n#select_front_crew#0;n#collageActivities#0;n#!!top" />
+            <element signature="n#get_group_recommendation#0;n#collageActivities#0;n#!!top" />
+            <element signature="n#get_user_crew_order#0;n#collageActivities#0;n#!!top" />
+            <element signature="n#get_front_group#0;n#collageActivities#0;n#!!top" />
+            <element signature="n#get_front_group_type#0;n#collageActivities#0;n#!!top" />
+            <element signature="n#select_raffle_list#0;n#collageActivities#0;n#!!top" />
+            <element signature="n#update_group_order#0;n#collageActivities#0;n#!!top" />
+            <element signature="n#insert_group_order#0;n#collageActivities#0;n#!!top" />
+            <element signature="n#insert_crew_order#0;n#collageActivities#0;n#!!top" />
+            <element signature="n#insert_pro_mes#0;n#collageActivities#0;n#!!top" />
+            <element signature="n#select_activities_user#0;n#collageActivities#0;n#!!top" />
+            <element signature="n#insert_activities_user#0;n#collageActivities#0;n#!!top" />
+            <element signature="n#update_activities_user#0;n#collageActivities#0;n#!!top" />
+            <element signature="n#get_pay_batchcode_info#0;n#collageActivities#0;n#!!top" />
+            <element signature="n#get_paying_user#0;n#collageActivities#0;n#!!top" />
+            <element signature="e#72275#73292#0#PHP" />
+            <element signature="e#78379#79795#0#PHP" />
+            <element signature="e#80564#82511#0#PHP" />
+            <element signature="n#check_qualification#0;n#collageActivities#0;n#!!top" />
+            <element signature="n#refund_all#0;n#collageActivities#0;n#!!top" />
+            <element signature="n#group_refund#0;n#collageActivities#0;n#!!top" />
+            <element signature="n#free_group_cashback#0;n#collageActivities#0;n#!!top" />
+            <element signature="n#cal_cuddle_coefficient#0;n#collageActivities#0;n#!!top" />
+            <element signature="n#cal_back_currency#0;n#collageActivities#0;n#!!top" />
+            <element signature="n#collage_success_operate#0;n#collageActivities#0;n#!!top" />
+            <element signature="n#cuddle_group_log#0;n#collageActivities#0;n#!!top" />
+            <element signature="n#cuddle_order_log#0;n#collageActivities#0;n#!!top" />
+            <element signature="n#insert_free_currency_log#0;n#collageActivities#0;n#!!top" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/weixin_platform/weixinpl/mshop/orderlist_detail.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="52">
-          <caret line="2084" lean-forward="true" selection-start-line="2084" selection-end-line="2084" />
+        <state relative-caret-position="521">
+          <caret line="3988" column="7" selection-start-line="3988" selection-start-column="7" selection-end-line="3988" selection-end-column="7" />
           <folding>
             <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />

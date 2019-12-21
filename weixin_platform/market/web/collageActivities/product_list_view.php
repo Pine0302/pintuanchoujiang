@@ -52,8 +52,8 @@ if( $op == 'ordinary' || $op == 'ordinary3' || $op == 'ordinary2' ){
 	$condition=array(
 		'cat.customer_id' => $customer_id,
 		'ae.customer_id' => $customer_id,
-		'cat.end_time' => date('Y-m-d H:i:s',time()),
-		'cat.start_time' => date('Y-m-d H:i:s',time()),
+		//'cat.end_time' => date('Y-m-d H:i:s',time()),
+		//'cat.start_time' => date('Y-m-d H:i:s',time()),
 		'cat.isvalid' => true,
 		'ae.isvalid' => true,
         'ae.isshow' => '1',
@@ -67,7 +67,8 @@ if( $op == 'ordinary' || $op == 'ordinary3' || $op == 'ordinary2' ){
 	$list = $collageActivities->get_front_group($condition,$filed);
 }
 $type_list=$collageActivities->get_front_group_type($customer_id);
-	// var_dump($list);exit;
+
+
 //var_dump($type_list);
 define("InviteUrl",Protocol.$http_host."/weixinpl/common_shop/jiushop/forward.php?customer_id=".$customer_id_en."&redirect_url=".urlencode(Protocol.$http_host."/market/web/collageActivities/product_list_view.php?op=".$op)."&exp_user_id=".$user_id);
 //检查用户从哪里进  0:网页 1:微信 2:APP 3:支付宝

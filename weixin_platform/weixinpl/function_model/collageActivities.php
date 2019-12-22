@@ -2119,6 +2119,14 @@ class collageActivities{
         return $list;
     }
 
+    public function wlog($content,$type=1){
+        error_log(var_export($content,1),3,"/opt/www/weixin_platform/debug.txt");
+        error_log(var_export('---',1),3,"/opt/www/weixin_platform/debug.txt");
+        if($type!=1){
+            exit;
+        }
+
+    }
     /**
      * 更改拼团订单状态方法
      * @param  int $customer_id 商家编号
@@ -2126,6 +2134,7 @@ class collageActivities{
      * @param  int $paytype 支付方式
      */
     public function update_pay_crew_order($customer_id,$pay_batchcode,$paytype){
+        $this->wlog('update_pay_crew_order');
         $this->utlity = new shopMessage_Utlity();
         $this->shop = new shop();
 
@@ -2141,6 +2150,7 @@ class collageActivities{
             $is_QR = $row['is_QR'];
             $paystatus = $row['paystatus'];
         }
+
         if( $is_collageActivities == 0 ){	//非拼团订单不执行下面代码
             $res = array(
                 'is_collageActivities' => $is_collageActivities,
@@ -2150,12 +2160,14 @@ class collageActivities{
         }
 
         $condition = " ccot.customer_id=".$customer_id." AND ccot.batchcode='".$batchcode."' AND ccot.isvalid=true ";
-        $filed = " ccot.group_id.ccot.id,ccot.is_head,ccot.group_id,ccot.activitie_id,ccot.user_id,ccopmt.pid,cgot.type ";
+        $filed = " ccot.group_id,ccot.id,ccot.is_head,ccot.group_id,ccot.activitie_id,ccot.user_id,ccopmt.pid,cgot.type ";
         $crew_order = $this->get_crew_order($condition,$filed)['batchcode'][0];
 
         if( !empty($crew_order) ){
             $group_status = $this->check_group_status($customer_id,$crew_order['group_id']);
             $group_log = $this->check_group_log($crew_order['group_id'],$customer_id);
+
+
             if( !$group_status && !$group_log ){
                 //如果已经拼团成功，则该订单为待退款状态
                 $condition = array(
@@ -2167,20 +2179,6 @@ class collageActivities{
                     'paytime' => 'now()',
                     'paystyle' => "'".$paytype."'"
                 );
-                if($crew_order['type']==7){  //新抽奖团
-                    $condition = array(
-                        'customer_id' => $customer_id,
-                        'group_id' => $crew_order['group_id']
-                    );
-                    $value = array(
-                        'status' => 11,
-                        'paytime' => 'now()',
-                        'paystyle' => "'".$paytype."'"
-                    );
-                    $this->update_crew_order($condition,$value);
-                    //抽奖动作开始
-                    $choose_tuan = $this->lottery($crew_order['group_id'],$customer_id);
-                }
                 $this->update_crew_order($condition,$value);
 
 
@@ -2479,10 +2477,12 @@ class collageActivities{
         $num = rand(1,$user_num);
 
         //修改collage_crew_order_t 状态
-        $query_set_lottery_status_0 = "update collage_crew_order_t set lottery_status = 0 and status = 4 WHERE customer_id = ".$customer_id." AND group_id = ".$group_id." AND isvalid=true and lottery_status = 2 and id != ".$users[$num-1]['id'];
-        $query_set_lottery_status_1 = "update collage_crew_order_t set lottery_status = 1 and status = 5 WHERE id = ".$users[$num-1]['id'];
+        $query_set_lottery_status_0 = "update collage_crew_order_t set lottery_status = 0 , status = 4 WHERE customer_id = ".$customer_id." AND group_id = ".$group_id." AND isvalid=true  and id != ".$users[$num-1]['id'];
+        $query_set_lottery_status_1 = "update collage_crew_order_t set lottery_status = 1 , status = 5 WHERE id = ".$users[$num-1]['id'];
         _mysql_query($query_set_lottery_status_0);
         _mysql_query($query_set_lottery_status_1);
+        $this->wlog($query_set_lottery_status_0);
+        $this->wlog($query_set_lottery_status_1);
         //todo 修改 crew_order_t 状态
 
         return $users[$num-1];
@@ -2495,17 +2495,21 @@ class collageActivities{
      */
     public function check_group_status($customer_id,$group_id){
         $query = "SELECT status,success_num,join_num FROM collage_group_order_t WHERE customer_id=".$customer_id." AND id=".$group_id." AND isvalid=true";
+        $this->wlog($query);
         $result = _mysql_query($query) or die('Query failed:'.mysql_error());
         $group_info = mysql_fetch_assoc($result);
+        $this->wlog($group_info);
+        $this->wlog($group_info['status']);
         //团状态非进行和未支付，则返回false
         if( $group_info['status'] != 1 && $group_info['status'] != -1 ){
             return false;
         }
 
         //参团人数等于成团人数，则返回false
-        if( $group_info['success_num'] == $group_info['join_num'] ){
+        if($group_info['success_num'] == $group_info['join_num'] ){
             return false;
         }
+     //   exit;
 
         return true;
     }
@@ -3162,6 +3166,9 @@ class collageActivities{
 
         //非免单团拼团成功操作
         if($group_info['type'] != 6){
+
+
+
             $group_status = 3; //拼团成功
 
             if( $group_info['type'] == 2 ){
@@ -3178,17 +3185,22 @@ class collageActivities{
             );
             $this->update_group_order($condition,$value);
 
-            //更新团员订单状态
-            $condition = array(
-                'customer_id' => $customer_id,
-                'group_id' => ' IN ('.$group_id.') ',
-                'isvalid' => true,
-                'activitie_id' => $group_info['activitie_id'],
-                'status' => 2
-            );
+            if($group_info['type']==7){
+                $choose_tuan = $this->lottery($group_id,$customer_id);
+                $this->wlog($choose_tuan);exit;
+            }else{
+                //更新团员订单状态
+                $condition = array(
+                    'customer_id' => $customer_id,
+                    'group_id' => ' IN ('.$group_id.') ',
+                    'isvalid' => true,
+                    'activitie_id' => $group_info['activitie_id'],
+                    'status' => 2
+                );
 
-            $value = array('status' => 5);
-            $this->update_crew_order($condition,$value);
+                $value = array('status' => 5);
+                $this->update_crew_order($condition,$value);
+            }
 
             //抱抱团拼团成功返购物币
             if( $group_info['type'] == 5 ){

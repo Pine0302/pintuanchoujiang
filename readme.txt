@@ -5,3 +5,5 @@ VALUES (7, 41, b'1', '2019-12-09 06:36:12', '新抽奖团说明', '<p><span styl
   ADD COLUMN `lottery_status` int(1) NULL DEFAULT 2 COMMENT '是否拼团抽中 0:未抽中  1:抽奖  2.等待抽奖' AFTER `is_refund`;
   ALTER TABLE `wsy_mark`.`collage_group_order_t`
   ADD COLUMN `lottery_status` int(1) NULL DEFAULT 2 COMMENT '是否中奖 0:未中奖  1:已中奖 2:未开奖' AFTER `coefficient`;
+  ALTER TABLE `wsy_mark`.`collage_group_order_t`
+  ADD COLUMN `group_id` int(11) NULL COMMENT '团id' AFTER `lottery_status`;

@@ -512,7 +512,19 @@ class check_run_day{
 
 
 class order_refund{
+
+    public function wlog($content,$type=1){
+        error_log(var_export($content,1),3,"/opt/www/weixin_platform/debug.txt");
+        error_log(var_export('---',1),3,"/opt/www/weixin_platform/debug.txt");
+        if($type!=1){
+            exit;
+        }
+
+    }
+
+
 	public function refund($batchcode = '',$customer_id = 0){
+        //$this->wlog("refund");
 		$shopMessage_Utlity = new shopMessage_Utlity();
 
 		$collageActivities = new collageActivities($customer_id);//自定义类

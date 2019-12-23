@@ -474,6 +474,7 @@ switch( $op ){
 		$data['activity']['name']			= $configutil->splash_new($_POST['name']);
 		$data['activity']['type']			= $configutil->splash_new($_POST['type']);
 		$data['activity']['luck_draw_num'] 	= $configutil->splash_new($_POST['luck_draw_num']);
+		$data['activity']['luck_split_money'] 	= $configutil->splash_new($_POST['luck_split_money']);
 		$data['activity']['start_time'] 	= $configutil->splash_new($_POST['start_time']);
 		$data['activity']['end_time']		= $configutil->splash_new($_POST['end_time']);
 		$data['activity']['group_size']		= $configutil->splash_new($_POST['group_size']);
@@ -517,7 +518,6 @@ switch( $op ){
 			$data['activity']['status'] = 1;
 			$data['activity']['createtime'] = 'now()';
 		}
-
 		$result = $collageActivities -> change_group_products_t($data,$data['activity']['id']);
 
 		die(json_encode($result));

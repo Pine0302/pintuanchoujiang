@@ -26,7 +26,7 @@ $condition = array(
 	'isvalid' => true,
 	'id' => $keyid
 );
-$field = " id,status,name,type,start_time,end_time,group_size,user_level,number,createtime,luck_draw_num,if_curr_pay,coefficient,return_curr,head_times,if_change_pro,if_refund,if_return_pro,ginseng_num,is_since,shopcode_onoff,shopcode_limit,shopcode_precent,coupon_onoff,alone_onoff ";
+$field = " id,status,name,type,start_time,end_time,group_size,user_level,number,createtime,luck_draw_num,luck_split_money,if_curr_pay,coefficient,return_curr,head_times,if_change_pro,if_refund,if_return_pro,ginseng_num,is_since,shopcode_onoff,shopcode_limit,shopcode_precent,coupon_onoff,alone_onoff ";
 $activity_info = $collageActivities -> getActivitiesMes($condition,$field)['data'][0];
 $user_level = $activity_info['user_level'];
 $user_level_arr = explode('_',$user_level);
@@ -216,6 +216,12 @@ table#WSY_t1 td{word-wrap: break-word;text-align:center;}
 			<label class="delivery_font">抽奖团名额：</label>
 			<input type="number" name="luck_draw_num" value="<?php echo $activity_info['luck_draw_num'];?>" <?php if($activity_info['status']!=1 && $activity_info['status']!=''){echo 'disabled';}?> /><span style="color:ff0000;">提示：中奖名额以团为单位，举例设置1，代表会有一个团被抽中</span>
 		</div>
+
+        <div class="luck_split_money" style="margin-top:20px;<?php if($activity_info['type']==7){echo 'display:block;';}else{echo 'display:none;';}?>" >
+            <label class="delivery_font">抽奖失败平分金额：</label>
+            <input type="number" name="luck_split_money" value="<?php echo $activity_info['luck_split_money'];?>" <?php if($activity_info['status']!=1 && $activity_info['status']!=''){echo 'disabled';}?> /><span style="color:ff0000;">提示：拼团成功后,抽奖失败者平分此金额</span>
+        </div>
+
 		<div style="margin-top:20px">
 			<label class="delivery_font">开始时间：</label>
 			<input type="text" id="start_time" name="start_time" value="<?php echo $activity_info['start_time'];?>" placeholder="年-月-日" onfocus="WdatePicker({onpicked:function(){check_time_section();},dateFmt:'yyyy-M-d HH:mm:ss',maxDate:'#F{$dp.$D(\'end_time\')}'});"  readonly <?php if($activity_info['status']!=1 && $activity_info['status']!=''){echo 'disabled';}?> />
@@ -791,13 +797,16 @@ $('#is_since_tips').on('mouseenter', function(){
 
 $('input[name=type]').click(function(){
     console.log("选择不同的团");
+
 	var val = $(this).val();
 	type = val; //将当前选择的团类型设为常量
 	choose_type = val; //将当前选择的团类型设为常量
+    console.log(choose_type);
 	var shopcode_onoff = $('input[name=shopcode_onoff]').val();
 	//隐藏域记录当前团类型
 	$('#now_type').val(val);
 	if( val == 2 ){
+        $('.luck_split_money').fadeOut();
 		$('.luck_draw_num').fadeIn();
 		$('#group_size').attr('onkeyup','clearInt2(this)');
 		$('#group_size').attr('max','5');
@@ -816,7 +825,7 @@ $('input[name=type]').click(function(){
 			$('#isShow_shopcodeLimit_precent').fadeIn();
 		}
 	}else if(  val == 5 ){
-
+        $('.luck_split_money').fadeOut();
 		$('.luck_draw_num').fadeOut();
 		$('#group_size').attr('onkeyup','clearInt(this)');
 		$('#group_size').attr('max','');
@@ -833,7 +842,7 @@ $('input[name=type]').click(function(){
 		$('.alone_buy').fadeOut();
 		$('.alone_buy1').fadeOut();
 	}else if(  val == 6 ){
-
+        $('.luck_split_money').fadeOut();
 		$('.luck_draw_num').fadeOut();
 		$('#group_size').attr('onkeyup','clearInt(this)');
 		$('#group_size').attr('max','');
@@ -853,6 +862,7 @@ $('input[name=type]').click(function(){
 		}
 		check_time_section();
 	}else if(val == 7){
+        $('.luck_split_money').fadeIn();
         $('.luck_draw_num').fadeOut();
         $('#group_size').attr('onkeyup','clearInt(this)');
         $('#group_size').attr('max','');
@@ -871,6 +881,7 @@ $('input[name=type]').click(function(){
             $('#isShow_shopcodeLimit_precent').fadeIn();
         }
     } else {
+        $('.luck_split_money').fadeOut();
 		$('.luck_draw_num').fadeOut();
 		$('#group_size').attr('onkeyup','clearInt(this)');
 		$('#group_size').attr('max','');
@@ -1258,6 +1269,7 @@ $('.save-button').click(function(){
 	}
 	var type = $('input[name=type]:checked').val();
 	var luck_draw_num = 0;
+	var luck_split_money = 0;
     var if_curr_pay   = 1;
     var coefficient   = 0;
     var head_times    = -1;
@@ -1280,6 +1292,13 @@ $('.save-button').click(function(){
 			return;
 		}
 	}
+
+    if( type == 7 ){
+        luck_split_money = $('input[name=luck_split_money]').val();
+        if( luck_split_money == '' || parseInt(luck_split_money) < 0 || parseInt(luck_split_money) == undefined ){
+            luck_split_money = 0;
+        }
+    }
 
     if( type == 5 ){
         var if_curr_pay = $('input[name=head_curr_use]:checked').val();
@@ -1567,6 +1586,7 @@ $('.save-button').click(function(){
 			name : name,
 			type : type,
 			luck_draw_num : luck_draw_num,
+            luck_split_money : luck_split_money,
 			start_time : start_time,
 			end_time : end_time,
 			group_size : group_size,

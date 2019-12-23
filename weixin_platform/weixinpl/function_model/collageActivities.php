@@ -4,6 +4,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/weixinpl/function_model/currency.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/weixinpl/common/utility_shop.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/weixinpl/function_model/shop/shop.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/wsy_pay/web/function/handle_shop_order.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/weixinpl/function_model/moneybag.php");
 
 class collageActivities{
 
@@ -2463,30 +2464,90 @@ class collageActivities{
 
     //新抽奖逻辑
     public function lottery($group_id,$customer_id){
-        $query = "SELECT id,user_id,batchcode,group_id FROM collage_crew_order_t WHERE customer_id=".$customer_id." AND group_id=".$group_id." AND isvalid=true and lottery_status = 2";
+        $query = "SELECT id,user_id,batchcode,group_id, activitie_id FROM collage_crew_order_t WHERE customer_id=".$customer_id." AND group_id=".$group_id." AND isvalid=true and lottery_status = 2";
         $result = _mysql_query($query) or die('Query failed:'.mysql_error());
+        $activitie_id = 0;
         while ( $row = mysql_fetch_object($result) ) {
             $users[] = array(
                 'id' => $row -> id,
                 'user_id' => $row -> user_id,
                 'batchcode' => $row -> batchcode,
                 'group_id' => $row -> group_id,
+                'activitie_id' => $row -> activitie_id,
             );
+            if($activitie_id==0){
+                $activitie_id = $row -> activitie_id;
+            }
+
         }
         $user_num = count($users);
         $num = rand(1,$user_num);
 
         //修改collage_crew_order_t 状态
-        $query_set_lottery_status_0 = "update collage_crew_order_t set lottery_status = 0 , status = 4 WHERE customer_id = ".$customer_id." AND group_id = ".$group_id." AND isvalid=true  and id != ".$users[$num-1]['id'];
+        $query_set_lottery_status_0 = "update collage_crew_order_t set lottery_status = 0 , status = 3 WHERE customer_id = ".$customer_id." AND group_id = ".$group_id." AND isvalid=true  and id != ".$users[$num-1]['id'];
         $query_set_lottery_status_1 = "update collage_crew_order_t set lottery_status = 1 , status = 5 WHERE id = ".$users[$num-1]['id'];
         _mysql_query($query_set_lottery_status_0);
         _mysql_query($query_set_lottery_status_1);
         $this->wlog($query_set_lottery_status_0);
         $this->wlog($query_set_lottery_status_1);
-        //todo 修改 crew_order_t 状态
+
+        //给未中奖的用户发钱
+        $this->splitBonus($users,$users[$num-1],$activitie_id,$customer_id);
+        //给中奖用户添加一次中奖记录
+        $this->addLotteryRecode($users[$num-1],$customer_id);
+
 
         return $users[$num-1];
     }
+
+    //给未中奖的用户分钱
+    public function splitBonus($users,$chooseUser,$activitie_id,$customer_id){
+        $this->wlog('splitBonus--begin');
+        $query = "SELECT id,luck_split_money FROM collage_activities_t WHERE id=".$activitie_id;
+        $result = _mysql_query($query) or die('Query failed:'.mysql_error());
+        $luck_split_money = mysql_fetch_assoc($result)['luck_split_money'];
+        if($luck_split_money>0){
+            $luck_split_money = intval($luck_split_money);
+        }
+        $this->wlog($luck_split_money);
+        $luck_split_money_each = floatval($luck_split_money/(count($users)-1));
+        $this->wlog($luck_split_money_each);
+        $this->wlog($users);
+        foreach($users as $ku=>$vu){
+            if($vu['user_id'] != $chooseUser['user_id']){
+                $MoneyBag = new MoneyBag();
+                $remark = "拼团成功后抽奖失败奖励零钱";
+                $refund_result = $MoneyBag->update_moneybag($customer_id,$vu['user_id'],$luck_split_money_each,$vu['batchcode'],$remark,1,14,0);
+                $sendMessage_content[] = "亲，您的零钱钱包 +".$luck_split_money_each."元\r\n".
+                    "来源：【拼团成功后抽奖失败】\n".
+                    "状态：【零钱到帐】\n".
+                    "时间：".date( "Y-m-d H:i:s")."";
+            }
+        }
+        $this->wlog('splitBonus--end');
+    }
+
+    //给中奖用户新增中奖记录
+    public function addLotteryRecode($chooseUser,$customer_id){
+        $this->wlog("addLotteryRecode--begin");
+        $query_add_lotter_log = "INSERT INTO collage_lottery_recode (
+												user_id,
+												group_id,
+												batchcode,
+												customer_id,
+												createtime
+											) VALUES (
+												".$chooseUser['user_id'].",
+												".$chooseUser['group_id'].",
+												'".$chooseUser['batchcode']."',
+												".$customer_id.",
+												now()
+											)";
+        $this->wlog($query_add_lotter_log);
+        _mysql_query($query_add_lotter_log) or die('Query_order_log failed:'.mysql_error());
+        $this->wlog("addLotteryRecode--end");
+    }
+
 
     /**
      * 支付检测团状态
@@ -3106,6 +3167,7 @@ class collageActivities{
      * @param  int $is_manual    	是否后台手动拼团成功 1是，0否
      */
     function collage_success_operate($customer_id, $group_id, $is_manual=0){
+        $this->wlog("collage_success_operate");
         $utlity= new shopMessage_Utlity();
         $shop = new shop();
 
@@ -3185,9 +3247,10 @@ class collageActivities{
             );
             $this->update_group_order($condition,$value);
 
+            $choose_tuan = array();
             if($group_info['type']==7){
                 $choose_tuan = $this->lottery($group_id,$customer_id);
-                $this->wlog($choose_tuan);exit;
+                $this->wlog($choose_tuan);
             }else{
                 //更新团员订单状态
                 $condition = array(
@@ -3432,7 +3495,7 @@ class collageActivities{
             foreach( $batchcode_arr as $k => $v ){
 
                 //如果是二维码核销产品并且非抽奖团则自动发货,若是免单团，每次下单即发货
-                if( $is_QR == 1 && $group_info['type'] != 2 ){
+                if( $is_QR == 1 && $group_info['type'] != 2 &&  $group_info['type'] != 7){
 
                     $user_id = $user_id_arr[$k];
 
@@ -3456,9 +3519,15 @@ class collageActivities{
                 }
 
                 //拼团成功进行派单（不包括抽奖团跟免单团）
-                if ( $group_info['type'] != 2 && $group_info['type'] != 6 ) {
+                if ( $group_info['type'] != 2 && $group_info['type'] != 6 && $group_info['type'] != 7 ) {
                     //派单
                     $new_shop_pay->send_order_fun($customer_id, '', $v);
+                }
+                $this->wlog($group_info);
+                if($group_info['type'] ==7){
+                    if($choose_tuan['batchcode'] == $v){
+                        $new_shop_pay->send_order_fun($customer_id, '', $v);
+                    }
                 }
             }
         }else{

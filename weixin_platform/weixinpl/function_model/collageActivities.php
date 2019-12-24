@@ -1385,6 +1385,46 @@ class collageActivities{
     }
 
     /*
+    * 参团人员信息_new
+    * @param  array  $condition  搜索条件数组
+    * @param  string  $filed  查找字段字符串
+    */
+    public function select_front_crew_new($condition=null,$filed='*'){
+        $list['code'] = 0;
+        $list['errmsg'] = '成功';
+        $list['data'] = [];
+
+        $condition_new = '';
+        foreach( $condition as $k => $v ){
+            if( $k == 'ccot.status' ){
+                $condition_new .= " AND (".$k."=".$v[0]." OR ".$k."=".$v[1]." OR (".$k."=".$v[2]." AND UNIX_TIMESTAMP(ccot.paytime) > 0) OR ".$k."=".$v[3]." OR ".$k."=".$v[4]." OR ".$k."=".$v[5].")";
+                continue;
+            }
+            $condition_new .= " AND ".$k."=".$v;
+        }
+        if( $condition_new != '' ){
+            $condition_new .= " AND ccot.is_refund=0";
+            $condition_new = substr($condition_new,4);
+        }
+
+        $query = "SELECT ".$filed." FROM collage_crew_order_t AS ccot
+					LEFT JOIN weixin_users AS wu ON ccot.user_id=wu.id
+					WHERE ".$condition_new." AND UNIX_TIMESTAMP(paytime)>0";
+
+        $result = _mysql_query($query);
+        $error = mysql_error();
+        if( $error ){
+            $list['code'] = 40006;
+            $list['errmsg'] = $error;
+        } else {
+            while( $info = mysql_fetch_assoc($result) ){
+                $list['data'][] = $info;
+            }
+        }
+        return $list;
+    }
+
+    /*
      * 获取推荐的团
      * @param  array  $condition  搜索条件数组
      * @param  string  $filed  查找字段字符串
@@ -2465,7 +2505,8 @@ class collageActivities{
     //新抽奖逻辑
     public function lottery($group_id,$customer_id){
         $this->wlog("lottery_start");
-        $query = "SELECT ccot.id,ccot.user_id,ccot.batchcode,ccot.group_id, ccot.activitie_id,clc.lottery_count FROM collage_crew_order_t ccot left join wsy_mark.collage_lottery_count clc on ccot.user_id = clc.user_id WHERE ccot.customer_id=".$customer_id." AND ccot.group_id=".$group_id." AND ccot.isvalid=true and ccot.lottery_status = 2";
+        $utlity= new shopMessage_Utlity();
+        $query = "SELECT users.weixin_fromuser,ccot.id,ccot.user_id,ccot.batchcode,ccot.group_id, ccot.activitie_id,clc.lottery_count FROM collage_crew_order_t ccot  left join wsy_user.weixin_users users on users.id = ccot.user_id left join wsy_mark.collage_lottery_count clc on ccot.user_id = clc.user_id WHERE ccot.customer_id=".$customer_id." AND ccot.group_id=".$group_id." AND ccot.isvalid=true and ccot.lottery_status = 2";
         $this->wlog($query);
         $result = _mysql_query($query) or die('Query failed:'.mysql_error());
 
@@ -2483,6 +2524,7 @@ class collageActivities{
                 'group_id' => $row -> group_id,
                 'activitie_id' => $row -> activitie_id,
                 'lottery_count' => $row -> lottery_count,
+                'weixin_fromuser' => $row -> weixin_fromuser,
             );
             if($activitie_id==0){
                 $activitie_id = $row -> activitie_id;
@@ -2521,7 +2563,13 @@ class collageActivities{
         foreach($users as $ku=>$vu){
             if($vu['id']==$choose_id){
                 $choose_user = $vu;
+                $content = "亲，您参加的拼团抽奖成功\r\n".
+                    "时间：".date( "Y-m-d H:i:s")."";
+            }else{
+                $content = "亲，您参加的拼团抽奖没有中奖噢\r\n".
+                    "时间：".date( "Y-m-d H:i:s")."";
             }
+            $utlity->SendMessage($content,$vu['weixin_fromuser'],$customer_id);
         }
         $this->wlog($choose_user);
 
@@ -3489,6 +3537,12 @@ class collageActivities{
                                 $type_str = " 抱抱团";
                             }
                             $type_status_str = "拼团成功";
+                            break;
+                        case 7:
+                            if(empty($type_str)){
+                                $type_str = " 抽奖团";
+                            }
+                            $type_status_str = "拼团成功,待抽奖";
                             break;
                     }
 

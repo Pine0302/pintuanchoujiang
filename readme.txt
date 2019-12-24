@@ -10,3 +10,23 @@ VALUES (7, 41, b'1', '2019-12-09 06:36:12', '新抽奖团说明', '<p><span styl
 
   ALTER TABLE `wsy_mark`.`collage_activities_t`
   ADD COLUMN `luck_split_money` tinyint(11) NULL DEFAULT 0 COMMENT '拼团成功未中奖者平分的金额' AFTER `alone_onoff`;
+
+  CREATE TABLE `collage_lottery_count`  (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `user_id` int(11) NULL DEFAULT NULL,
+    `lottery_count` int(11) NULL DEFAULT NULL,
+    `updatetime` int(11) NULL DEFAULT NULL,
+    `customer_id` int(11) NULL DEFAULT NULL,
+    PRIMARY KEY (`id`) USING BTREE
+  ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Compact;
+
+
+  CREATE TABLE `collage_lottery_recode`  (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `user_id` int(11) NULL DEFAULT NULL,
+    `batchcode` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
+    `createtime` datetime(0) NULL DEFAULT NULL,
+    `customer_id` int(11) NULL DEFAULT NULL,
+    `group_id` int(11) NULL DEFAULT NULL,
+    PRIMARY KEY (`id`) USING BTREE
+  ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Compact;

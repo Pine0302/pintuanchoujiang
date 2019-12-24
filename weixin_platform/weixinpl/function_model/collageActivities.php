@@ -2464,40 +2464,86 @@ class collageActivities{
 
     //新抽奖逻辑
     public function lottery($group_id,$customer_id){
-        $query = "SELECT id,user_id,batchcode,group_id, activitie_id FROM collage_crew_order_t WHERE customer_id=".$customer_id." AND group_id=".$group_id." AND isvalid=true and lottery_status = 2";
+        $this->wlog("lottery_start");
+        $query = "SELECT ccot.id,ccot.user_id,ccot.batchcode,ccot.group_id, ccot.activitie_id,clc.lottery_count FROM collage_crew_order_t ccot left join wsy_mark.collage_lottery_count clc on ccot.user_id = clc.user_id WHERE ccot.customer_id=".$customer_id." AND ccot.group_id=".$group_id." AND ccot.isvalid=true and ccot.lottery_status = 2";
+        $this->wlog($query);
         $result = _mysql_query($query) or die('Query failed:'.mysql_error());
+
         $activitie_id = 0;
+        $users = array();
         while ( $row = mysql_fetch_object($result) ) {
+            if(!($row->lottery_count)){
+                $row->lottery_count = 0;
+            }
+            $this->wlog($row->lottery_count);
             $users[] = array(
                 'id' => $row -> id,
                 'user_id' => $row -> user_id,
                 'batchcode' => $row -> batchcode,
                 'group_id' => $row -> group_id,
                 'activitie_id' => $row -> activitie_id,
+                'lottery_count' => $row -> lottery_count,
             );
             if($activitie_id==0){
                 $activitie_id = $row -> activitie_id;
             }
-
         }
-        $user_num = count($users);
-        $num = rand(1,$user_num);
+        $this->wlog($users);
+        //选出抽奖最低的
+        $min_lottery = $users[0]['lottery_count'];
+        foreach($users as $ku=>$vu){
+            if($vu['lottery_count'] < $min_lottery){
+                $min_lottery = $vu['lottery_count'] ;
+            }
+        }
+        $this->wlog($min_lottery);
+
+        $to_be_choose_id = array();
+        foreach ($users as $ku=>$vu){
+            if($vu['lottery_count'] == $min_lottery){
+                $to_be_choose_id[] = $vu['id'];
+            }
+        }
+        $this->wlog($to_be_choose_id);
+
+        $id_count = count($to_be_choose_id);
+        $num_id = rand(1,$id_count);
+
+        $this->wlog('num_id');
+        $this->wlog($num_id);
+
+        $choose_id = $to_be_choose_id[$num_id-1];
+
+        $this->wlog('choose_id');
+        $this->wlog($choose_id);
+
+        $choose_user = array();
+        foreach($users as $ku=>$vu){
+            if($vu['id']==$choose_id){
+                $choose_user = $vu;
+            }
+        }
+        $this->wlog($choose_user);
+
+     /*   $user_num = count($users);
+        $num = rand(1,$user_num);*/
+
 
         //修改collage_crew_order_t 状态
-        $query_set_lottery_status_0 = "update collage_crew_order_t set lottery_status = 0 , status = 3 WHERE customer_id = ".$customer_id." AND group_id = ".$group_id." AND isvalid=true  and id != ".$users[$num-1]['id'];
-        $query_set_lottery_status_1 = "update collage_crew_order_t set lottery_status = 1 , status = 5 WHERE id = ".$users[$num-1]['id'];
+        $query_set_lottery_status_0 = "update collage_crew_order_t set lottery_status = 0 , status = 3 WHERE customer_id = ".$customer_id." AND group_id = ".$group_id." AND isvalid=true  and id != ".$choose_user['id'];
+        $query_set_lottery_status_1 = "update collage_crew_order_t set lottery_status = 1 , status = 5 WHERE id = ".$choose_user['id'];
         _mysql_query($query_set_lottery_status_0);
         _mysql_query($query_set_lottery_status_1);
         $this->wlog($query_set_lottery_status_0);
         $this->wlog($query_set_lottery_status_1);
 
         //给未中奖的用户发钱
-        $this->splitBonus($users,$users[$num-1],$activitie_id,$customer_id);
+        $this->splitBonus($users,$choose_user,$activitie_id,$customer_id);
         //给中奖用户添加一次中奖记录
-        $this->addLotteryRecode($users[$num-1],$customer_id);
+        $this->addLotteryRecode($choose_user,$customer_id);
 
-
-        return $users[$num-1];
+        $this->wlog("lottery_end");
+        return $choose_user;
     }
 
     //给未中奖的用户分钱
@@ -2530,21 +2576,28 @@ class collageActivities{
     //给中奖用户新增中奖记录
     public function addLotteryRecode($chooseUser,$customer_id){
         $this->wlog("addLotteryRecode--begin");
-        $query_add_lotter_log = "INSERT INTO collage_lottery_recode (
-												user_id,
-												group_id,
-												batchcode,
-												customer_id,
-												createtime
-											) VALUES (
-												".$chooseUser['user_id'].",
-												".$chooseUser['group_id'].",
-												'".$chooseUser['batchcode']."',
-												".$customer_id.",
-												now()
-											)";
+        $query_add_lotter_log = "INSERT INTO wsy_mark.collage_lottery_recode ( `user_id`,`group_id`,`batchcode`,`customer_id`,`createtime`) VALUES (".$chooseUser['user_id'].",".$chooseUser['group_id'].",'".$chooseUser['batchcode']."',".$customer_id.",now())";
+     //   $query = "INSERT INTO `collage_lottery_recode` ( `user_id`, `group_id`, `batchcode`, `customer_id`, `createtime` ) VALUES ( 100329, 58, '10032915771526488060', 41, now( ) )";
         $this->wlog($query_add_lotter_log);
         _mysql_query($query_add_lotter_log) or die('Query_order_log failed:'.mysql_error());
+
+        //先查看该用户有没有中奖次数,没有的话,插入数据,有的话,数据+1
+        $query_lottery_count_info = "SELECT id,user_id,lottery_count FROM wsy_mark.collage_lottery_count WHERE user_id=".$chooseUser['user_id'];
+        $result_lottery_count_info = _mysql_query($query_lottery_count_info) or die('Query failed:'.mysql_error());
+        $old_lotter_count = mysql_fetch_assoc($result_lottery_count_info)['lottery_count'];
+        if($old_lotter_count){
+            $this->wlog("qq");
+            $this->wlog($old_lotter_count);
+            $query_update_lotter_count = "update wsy_mark.collage_lottery_count set lottery_count = lottery_count+1  WHERE user_id = ".$chooseUser['user_id'];
+            _mysql_query($query_update_lotter_count);
+        }else{
+            $this->wlog("ww");
+            $new_lottery_count = 1;
+            $query_add_lotter_count = "INSERT INTO wsy_mark.collage_lottery_count ( `user_id`,`lottery_count`,`customer_id`) VALUES (".$chooseUser['user_id'].",".$new_lottery_count.",".$customer_id.")";
+            $this->wlog($query_add_lotter_count);
+            _mysql_query($query_add_lotter_count);
+        }
+       // _mysql_query($query);
         $this->wlog("addLotteryRecode--end");
     }
 

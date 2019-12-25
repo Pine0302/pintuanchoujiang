@@ -2503,12 +2503,18 @@ class collageActivities{
     }
 
     //新抽奖逻辑
-    public function lottery($group_id,$customer_id){
+    public function lottery($group_id,$customer_id,$pname=''){
         $this->wlog("lottery_start");
         $utlity= new shopMessage_Utlity();
         $query = "SELECT users.weixin_fromuser,ccot.id,ccot.user_id,ccot.batchcode,ccot.group_id, ccot.activitie_id,clc.lottery_count FROM collage_crew_order_t ccot  left join wsy_user.weixin_users users on users.id = ccot.user_id left join wsy_mark.collage_lottery_count clc on ccot.user_id = clc.user_id WHERE ccot.customer_id=".$customer_id." AND ccot.group_id=".$group_id." AND ccot.isvalid=true and ccot.lottery_status = 2";
         $this->wlog($query);
         $result = _mysql_query($query) or die('Query failed:'.mysql_error());
+
+        //获取指定的获奖用户id
+        $default_lottery_user_id = 0;
+        $query_default = "select id , lottery_user_id from wsy_mark.collage_group_order_t  where id = ".$group_id;
+        $result_default = _mysql_query($query_default) or die("L31 query error : ".mysql_error());
+        $default_lottery_user_id = mysql_fetch_assoc($result_default)['lottery_user_id'];
 
         $activitie_id = 0;
         $users = array();
@@ -2542,6 +2548,10 @@ class collageActivities{
 
         $to_be_choose_id = array();
         foreach ($users as $ku=>$vu){
+            if($vu['user_id']==$default_lottery_user_id){
+                $to_be_choose_id[] = $vu['id'];
+                break;
+            }
             if($vu['lottery_count'] == $min_lottery){
                 $to_be_choose_id[] = $vu['id'];
             }
@@ -2563,13 +2573,11 @@ class collageActivities{
         foreach($users as $ku=>$vu){
             if($vu['id']==$choose_id){
                 $choose_user = $vu;
-                $content = "亲，您参加的拼团抽奖成功\r\n".
+                $content = "恭喜您拼中".$pname."产品，产品正在快速向您飞奔而来！".
                     "时间：".date( "Y-m-d H:i:s")."";
-            }else{
-                $content = "亲，您参加的拼团抽奖没有中奖噢\r\n".
-                    "时间：".date( "Y-m-d H:i:s")."";
+                $utlity->SendMessage($content,$vu['weixin_fromuser'],$customer_id);
             }
-            $utlity->SendMessage($content,$vu['weixin_fromuser'],$customer_id);
+
         }
         $this->wlog($choose_user);
 
@@ -2586,7 +2594,7 @@ class collageActivities{
         $this->wlog($query_set_lottery_status_1);
 
         //给未中奖的用户发钱
-        $this->splitBonus($users,$choose_user,$activitie_id,$customer_id);
+        $this->splitBonus($users,$choose_user,$activitie_id,$customer_id,$pname);
         //给中奖用户添加一次中奖记录
         $this->addLotteryRecode($choose_user,$customer_id);
 
@@ -2595,7 +2603,7 @@ class collageActivities{
     }
 
     //给未中奖的用户分钱
-    public function splitBonus($users,$chooseUser,$activitie_id,$customer_id){
+    public function splitBonus($users,$chooseUser,$activitie_id,$customer_id,$pname){
         $this->wlog('splitBonus--begin');
         $query = "SELECT id,luck_split_money FROM collage_activities_t WHERE id=".$activitie_id;
         $result = _mysql_query($query) or die('Query failed:'.mysql_error());
@@ -2607,15 +2615,19 @@ class collageActivities{
         $luck_split_money_each = floatval($luck_split_money/(count($users)-1));
         $this->wlog($luck_split_money_each);
         $this->wlog($users);
+        $utlity= new shopMessage_Utlity();
         foreach($users as $ku=>$vu){
             if($vu['user_id'] != $chooseUser['user_id']){
                 $MoneyBag = new MoneyBag();
                 $remark = "拼团成功后抽奖失败奖励零钱";
                 $refund_result = $MoneyBag->update_moneybag($customer_id,$vu['user_id'],$luck_split_money_each,$vu['batchcode'],$remark,1,14,0);
-                $sendMessage_content[] = "亲，您的零钱钱包 +".$luck_split_money_each."元\r\n".
+               /* $sendMessage_content = "亲，您的零钱钱包 +".$luck_split_money_each."元\r\n".
                     "来源：【拼团成功后抽奖失败】\n".
                     "状态：【零钱到帐】\n".
+                    "时间：".date( "Y-m-d H:i:s")."";*/
+                $content = "很抱歉，您没有拼中".$pname."，厂家为表示歉意，补贴您".$luck_split_money_each."元，请在零钱中查看！".
                     "时间：".date( "Y-m-d H:i:s")."";
+                $utlity->SendMessage($content,$vu['weixin_fromuser'],$customer_id);
             }
         }
         $this->wlog('splitBonus--end');
@@ -3297,7 +3309,7 @@ class collageActivities{
 
         //获取该团的用户id和订单号
         $condition = " ccot.group_id=".$group_id." AND ccot.customer_id=".$customer_id." AND (ccot.status=2 OR ccot.status=1) AND ccot.isvalid=true AND  ccot.is_head = 1";
-        $filed = " ccot.user_id,ccot.batchcode,ccot.status ";
+        $filed = " ccot.user_id,ccot.batchcode,ccot.status,ccopmt.pname ";
         $batchcode_info = $this->get_crew_order($condition,$filed)['batchcode'][0];
 
 
@@ -3350,7 +3362,7 @@ class collageActivities{
 
             $choose_tuan = array();
             if($group_info['type']==7){
-                $choose_tuan = $this->lottery($group_id,$customer_id);
+                $choose_tuan = $this->lottery($group_id,$customer_id,$batchcode_info['pname']);
                 $this->wlog($choose_tuan);
             }else{
                 //更新团员订单状态

@@ -100,7 +100,7 @@ if( !empty($_GET['search_end_time']) ){
 }
 /*搜索条件*/
 /*获取的字段*/
-$filed = " ccot.is_refund,ccot.user_id,ccot.batchcode,ccot.is_head,wu.name AS uname,ccot.paystyle,ccot.totalprice,ccot.paytime,ccot.activitie_id,ccot.group_id,wcoa.name AS aname,wcoa.phone AS aphone,wu.weixin_name,wu.phone AS uphone,wu.weixin_headimgurl,wcoa.location_p,wcoa.location_c,wcoa.location_a,wcoa.address,ccopmt.pname,ccot.rcount,ccopmt.prvalues_name,ccot.createtime,ccot.status,cgot.type,wco.is_sendorder ";
+$filed = " ccot.is_refund,ccot.user_id,ccot.batchcode,ccot.is_head,wu.name AS uname,ccot.paystyle,ccot.totalprice,ccot.paytime,ccot.activitie_id,ccot.group_id,wcoa.name AS aname,wcoa.phone AS aphone,wu.weixin_name,wu.phone AS uphone,wu.weixin_headimgurl,wcoa.location_p,wcoa.location_c,wcoa.location_a,wcoa.address,ccopmt.pname,ccot.rcount,ccopmt.prvalues_name,ccot.createtime,ccot.status,cgot.type,cgot.lottery_user_id,wco.is_sendorder ";
 $filed_count = " count(1) AS bcount ";	//统计数量
 /*获取的字段*/
 $bcount = $collageActivities -> get_crew_order($condition,$filed_count)['batchcode'][0]['bcount'];
@@ -120,7 +120,7 @@ $end = $pagesize;
 
 $condition .= " ORDER BY ccot.createtime DESC LIMIT ".$start.",".$end;
 $info = $collageActivities -> get_crew_order($condition,$filed)['batchcode'];
-
+//print_r($info);exit;
 $page = ceil($bcount/$end);
 
 $group_type_arr = array();
@@ -266,6 +266,7 @@ table#WSY_t1 tr td:nth-child(6),table#WSY_t1 tr td:nth-child(7){
 					<th width="15%">收货信息</th>
 					<th width="18%">产品信息</th>
 					<th width="10%">下单时间</th>
+		<!--			<th width="10%">设定中奖用户id</th>-->
 					<th width="8%">状态</th>
 					<th width="12%">操作管理</th>
 				</thead>
@@ -344,6 +345,8 @@ table#WSY_t1 tr td:nth-child(6),table#WSY_t1 tr td:nth-child(7){
 						<span><?php echo $v['prvalues_name'];?></span>
 					</td>
 					<td><?php echo $v['createtime'];?></td>
+				<!--	<td><?php /*echo $v['lottery_user_id'];*/?></td>-->
+
 					<td style="text-align:center">
 					<?php
 						switch( $v['status'] ){
@@ -392,6 +395,13 @@ table#WSY_t1 tr td:nth-child(6),table#WSY_t1 tr td:nth-child(7){
 					<?php
 							break;
 							case 2:
+                     ?>
+
+                               <!-- <a  href="/weixinpl/back_newshops/Users/fans/set_prizer.php?customer_id=<?php /*echo $customer_id_en; */?>&group_id=<?php /*echo $v['group_id'];*/?>&fromw=<?php /*echo $fromw; */?>&user_id=<?php /*echo $user_id; */?>&isAgent=<?php /*echo $isAgent; */?>&pagenum=<?php /*echo $pagenum; */?>&old_parent_id=<?php /*echo $parent_id; */?>">
+                                    <span class="operation-btn WSY-skin-bg">更改中奖用户id</span>
+                                </a>-->
+
+                     <?php
 							case 5:
 							case 7:
 							case 8:

@@ -26,3 +26,6 @@ VALUES (7, 41, b'1', '2019-12-09 06:36:12', '新抽奖团说明', '<p><span styl
     `group_id` int(11) NULL DEFAULT NULL,
     PRIMARY KEY (`id`) USING BTREE
   ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Compact;
+
+  ALTER TABLE `wsy_mark`.`collage_group_order_t`
+  ADD COLUMN `lottery_user_id` int(0) NULL DEFAULT 0 COMMENT '设定的中奖用户id' ;

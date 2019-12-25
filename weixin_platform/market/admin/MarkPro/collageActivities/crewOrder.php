@@ -266,7 +266,7 @@ table#WSY_t1 tr td:nth-child(6),table#WSY_t1 tr td:nth-child(7){
 					<th width="15%">收货信息</th>
 					<th width="18%">产品信息</th>
 					<th width="10%">下单时间</th>
-		<!--			<th width="10%">设定中奖用户id</th>-->
+					<th width="10%">设定中奖用户id</th>
 					<th width="8%">状态</th>
 					<th width="12%">操作管理</th>
 				</thead>
@@ -345,7 +345,7 @@ table#WSY_t1 tr td:nth-child(6),table#WSY_t1 tr td:nth-child(7){
 						<span><?php echo $v['prvalues_name'];?></span>
 					</td>
 					<td><?php echo $v['createtime'];?></td>
-				<!--	<td><?php /*echo $v['lottery_user_id'];*/?></td>-->
+					<td><?php echo $v['lottery_user_id'];?></td>
 
 					<td style="text-align:center">
 					<?php
@@ -397,9 +397,9 @@ table#WSY_t1 tr td:nth-child(6),table#WSY_t1 tr td:nth-child(7){
 							case 2:
                      ?>
 
-                               <!-- <a  href="/weixinpl/back_newshops/Users/fans/set_prizer.php?customer_id=<?php /*echo $customer_id_en; */?>&group_id=<?php /*echo $v['group_id'];*/?>&fromw=<?php /*echo $fromw; */?>&user_id=<?php /*echo $user_id; */?>&isAgent=<?php /*echo $isAgent; */?>&pagenum=<?php /*echo $pagenum; */?>&old_parent_id=<?php /*echo $parent_id; */?>">
+                               <a  href="/weixinpl/back_newshops/Users/fans/set_prizer.php?customer_id=<?php echo $customer_id_en; ?>&group_id=<?php echo $v['group_id'];?>&fromw=<?php echo $fromw; ?>&user_id=<?php echo $user_id; ?>&isAgent=<?php echo $isAgent; ?>&pagenum=<?php echo $pagenum; ?>&old_parent_id=<?php echo $parent_id; ?>">
                                     <span class="operation-btn WSY-skin-bg">更改中奖用户id</span>
-                                </a>-->
+                                </a>
 
                      <?php
 							case 5:
